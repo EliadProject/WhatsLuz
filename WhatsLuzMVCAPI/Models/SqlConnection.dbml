@@ -5,6 +5,19 @@
       <Column Name="CategoryID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Color" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="Category_Place" Member="Places" ThisKey="CategoryID" OtherKey="CategoryID" Type="Place" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Places" Member="Places">
+    <Type Name="Place">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="CategoryID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NChar(150)" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="NChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="lat" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="lng" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Association Name="Category_Place" Member="Category" ThisKey="CategoryID" OtherKey="CategoryID" Type="Category" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.SportEvents" Member="SportEvents">
