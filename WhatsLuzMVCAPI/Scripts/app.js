@@ -223,7 +223,7 @@ module.controller('ctrl', function (moment, $scope, calendarConfig) {
 
       $scope.title = event["title"];
       $scope.category = event["category"];
-      $scope.owner =event["owner"];
+      $scope.owner = event["owner"];
       $scope.max_attendies = event["max_attendies"];
       $scope.location = event["location"];
       $scope.notes = event["notes"];

@@ -32,7 +32,7 @@ $(document).ready(function () {
     //customizing datetimepicker
     $('#datetimepicker1').datetimepicker(
         {
-            // locale: 'he',
+            locale: 'en',
             format: "HH:mm DD/MM/YYYY"
 
         });

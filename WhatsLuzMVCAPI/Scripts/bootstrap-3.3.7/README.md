@@ -61,7 +61,7 @@ bootstrap/
     ├── glyphicons-halflings-regular.svg
     ├── glyphicons-halflings-regular.ttf
     ├── glyphicons-halflings-regular.woff
-    └── glyphicons-halflings-regular.woff2
+    └── glyphicons-halflings-regular.woff
 ```
 
 We provide compiled CSS and JS (`bootstrap.*`), as well as compiled and minified CSS and JS (`bootstrap.min.*`). CSS [source maps](https://developer.chrome.com/devtools/docs/css-preprocessors) (`bootstrap.*.map`) are available for use with certain browsers' developer tools. Fonts from Glyphicons are included, as is the optional Bootstrap theme.

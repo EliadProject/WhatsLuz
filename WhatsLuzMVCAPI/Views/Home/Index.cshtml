@@ -69,20 +69,20 @@
         <hr />
 
         <ul>
-            <li><div class="list_key">יוצר האירוע: </div> <div id="owner_id" style="display:initial"> {{ owner }} </div> </li>
-            <li> <div class="list_key">קטגוריה: </div> {{ category }} </li>
-            <li><div class="list_key"> מספר משתפים מקסימלי: </div>{{ max_attendies }} </li>
-            <li><div class="list_key"> מיקום: </div> {{ location }} </li>
-            <li><div class="list_key"> תאריך: </div> {{ date }} </li>
-            <li><div class="list_key"> שעת התחלה: </div> {{ startsAt }} </li>
-            <li><div class="list_key"> שעת סיום: </div> {{ endsAt }} </li>
+            <li><div class="list_key">Owner: </div> <div id="owner_id" style="display:initial"> {{ owner }} </div> </li>
+            <li> <div class="list_key">Category: </div> {{ category }} </li>
+            <li><div class="list_key"> Maximum Attendies: </div>{{ max_attendies }} </li>
+            <li><div class="list_key"> Location: </div> {{ location }} </li>
+            <li><div class="list_key"> Date: </div> {{ date }} </li>
+            <li><div class="list_key"> Start Time: </div> {{ startsAt }} </li>
+            <li><div class="list_key"> End Time: </div> {{ endsAt }} </li>
 
         </ul>
 
 
         <br />
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="opacity: 1">
-            <input class="btn actionButton" ng-type="button" id="sport_event_join" value="הצטרף" />
+            <input class="btn actionButton" ng-type="button" id="sport_event_join" value="Join" />
         </button>    
     </form>
 </div>
@@ -96,49 +96,51 @@
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
         </button>
 
-        <h3>הוספת מפגש</h3>
+        <h3>Event Creation</h3>
     </div>
     <hr />
     <form data-toggle="validator" role="form" action="#">
         <div class="form-group">
-            <label class="labelEvent">כותרת</label>
-            <input type="text" id="title" class="form-control" maxlength="50" placeholder="רשום כותרת למפגש" />
+            <label class="labelEvent">Title</label>
+            <input type="text" id="title" class="form-control" maxlength="50" placeholder="Write title" />
         </div>
         <div class="form-group">
-            <label class="labelEvent" for="categories">קטגוריה <span class="asterisk">*</span></label>
+            <label class="labelEvent" for="categories">Category <span class="asterisk">*</span></label>
             <select id="categories" class="form-control" required></select>
         </div>
         <div class="form-group">
-            <label class="labelEvent">שעה ותאריך <span class="asterisk">*</span></label>
+            <label class="labelEvent">Date and Time <span class="asterisk">*</span></label>
             <div class='input-group date form-group' id='datetimepicker1'>
-                <input type='text' class="form-control" id="datetime" data-error="יש לבחור תאריך" required />
+                
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
+                <input type='text' class="form-control" id="datetime" data-error="Choose date and time" required />
+
 
             </div>
         </div>
         <div class="form-group">
-            <label class="labelEvent">מספר משתתפים מקסימלי</label>
-            <input type="number" id="attendies" min="2" max="50" class="form-control" placeholder="רשום את מספר המשתתפים המקסימלי" />
+            <label class="labelEvent">Maximum Attendies</label>
+            <input type="number" id="attendies" min="2" max="50" class="form-control" placeholder="Write the maximum attendies number" />
         </div>
         <div class="form-group">
-            <label class="labelEvent">משך האירוע בדקות</label>
-            <input type="number" id="duration" min="30" max="300" class="form-control" placeholder="רשום את משך האירוע (בדקות)" />
+            <label class="labelEvent">Duration</label>
+            <input type="number" id="duration" min="30" max="300" class="form-control" placeholder="Write the duration in munutes" />
         </div>
         <div class="form-group">
-            <label class="labelEvent">מיקום<span class="asterisk">*</span></label>
-            <input type="text" id="location" class="form-control" placeholder="רשום את המיקום" maxlength="50" data-error="יש לציין מיקום" required />
+            <label class="labelEvent">Location<span class="asterisk">*</span></label>
+            <input type="text" id="location" class="form-control" placeholder="Write the location" maxlength="50" data-error="No location" required />
             <div class="help-block with-errors"></div>
         </div>
         <div class="form-group">
-            <label class="labelEvent">הערות<span class="asterisk"></span></label>
-            <textarea id="notes" class="form-control" rows="4" placeholder="רשום הערות" maxlength="200"></textarea>
+            <label class="labelEvent">Notes<span class="asterisk"></span></label>
+            <textarea id="notes" class="form-control" rows="4" placeholder="Write notes" maxlength="200"></textarea>
 
         </div>
 
         <div class="form-group">
-            <button id="form_eventSport_send" type="submit" class="btn btn-primary">צור אירוע</button>
+            <button id="form_eventSport_send" type="submit" class="btn btn-primary">Create</button>
         </div>
     </form>
 
