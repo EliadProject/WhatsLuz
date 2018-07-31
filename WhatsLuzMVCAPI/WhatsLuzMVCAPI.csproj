@@ -198,6 +198,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\WhatsLuz.mdf" />
+    <Content Include="App_Data\WhatsLuz_log.ldf">
+      <DependentUpon>WhatsLuz.mdf</DependentUpon>
+    </Content>
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -3849,6 +3853,9 @@
       <LastGenOutput>SqlConnection.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <None Include="Models\SqlConnection.dbml.layout">
+      <DependentUpon>SqlConnection.dbml</DependentUpon>
+    </None>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bower_components\angular-bootstrap-calendar\dist\css\angular-bootstrap-calendar.css" />
     <Content Include="Scripts\bower_components\angular-bootstrap-calendar\dist\css\angular-bootstrap-calendar.min.css" />
@@ -4459,18 +4466,12 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Views\Category\" />
     <Folder Include="Views\Cookie\" />
     <Folder Include="Views\Users\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Models\SqlConnection.dbml.layout">
-      <DependentUpon>SqlConnection.dbml</DependentUpon>
-    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
