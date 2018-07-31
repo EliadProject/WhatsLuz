@@ -1,124 +1,65 @@
 ﻿
 
 
+<!-- Main Calender-->
+<div class="panel-body col-md-9">
 
-    <!-- Close Events  -->
-    <div class="col-md-3">
-        <center> <h2> אירועים קרובים </h2></center>
-        asdasdasd
-        <div ng-repeat="event in close_events_arr">
-            
+    <mwl-calendar events="events"
+                  view="calConfig.calendarView"
+                  current-day="calConfig.calendarDay"
+                  control="calendarControl"
+                  view-title="calendarTitle"
+                  on-event-click="eventClicked(calendarEvent)"
+                  auto-open="true"
+                  on-drill-down-click="false"
+                  cell-modifier="cellModifier(calendarCell)">
+    </mwl-calendar>
 
-            <div class="closeEventTemplate">
+</div>
 
-                <div style="height: 30%; background-color: #337ab7;">
-                    <p style=" padding: 3%; text-align: center; color: white;"> {{ event.title}} </p>
-                </div>
+<!-- Close Events  -->
+<div class="col-md-3">
+    <center> <h2> Close Events </h2></center>
+    
+    <div ng-repeat="event in close_events_arr">
 
-                <div style="padding-top: 10px; padding-bottom: 10px;">
-                    <table style="width: 100%">
-                        <tbody>
-                            <tr>
+        <div class="closeEventTemplate">
 
-                                <td style="width: 65%;">
-                                    <ul>
-                                        <li><b> קטגוריה </b> : {{ event.category }} </li>
-                                        <li> <b>מתחיל ב: </b> <br/> {{ event.startsAt }}  </li>
-                                        <li> <b> מס' משתתפים: </b> {{ event.max_attendies}} </li>
-                                    </ul>
-                                </td>
-                                <td style="width: 35%;">
-                                    <div style="padding: 10%; ">
-
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="opacity: 1;float:left">
-                                            <input class="btn actionButton" ng type="button" id="send" value="הצטרף" />
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
+            <div style="height: 30%; background-color: #337ab7;">
+                <p style=" padding: 3%; text-align: center; color: white;"> {{ event.title}} </p>
             </div>
+
+            <div style="padding-top: 10px; padding-bottom: 10px;">
+                <table style="width: 100%">
+                    <tbody>
+                        <tr>
+
+                            <td style="width: 65%;">
+                                <ul>
+                                    <li><b> קטגוריה </b> : {{ event.category }} </li>
+                                    <li> <b>מתחיל ב: </b> <br /> {{ event.startsAt }}  </li>
+                                    <li> <b> מס' משתתפים: </b> {{ event.max_attendies}} </li>
+                                </ul>
+                            </td>
+                            <td style="width: 35%;">
+                                <div style="padding: 10%; ">
+
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="opacity: 1;float:left">
+                                        <input class="btn actionButton" ng type="button" id="send" value="הצטרף" />
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
         </div>
-        <br>
     </div>
-
-    <!-- <div ng-repeat="event in close_events_arr">
-        <h3><center> {{ event.title }}</center></h3>
-        <hr/>
-        <div style="float:left; width: 30%;">
-            <div>
-                {{ event.category}}
-                {{ event.startAt}}
-            </div>
-            <div>
-                {{event.maxAttendies}}
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="opacity: 1">
-                <input class="btn actionButton" ng type="button" id="send" value="הצטרף"  />
-                </button>
-            </div>
-        </div>
-    </div> 
-    <div>
-    <h3><center> Chuki fluki</center></h3>
-    <hr/>
-    <div style="float:left; width: 30%;">
-        <div>
-            כדורגל
-            13.9.2017
-        </div>
-        <div>
-            פרטין נוספים
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="opacity: 1">
-            <input class="btn actionButton" ng type="button" id="send" value="הצטרף"  />
-            </button>
-        </div>
-    </div>--->
+    <br>
+</div>
 
 
-
-    <div class="panel-body col-md-9"  >
-
-        <mwl-calendar events="events"
-                      view="calConfig.calendarView"
-                      current-day="calConfig.calendarDay"
-                      control="calendarControl"
-                      view-title="calendarTitle"
-                      on-event-click="eventClicked(calendarEvent)"
-                      auto-open="true"
-                      on-drill-down-click="false"
-                      cell-modifier="cellModifier(calendarCell)">
-        </mwl-calendar>
-       
-    </div>
-<script>
-    /*
-    function getEvents($scope) {
-        $(document).ready(function () {
-            $scope.events = [];
-            $.getJSON('http://localhost:61733/api/Events', function () {
-                console.log("success");
-            })
-                .done(function (data) {
-                    $.each(data, function (key, item) {
-                        var itemParsed = JSON.parse(item)
-                        console.log(itemParsed);
-                        $scope.events.push(itemParsed);
-                    });
-                    console.log("second success");
-                })
-                .fail(function () {
-                    console.log("error");
-                })
-                .always(function () {
-                    console.log("complete");
-                });
-        })
-    }
-    */
-</script>
 
 <!-- ShowEvent -->
 
@@ -126,41 +67,35 @@
     <form action="#" class="sport_event">
         <label> {{ title }}  </label>
         <hr />
-        <!-- <div ng-repeat="n in keys | limitTo: 7 ">
-            {{ n + ": " + vals[$index] }}
-        </div> -->
-        
+
+        <ul>
+            <li><div class="list_key">יוצר האירוע: </div> <div id="owner_id" style="display:initial"> {{ owner }} </div> </li>
+            <li> <div class="list_key">קטגוריה: </div> {{ category }} </li>
+            <li><div class="list_key"> מספר משתפים מקסימלי: </div>{{ max_attendies }} </li>
+            <li><div class="list_key"> מיקום: </div> {{ location }} </li>
+            <li><div class="list_key"> תאריך: </div> {{ date }} </li>
+            <li><div class="list_key"> שעת התחלה: </div> {{ startsAt }} </li>
+            <li><div class="list_key"> שעת סיום: </div> {{ endsAt }} </li>
+
+        </ul>
 
 
-            <ul>
-                <li><div class="list_key">יוצר האירוע: </div> <div id="owner_id" style="display:initial"> {{ owner }} </div> </li>
-                <li> <div class="list_key">קטגוריה: </div> {{ category }} </li>
-                <li><div class="list_key"> מספר משתפים מקסימלי: </div>{{ max_attendies }} </li>
-                <li><div class="list_key"> מיקום: </div> {{ location }} </li>
-                <li><div class="list_key"> תאריך: </div> {{ date }} </li> 
-                <li><div class="list_key"> שעת התחלה: </div> {{ startsAt }} </li>
-                <li><div class="list_key"> שעת סיום: </div> {{ endsAt }} </li>
-                
-            </ul>
-
-
-            <br />
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="opacity: 1">
-                <input class="btn actionButton" ng-type="button" id="sport_event_join" value="הצטרף" />
-            </button>
-            <!-- <img src="imgs/join.png" alt="הצטרף" style="width:50px;height:50px;"> -->
+        <br />
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="opacity: 1">
+            <input class="btn actionButton" ng-type="button" id="sport_event_join" value="הצטרף" />
+        </button>    
     </form>
 </div>
 
 <!-- Event creation form -->
-<div class="fade sport_event" id="eventAddition-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;"  >
-        
+<div class="fade sport_event" id="eventAddition-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+
     <div>
-        
+
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
         </button>
-        
+
         <h3>הוספת מפגש</h3>
     </div>
     <hr />
@@ -175,12 +110,12 @@
         </div>
         <div class="form-group">
             <label class="labelEvent">שעה ותאריך <span class="asterisk">*</span></label>
-                <div class='input-group date form-group' id='datetimepicker1'>
+            <div class='input-group date form-group' id='datetimepicker1'>
                 <input type='text' class="form-control" id="datetime" data-error="יש לבחור תאריך" required />
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
-               
+
             </div>
         </div>
         <div class="form-group">
@@ -193,24 +128,21 @@
         </div>
         <div class="form-group">
             <label class="labelEvent">מיקום<span class="asterisk">*</span></label>
-            <input type="text" id="location" class="form-control" placeholder="רשום את המיקום" maxlength="50" data-error="יש לציין מיקום"  required />
+            <input type="text" id="location" class="form-control" placeholder="רשום את המיקום" maxlength="50" data-error="יש לציין מיקום" required />
             <div class="help-block with-errors"></div>
         </div>
         <div class="form-group">
             <label class="labelEvent">הערות<span class="asterisk"></span></label>
             <textarea id="notes" class="form-control" rows="4" placeholder="רשום הערות" maxlength="200"></textarea>
-            
+
         </div>
-           
+
         <div class="form-group">
             <button id="form_eventSport_send" type="submit" class="btn btn-primary">צור אירוע</button>
         </div>
     </form>
 
-
-
 </div>
 
 
 
-        
