@@ -18,18 +18,13 @@ firebase.auth().signInWithPopup(provider).then(function(result) {
   var token = result.credential.accessToken;
   // The signed-in user info.
   var user = result.user;
-    // ...
-    $(document).ready(function () {
-        console.log("Success");
-            $('body').load('/Home/Index');  
-       
-    });
-
+  //Redirect to main project page
+  window.location = "http://localhost:61733/Home/Index";
 
 }).catch(function(error) {
   // Handle Errors here.
-    window.location = "/Views/Shared/Error.cshtml";
-  
+    // window.location = "/Views/Shared/Error.cshtml";
+    console.log("error");
   var errorCode = error.code;
   var errorMessage = error.message;
   // The email of the user's account used.

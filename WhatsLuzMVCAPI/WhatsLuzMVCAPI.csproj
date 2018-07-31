@@ -4424,6 +4424,7 @@
     <Content Include="Scripts\js\moment-with-locales.min.js" />
     <Content Include="Scripts\js\moment.js" />
     <Content Include="Scripts\js\ui-bootstrap-tpls.min.js" />
+    <Content Include="Scripts\LoginPage.css" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -4468,6 +4469,7 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Content\Images\" />
     <Folder Include="Views\Category\" />
     <Folder Include="Views\Cookie\" />
     <Folder Include="Views\Users\" />
