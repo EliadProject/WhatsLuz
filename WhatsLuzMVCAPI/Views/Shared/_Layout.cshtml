@@ -7,7 +7,7 @@
 
     <!-- Base libaries -->
     <link href="~/scripts/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-   
+
     @*<link href="/scripts/bootstrap-rtl-master/dist/css/bootstrap-rtl.css" rel="stylesheet">*@
     <script src="/scripts/angular-1.6.4/angular.js"></script>
     @*<script type="text/javascript" src="/scripts/js/jquery-1.11.3.js"></script>*@
@@ -23,10 +23,9 @@
     <script src="/scripts/app.js"></script>
 
     <!-- <script src="js/he.js"></script> -->
-   
     <!-- Datetime picker -->
     <link href="~/scripts/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-    <script src="/scripts/js/moment-with-locales.min.js"></script> 
+    <script src="/scripts/js/moment-with-locales.min.js"></script>
     <script src="/scripts/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 
     <!-- Sport Event Form -->
@@ -37,11 +36,15 @@
     <link rel="stylesheet" href="/scripts/style.css">
     <script src="~/Scripts/script.js"></script>
     <script src="~/Scripts/Functions.js"></script>
-    
-    @*@Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")*@
 
+
+
+    <!-- Firebase -->
+
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
    
+    <script src="~/Scripts/firebase.js"></script>
+
 
 </head>
 <body ng-controller="ctrl" style="height: 100%" >
@@ -51,18 +54,27 @@
             <div>
                 <div class="col-md-4">
                     <a href="#" id="createEventButton" class="btn btn-primary btn-lg " style="padding: 6px 16px;" role="button" data-toggle="modal" data-target="#eventAddition-modal">
-                        <p style="margin: 0 0 0 0;">  <span class="glyphicon glyphicon-plus" class="text-center"></span> Create Sport Event </p>
+                        <p style="margin: 0 0 0 0;">  <span class="glyphicon glyphicon-plus text-center"></span> Create Sport Event </p>
                     </a>
                 </div>
                 <div class="col-md-4">
                     <h2 style="margin-top: 0px; margin-bottom: 0px;" class="text-center">{{ calendarTitle }} </h2>
                 </div>
 
-                <div class="btn-group col-md-4 " style="float: left;">
+                <div class="btn-group col-md-2 " style="float: left;">
                     <label class="btn btn-primary" style="float: left;" ng-model="calConfig.calendarView" btn-radio="'day'">Day</label>
                     <label class="btn btn-primary" style="float: left;" ng-model="calConfig.calendarView" btn-radio="'week'">Week</label>
                     <label class="btn btn-primary" style="float: left;" ng-model="calConfig.calendarView" btn-radio="'month'">Month</label>
                 </div>
+
+                <!-- Admin Page -->
+                <div class="col-md-2">
+                    <button style="margin-top: 0px; margin-bottom: 0px;" class="btn btn-primary pull-right"> Admin Page  </button> 
+                </div>
+
+
+
+
 
             </div>
             <!-- <p class="text-center"><a href="#" class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#eventAddition-modal">Open Login Modal</a></p> -->

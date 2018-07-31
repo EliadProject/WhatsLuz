@@ -14,5 +14,11 @@ namespace WhatsLuzMVCAPI.Controllers
 
             return View();
         }
+        public ActionResult LoginPage()
+        {
+            ViewBag.Title = "Login Page";
+
+            return View();
+        }
     }
 }
