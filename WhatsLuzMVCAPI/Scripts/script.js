@@ -1,6 +1,6 @@
 ﻿
 $(document).ready(function () {
-
+    /*
     $.get(
         "http://localhost:61733/Cookie"
     );
@@ -16,7 +16,7 @@ $(document).ready(function () {
             alert("לא ניתן להצטרף, אתה הוא בעל האירוע");
 
     }); 
-
+    */
 
 
 

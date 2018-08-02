@@ -30,6 +30,9 @@ namespace WhatsLuzMVCAPI.Models
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
+    partial void InsertUsers_Event(Users_Event instance);
+    partial void UpdateUsers_Event(Users_Event instance);
+    partial void DeleteUsers_Event(Users_Event instance);
     partial void InsertCategory(Category instance);
     partial void UpdateCategory(Category instance);
     partial void DeleteCategory(Category instance);
@@ -39,12 +42,9 @@ namespace WhatsLuzMVCAPI.Models
     partial void InsertSportEvent(SportEvent instance);
     partial void UpdateSportEvent(SportEvent instance);
     partial void DeleteSportEvent(SportEvent instance);
-    partial void InsertUser(User instance);
-    partial void UpdateUser(User instance);
-    partial void DeleteUser(User instance);
-    partial void InsertUsers_Event(Users_Event instance);
-    partial void UpdateUsers_Event(Users_Event instance);
-    partial void DeleteUsers_Event(Users_Event instance);
+    partial void InsertUserAccount(UserAccount instance);
+    partial void UpdateUserAccount(UserAccount instance);
+    partial void DeleteUserAccount(UserAccount instance);
     #endregion
 		
 		public SqlConnectionDataContext() : 
@@ -77,6 +77,14 @@ namespace WhatsLuzMVCAPI.Models
 			OnCreated();
 		}
 		
+		public System.Data.Linq.Table<Users_Event> Users_Events
+		{
+			get
+			{
+				return this.GetTable<Users_Event>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Category> Categories
 		{
 			get
@@ -101,19 +109,203 @@ namespace WhatsLuzMVCAPI.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<User> Users
+		public System.Data.Linq.Table<UserAccount> UserAccounts
 		{
 			get
 			{
-				return this.GetTable<User>();
+				return this.GetTable<UserAccount>();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Users_Events")]
+	public partial class Users_Event : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Event_User_ID;
+		
+		private int _EventID;
+		
+		private int _UserID;
+		
+		private EntityRef<SportEvent> _SportEvent;
+		
+		private EntityRef<UserAccount> _UserAccount;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnEvent_User_IDChanging(int value);
+    partial void OnEvent_User_IDChanged();
+    partial void OnEventIDChanging(int value);
+    partial void OnEventIDChanged();
+    partial void OnUserIDChanging(int value);
+    partial void OnUserIDChanged();
+    #endregion
+		
+		public Users_Event()
+		{
+			this._SportEvent = default(EntityRef<SportEvent>);
+			this._UserAccount = default(EntityRef<UserAccount>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Event_User_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int Event_User_ID
+		{
+			get
+			{
+				return this._Event_User_ID;
+			}
+			set
+			{
+				if ((this._Event_User_ID != value))
+				{
+					this.OnEvent_User_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Event_User_ID = value;
+					this.SendPropertyChanged("Event_User_ID");
+					this.OnEvent_User_IDChanged();
+				}
 			}
 		}
 		
-		public System.Data.Linq.Table<Users_Event> Users_Events
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EventID", DbType="Int NOT NULL")]
+		public int EventID
 		{
 			get
 			{
-				return this.GetTable<Users_Event>();
+				return this._EventID;
+			}
+			set
+			{
+				if ((this._EventID != value))
+				{
+					if (this._SportEvent.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnEventIDChanging(value);
+					this.SendPropertyChanging();
+					this._EventID = value;
+					this.SendPropertyChanged("EventID");
+					this.OnEventIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="Int NOT NULL")]
+		public int UserID
+		{
+			get
+			{
+				return this._UserID;
+			}
+			set
+			{
+				if ((this._UserID != value))
+				{
+					if (this._UserAccount.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUserIDChanging(value);
+					this.SendPropertyChanging();
+					this._UserID = value;
+					this.SendPropertyChanged("UserID");
+					this.OnUserIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SportEvent_Users_Event", Storage="_SportEvent", ThisKey="EventID", OtherKey="EventID", IsForeignKey=true)]
+		public SportEvent SportEvent
+		{
+			get
+			{
+				return this._SportEvent.Entity;
+			}
+			set
+			{
+				SportEvent previousValue = this._SportEvent.Entity;
+				if (((previousValue != value) 
+							|| (this._SportEvent.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SportEvent.Entity = null;
+						previousValue.Users_Events.Remove(this);
+					}
+					this._SportEvent.Entity = value;
+					if ((value != null))
+					{
+						value.Users_Events.Add(this);
+						this._EventID = value.EventID;
+					}
+					else
+					{
+						this._EventID = default(int);
+					}
+					this.SendPropertyChanged("SportEvent");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserAccount_Users_Event", Storage="_UserAccount", ThisKey="UserID", OtherKey="UserID", IsForeignKey=true)]
+		public UserAccount UserAccount
+		{
+			get
+			{
+				return this._UserAccount.Entity;
+			}
+			set
+			{
+				UserAccount previousValue = this._UserAccount.Entity;
+				if (((previousValue != value) 
+							|| (this._UserAccount.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._UserAccount.Entity = null;
+						previousValue.Users_Events.Remove(this);
+					}
+					this._UserAccount.Entity = value;
+					if ((value != null))
+					{
+						value.Users_Events.Add(this);
+						this._UserID = value.UserID;
+					}
+					else
+					{
+						this._UserID = default(int);
+					}
+					this.SendPropertyChanged("UserAccount");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -809,27 +1001,27 @@ namespace WhatsLuzMVCAPI.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Users")]
-	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.UserAccounts")]
+	public partial class UserAccount : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _UserID;
 		
-		private string _Firstname;
+		private string _FacebookID;
 		
-		private string _Lastname;
+		private string _DisplayName;
 		
-		private string _Unit;
-		
-		private System.Nullable<double> _Fame;
-		
-		private int _PermissionLevel;
+		private string _Email;
 		
 		private System.Nullable<System.DateTime> _LastLogon;
 		
-		private string _Favourites;
+		private string _Address;
+		
+		private string _PhotoURL;
+		
+		private byte _isAdmin;
 		
 		private EntitySet<Users_Event> _Users_Events;
 		
@@ -839,23 +1031,23 @@ namespace WhatsLuzMVCAPI.Models
     partial void OnCreated();
     partial void OnUserIDChanging(int value);
     partial void OnUserIDChanged();
-    partial void OnFirstnameChanging(string value);
-    partial void OnFirstnameChanged();
-    partial void OnLastnameChanging(string value);
-    partial void OnLastnameChanged();
-    partial void OnUnitChanging(string value);
-    partial void OnUnitChanged();
-    partial void OnFameChanging(System.Nullable<double> value);
-    partial void OnFameChanged();
-    partial void OnPermissionLevelChanging(int value);
-    partial void OnPermissionLevelChanged();
+    partial void OnFacebookIDChanging(string value);
+    partial void OnFacebookIDChanged();
+    partial void OnDisplayNameChanging(string value);
+    partial void OnDisplayNameChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
     partial void OnLastLogonChanging(System.Nullable<System.DateTime> value);
     partial void OnLastLogonChanged();
-    partial void OnFavouritesChanging(string value);
-    partial void OnFavouritesChanged();
+    partial void OnAddressChanging(string value);
+    partial void OnAddressChanged();
+    partial void OnPhotoURLChanging(string value);
+    partial void OnPhotoURLChanged();
+    partial void OnisAdminChanging(byte value);
+    partial void OnisAdminChanged();
     #endregion
 		
-		public User()
+		public UserAccount()
 		{
 			this._Users_Events = new EntitySet<Users_Event>(new Action<Users_Event>(this.attach_Users_Events), new Action<Users_Event>(this.detach_Users_Events));
 			OnCreated();
@@ -881,102 +1073,62 @@ namespace WhatsLuzMVCAPI.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Firstname", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string Firstname
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FacebookID", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string FacebookID
 		{
 			get
 			{
-				return this._Firstname;
+				return this._FacebookID;
 			}
 			set
 			{
-				if ((this._Firstname != value))
+				if ((this._FacebookID != value))
 				{
-					this.OnFirstnameChanging(value);
+					this.OnFacebookIDChanging(value);
 					this.SendPropertyChanging();
-					this._Firstname = value;
-					this.SendPropertyChanged("Firstname");
-					this.OnFirstnameChanged();
+					this._FacebookID = value;
+					this.SendPropertyChanged("FacebookID");
+					this.OnFacebookIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Lastname", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string Lastname
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DisplayName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string DisplayName
 		{
 			get
 			{
-				return this._Lastname;
+				return this._DisplayName;
 			}
 			set
 			{
-				if ((this._Lastname != value))
+				if ((this._DisplayName != value))
 				{
-					this.OnLastnameChanging(value);
+					this.OnDisplayNameChanging(value);
 					this.SendPropertyChanging();
-					this._Lastname = value;
-					this.SendPropertyChanged("Lastname");
-					this.OnLastnameChanged();
+					this._DisplayName = value;
+					this.SendPropertyChanged("DisplayName");
+					this.OnDisplayNameChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Unit", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string Unit
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string Email
 		{
 			get
 			{
-				return this._Unit;
+				return this._Email;
 			}
 			set
 			{
-				if ((this._Unit != value))
+				if ((this._Email != value))
 				{
-					this.OnUnitChanging(value);
+					this.OnEmailChanging(value);
 					this.SendPropertyChanging();
-					this._Unit = value;
-					this.SendPropertyChanged("Unit");
-					this.OnUnitChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fame", DbType="Float")]
-		public System.Nullable<double> Fame
-		{
-			get
-			{
-				return this._Fame;
-			}
-			set
-			{
-				if ((this._Fame != value))
-				{
-					this.OnFameChanging(value);
-					this.SendPropertyChanging();
-					this._Fame = value;
-					this.SendPropertyChanged("Fame");
-					this.OnFameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PermissionLevel", DbType="Int NOT NULL")]
-		public int PermissionLevel
-		{
-			get
-			{
-				return this._PermissionLevel;
-			}
-			set
-			{
-				if ((this._PermissionLevel != value))
-				{
-					this.OnPermissionLevelChanging(value);
-					this.SendPropertyChanging();
-					this._PermissionLevel = value;
-					this.SendPropertyChanged("PermissionLevel");
-					this.OnPermissionLevelChanged();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
 				}
 			}
 		}
@@ -1001,27 +1153,67 @@ namespace WhatsLuzMVCAPI.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Favourites", DbType="NVarChar(MAX)")]
-		public string Favourites
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address", DbType="NVarChar(50)")]
+		public string Address
 		{
 			get
 			{
-				return this._Favourites;
+				return this._Address;
 			}
 			set
 			{
-				if ((this._Favourites != value))
+				if ((this._Address != value))
 				{
-					this.OnFavouritesChanging(value);
+					this.OnAddressChanging(value);
 					this.SendPropertyChanging();
-					this._Favourites = value;
-					this.SendPropertyChanged("Favourites");
-					this.OnFavouritesChanged();
+					this._Address = value;
+					this.SendPropertyChanged("Address");
+					this.OnAddressChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Users_Event", Storage="_Users_Events", ThisKey="UserID", OtherKey="UserName")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhotoURL", DbType="NVarChar(MAX)")]
+		public string PhotoURL
+		{
+			get
+			{
+				return this._PhotoURL;
+			}
+			set
+			{
+				if ((this._PhotoURL != value))
+				{
+					this.OnPhotoURLChanging(value);
+					this.SendPropertyChanging();
+					this._PhotoURL = value;
+					this.SendPropertyChanged("PhotoURL");
+					this.OnPhotoURLChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_isAdmin", DbType="TinyInt NOT NULL")]
+		public byte isAdmin
+		{
+			get
+			{
+				return this._isAdmin;
+			}
+			set
+			{
+				if ((this._isAdmin != value))
+				{
+					this.OnisAdminChanging(value);
+					this.SendPropertyChanging();
+					this._isAdmin = value;
+					this.SendPropertyChanged("isAdmin");
+					this.OnisAdminChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserAccount_Users_Event", Storage="_Users_Events", ThisKey="UserID", OtherKey="UserID")]
 		public EntitySet<Users_Event> Users_Events
 		{
 			get
@@ -1057,205 +1249,13 @@ namespace WhatsLuzMVCAPI.Models
 		private void attach_Users_Events(Users_Event entity)
 		{
 			this.SendPropertyChanging();
-			entity.User = this;
+			entity.UserAccount = this;
 		}
 		
 		private void detach_Users_Events(Users_Event entity)
 		{
 			this.SendPropertyChanging();
-			entity.User = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Users_Events")]
-	public partial class Users_Event : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Event_User_ID;
-		
-		private int _EventID;
-		
-		private int _UserName;
-		
-		private EntityRef<SportEvent> _SportEvent;
-		
-		private EntityRef<User> _User;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnEvent_User_IDChanging(int value);
-    partial void OnEvent_User_IDChanged();
-    partial void OnEventIDChanging(int value);
-    partial void OnEventIDChanged();
-    partial void OnUserNameChanging(int value);
-    partial void OnUserNameChanged();
-    #endregion
-		
-		public Users_Event()
-		{
-			this._SportEvent = default(EntityRef<SportEvent>);
-			this._User = default(EntityRef<User>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Event_User_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int Event_User_ID
-		{
-			get
-			{
-				return this._Event_User_ID;
-			}
-			set
-			{
-				if ((this._Event_User_ID != value))
-				{
-					this.OnEvent_User_IDChanging(value);
-					this.SendPropertyChanging();
-					this._Event_User_ID = value;
-					this.SendPropertyChanged("Event_User_ID");
-					this.OnEvent_User_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EventID", DbType="Int NOT NULL")]
-		public int EventID
-		{
-			get
-			{
-				return this._EventID;
-			}
-			set
-			{
-				if ((this._EventID != value))
-				{
-					if (this._SportEvent.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnEventIDChanging(value);
-					this.SendPropertyChanging();
-					this._EventID = value;
-					this.SendPropertyChanged("EventID");
-					this.OnEventIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="Int NOT NULL")]
-		public int UserName
-		{
-			get
-			{
-				return this._UserName;
-			}
-			set
-			{
-				if ((this._UserName != value))
-				{
-					if (this._User.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnUserNameChanging(value);
-					this.SendPropertyChanging();
-					this._UserName = value;
-					this.SendPropertyChanged("UserName");
-					this.OnUserNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SportEvent_Users_Event", Storage="_SportEvent", ThisKey="EventID", OtherKey="EventID", IsForeignKey=true)]
-		public SportEvent SportEvent
-		{
-			get
-			{
-				return this._SportEvent.Entity;
-			}
-			set
-			{
-				SportEvent previousValue = this._SportEvent.Entity;
-				if (((previousValue != value) 
-							|| (this._SportEvent.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._SportEvent.Entity = null;
-						previousValue.Users_Events.Remove(this);
-					}
-					this._SportEvent.Entity = value;
-					if ((value != null))
-					{
-						value.Users_Events.Add(this);
-						this._EventID = value.EventID;
-					}
-					else
-					{
-						this._EventID = default(int);
-					}
-					this.SendPropertyChanged("SportEvent");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Users_Event", Storage="_User", ThisKey="UserName", OtherKey="UserID", IsForeignKey=true)]
-		public User User
-		{
-			get
-			{
-				return this._User.Entity;
-			}
-			set
-			{
-				User previousValue = this._User.Entity;
-				if (((previousValue != value) 
-							|| (this._User.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._User.Entity = null;
-						previousValue.Users_Events.Remove(this);
-					}
-					this._User.Entity = value;
-					if ((value != null))
-					{
-						value.Users_Events.Add(this);
-						this._UserName = value.UserID;
-					}
-					else
-					{
-						this._UserName = default(int);
-					}
-					this.SendPropertyChanged("User");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
+			entity.UserAccount = null;
 		}
 	}
 }
