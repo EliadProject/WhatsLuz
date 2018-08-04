@@ -55,20 +55,20 @@ namespace WhatsLuzMVCAPI.Controllers
                 Console.WriteLine("Registred");
                 updateUser(dataContext, userAccount, DisplayName,Email,PhotoURL);
             }
-            if (userAccount == null)
+            else if (userAccount == null)
             {
                 //register user
                 createUser(dataContext, Userfid, DisplayName, Email, PhotoURL);
             }
           
             //Managing Permission Level
-
+            /*
             if (userAccount.isAdmin == 1)
             {
                 //user is admin
                 
             }
-
+            */
 
 
 
