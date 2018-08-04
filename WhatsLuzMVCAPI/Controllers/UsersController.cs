@@ -24,7 +24,7 @@ namespace WhatsLuzMVCAPI.Controllers
         {
             return "value";
         }
-
+        
         // POST: api/Users
         public void Post(HttpRequestMessage value)
         {
