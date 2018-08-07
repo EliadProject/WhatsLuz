@@ -33,7 +33,7 @@ firebase.auth().signInWithPopup(provider).then(function(result) {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:61733/api/Users",
+        url: "http://localhost:61733/Account/Login",
         data: json_user,
         success: function () {
             alert('success');
@@ -45,7 +45,7 @@ firebase.auth().signInWithPopup(provider).then(function(result) {
 
 
   //Redirect to main project page
-  window.location = "http://localhost:61733/Home/Index";
+  //window.location = "http://localhost:61733/Home/Index";
 
 
   //register/sign in to database

@@ -41,70 +41,29 @@
 </head>
 <body ng-controller="ctrl" style="height: 100%">
    
+   
+    
     <div class="panel panel-primary">
-        <div class="panel-heading clearfix">
-            <div>
-                <div class="col-md-4">
-                    <a href="#" id="createEventButton" class="btn btn-primary btn-lg " style="padding: 6px 16px;" role="button" data-toggle="modal" data-target="#eventAddition-modal">
-                        <p style="margin: 0 0 0 0;">  <span class="glyphicon glyphicon-plus text-center"></span> Create Sport Event </p>
-                    </a>
-                </div>
-                <div class="col-md-4">
-                    <h2 style="margin-top: 0px; margin-bottom: 0px;" class="text-center">{{ calendarTitle }} </h2>
-                </div>
-
-                <div class="btn-group col-md-2 " style="float: left;">
-                    <label class="btn btn-primary" style="float: left;" ng-model="calConfig.calendarView" btn-radio="'day'">Day</label>
-                    <label class="btn btn-primary" style="float: left;" ng-model="calConfig.calendarView" btn-radio="'week'">Week</label>
-                    <label class="btn btn-primary" style="float: left;" ng-model="calConfig.calendarView" btn-radio="'month'">Month</label>
-                </div>
-                <!--Admin Page-->
-               
-
-                    <div class="col-md-2">
-                        <button style="margin-top: 0px; margin-bottom: 0px;" class="btn btn-primary pull-right"> Admin Page</button>
-                    </div>
-                
-                
-
-
-
-            </div>
-            <!-- <p class="text-center"><a href = "#" class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#eventAddition-modal">Open Login Modal</a></p> -->
-
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                <li>@Html.ActionLink("About", "About", "Home")</li>
+                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            </ul>
+         
         </div>
-        <div class="container-fluid">
+
+
             @RenderBody()
+       
 
-        </div>
-
-    </div>
-    <div class="panel-footer">
-        <button class="btn btn-primary"
-                mwl-date-modifier
-                date="calConfig.calendarDay"
-                decrement="calConfig.calendarView">
-            Back
-        </button>
-        <button class="btn btn-default"
-                mwl-date-modifier
-                date="calConfig.calendarDay"
-                set-to-today>
-            Today
-        </button>
-
-        <button class="btn btn-primary"
-                mwl-date-modifier
-                date="calConfig.calendarDay"
-                increment="calConfig.calendarView">
-            Forward
-        </button>
 
 
     </div>
 
 
-    @*<div class="navbar navbar-inverse navbar-fixed-top">
+
+            @*<div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -123,15 +82,15 @@
             </div>
         </div>
 
-    *@
+            *@
 
 
 
 
-    @*@Scripts.Render("~/bundles/jquery")
+            @*@Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/bootstrap")
 
         @RenderSection("scripts", required: false)
-    *@
+            *@
 </body>
 </html>

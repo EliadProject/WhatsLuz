@@ -8,6 +8,12 @@ using System.Web.Http;
 using WhatsLuzMVCAPI.Models;
 using System.Data.Linq.Mapping;
 using System.Data.Linq;
+using System.Security.Claims;
+using Microsoft.Owin.Security.Cookies;
+using static Microsoft.AspNetCore.Hosting.Internal.HostingApplication;
+using System.Web;
+using Microsoft.AspNet.Identity;
+using System.Web.Security;
 
 namespace WhatsLuzMVCAPI.Controllers
 {
@@ -25,6 +31,7 @@ namespace WhatsLuzMVCAPI.Controllers
             return "value";
         }
         
+        [HttpPost]
         // POST: api/Users
         public void Post(HttpRequestMessage value)
         {
@@ -49,7 +56,28 @@ namespace WhatsLuzMVCAPI.Controllers
             userAccount = getUser(dataContext, Userfid);
 
 
-           if (userAccount != null)
+            /*
+            var claims = new List<Claim>();
+            claims.Add(new Claim(ClaimTypes.Name, Userfid));    
+            var id = new ClaimsIdentity(claims,
+                                        DefaultAuthenticationTypes.ApplicationCookie);
+
+            var ctx = Request.GetOwinContext();
+            var authenticationManager = ctx.Authentication;
+            authenticationManager.SignIn(id);
+            */
+            /*
+            FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket
+                           (
+                           1, DisplayName, DateTime.Now, DateTime.Now.AddMinutes(15), false, Userfid
+                           );
+
+            string enTicket = FormsAuthentication.Encrypt(authTicket);
+            HttpCookie faCookie = new HttpCookie("Cookie1", enTicket);
+            Response.Cookies.Add(faCookie);
+            */
+            bool auth = User.Identity.IsAuthenticated;
+            if (userAccount != null)
             {
                 //update his details
                 Console.WriteLine("Registred");
@@ -85,9 +113,11 @@ namespace WhatsLuzMVCAPI.Controllers
         {
         }
 
+       
+
 
         //get user by his facebook id
-       static public UserAccount getUser(SqlConnectionDataContext db, string userfID)
+        static public UserAccount getUser(SqlConnectionDataContext db, string userfID)
         {
             UserAccount usera =
    (from u in db.UserAccounts
