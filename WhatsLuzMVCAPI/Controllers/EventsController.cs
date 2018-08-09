@@ -16,8 +16,9 @@ namespace WhatsLuzMVCAPI.Controllers
     public class EventsController : ApiController
     {
         // GET: api/Events
-        public SportEvent_Parsed[] Get()
+        public SportEvent_Parsed[] Get(HttpRequestMessage value)
         {
+
 
             var dataContext = new SqlConnectionDataContext();
             Table<SportEvent> table_sportEvents = dataContext.SportEvents;
@@ -131,7 +132,8 @@ namespace WhatsLuzMVCAPI.Controllers
                 location = sportEvent.location,
                 notes = sportEvent.notes,
                 startsAt = sportEvent.Date,
-                endsAt = sportEvent.Date.AddMinutes(sportEvent.Duration)
+                endsAt = sportEvent.Date.AddMinutes(sportEvent.Duration),
+                color = "#ff0000"
             };
 
             //string toreturn = (JsonConvert.SerializeObject(sportEvent_parsed)).Replace(@"\","");

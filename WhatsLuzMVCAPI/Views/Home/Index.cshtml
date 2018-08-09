@@ -35,7 +35,7 @@
                                 <form class="form-horizontal" role="form">
                                     <div class="form-group">
                                         <label for="filter">Category</label>
-                                        <select class="form-control categories">
+                                        <select id="categories_filter" class="form-control categories">
                                             <option selected>Any</option>
                                         </select>
                                     </div>
@@ -47,11 +47,11 @@
                                         <label for="contain">Date</label>
                                         <input class="form-control" type="text" />
                                     </div>
-                                    <button type="submit" class="btn btn-primary" id="gosearch"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                    <button type="submit" class="btn btn-primary firefilter"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                                 </form>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                        <button type="button" class="btn btn-primary firefilter"><span class="glyphicon glyphicon-search" aria-hidden="true" ></span></button>
                     </div>
                 </div>
             </div>
@@ -193,7 +193,7 @@
         </div>
         <div class="form-group">
             <label class="labelEvent" for="categories">Category <span class="asterisk">*</span></label>
-            <select  class="form-control categories"  required></select>
+            <select id="categories_create" class="form-control categories"  required></select>
         </div>
         <div class="form-group">
             <label class="labelEvent">Date and Time <span class="asterisk">*</span></label>

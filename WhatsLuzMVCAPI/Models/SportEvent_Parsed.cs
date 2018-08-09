@@ -59,7 +59,9 @@ namespace WhatsLuzMVCAPI.Models
         [JsonProperty]
         public DateTime endsAt { get; set; }
 
-
+        [JsonProperty]
+        public string color { get; set; }
+        
 
 
 

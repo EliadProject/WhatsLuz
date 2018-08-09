@@ -1,5 +1,16 @@
 ﻿
 $(document).ready(function () {
+    //get all events
+    data = "";
+    angular.element(document.getElementById('ctrlid')).scope().getevents(data);
+
+
+    $('.firefilter').click(function () {
+        categories = $("#categories_create").val();
+        var filter_data = JSON.stringify(categories);
+        angular.element(document.getElementById('ctrlid')).scope().getevents(filter_data);
+    })
+
     /*
     $.get(
         "http://localhost:61733/Cookie"
@@ -17,7 +28,7 @@ $(document).ready(function () {
 
     }); 
     */
-    $.g
+    
 
 
     //Retrieving cateogies from Database
@@ -52,7 +63,7 @@ $(document).ready(function () {
             var sport_event = new Object();
             //retrieve forms values 
             sport_event.title = $("#title").val();
-            sport_event.categories = $("#categories").val();
+            sport_event.categories = $("#categories_create").val();
             sport_event.datetime = $("#datetime").val();
             sport_event.attendies = $("#attendies").val();
             sport_event.duration = $("#duration").val();

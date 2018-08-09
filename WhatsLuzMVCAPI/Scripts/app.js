@@ -1,18 +1,7 @@
 
 
 var module = angular.module('app', ['mwl.calendar', 'ui.bootstrap']);
-/*
-module.provider("myProvider", function () {
-    this.$get = function () {
-        $.get(
-            "http://localhost:61733/api/Events",
-            function (data, status, xhr) {
-                alert(data);
-                $scope.events = data;
-            });
-    };
-});
-*/
+var data = "";
 module.controller('ctrl', function (moment, $scope, calendarConfig) {
 
     calendarConfig.dateFormatter = 'moment'; // use moment to format dates
@@ -25,23 +14,23 @@ module.controller('ctrl', function (moment, $scope, calendarConfig) {
         }
     });
 
-   
-    $scope.events = [];
+    $scope.getevents = function (filter_data)
+    {
         $.ajax({
             url: "http://localhost:61733/api/Events",
+            data: filter_data,
             accepts: "application/json",
             async: false,
             success: function (data, status, xhr) {
                 //  alert(data);                
-                
+
                 //$scope.dan = data;
                 var splitT, splitDash, year, month, day, splitDots, hour, min;
-                
-                for (i in data)
-                {   
 
-                  
-                   // data[i].startsAt = moment(data[i].startsAt).toDate();
+                for (i in data) {
+
+
+                    // data[i].startsAt = moment(data[i].startsAt).toDate();
                     //data[i].endsAt = moment(data[i].endsAt).toDate();
 
                     //data[i].startsAt = moment().startOf('week').add(3, 'days').toDate();
@@ -52,7 +41,7 @@ module.controller('ctrl', function (moment, $scope, calendarConfig) {
                     splitDash = splitT[0].split("-");
                     year = splitDash[0];
                     //month starts from 0
-                    month = splitDash[1]-1;
+                    month = splitDash[1] - 1;
                     day = splitDash[2];
                     splitDots = splitT[1].split(":");
                     hour = splitDots[0];
@@ -64,7 +53,7 @@ module.controller('ctrl', function (moment, $scope, calendarConfig) {
                     splitDash = splitT[0].split("-");
                     year = splitDash[0];
                     //month starts from 0
-                    month = splitDash[1]-1;
+                    month = splitDash[1] - 1;
                     day = splitDash[2];
                     splitDots = splitT[1].split(":");
                     hour = splitDots[0];
@@ -72,14 +61,18 @@ module.controller('ctrl', function (moment, $scope, calendarConfig) {
                     data[i].endsAt = new Date(year, month, day, hour, min);
 
                     $scope.events.push(data[i]);
-                    
+
                 }
-               
-               
-               
-                
+
+
+
+
             }
-    });
+        });
+    }
+   
+    $scope.events = [];
+        
        
     
    
@@ -107,6 +100,7 @@ module.controller('ctrl', function (moment, $scope, calendarConfig) {
             calendarDay: new Date()
         };
 
+    
 
         $scope.updateCloseEvents = function () {
 
@@ -140,15 +134,8 @@ module.controller('ctrl', function (moment, $scope, calendarConfig) {
             }
         }
 
-       
-        
-           
-        
-        
-        
-        
-    
-  /*
+ /*
+  
   $scope.events = [
   
   {
@@ -167,15 +154,10 @@ module.controller('ctrl', function (moment, $scope, calendarConfig) {
     endsAt: moment().startOf('week').add(3, 'days').toDate(), // Optional - a javascript date object for when the event ends
    
     color: { // can also be calendarConfig.colorTypes.warning for shortcuts to the deprecated event types
-      primary: '#e3bc08', // .css("display", "block");he primary event color (should be darker than secondary)
+        primary: '#ff0000', // .css("display", "block");he primary event color (should be darker than secondary)
       secondary: '#fdf1ba' // the secondary event color (should be lighter than primary)
     },
-    actions: [{ // an array of actions that will be displayed next to the event title
-      label: '<i class=\'glyphicon glyphicon-pencil\'></i>', // the label of the action
-      onClick: function(args) { // the action that occurs when it is clicked. The first argument will be an object containing the parent event
-        console.log('Edit event', args.calendarEvent);
-      }
-    }],
+    
     draggable: true, //Allow an event to be dragged and dropped
     cssClass: 'a-css-class-name', //A CSS class (or more, just separate with spaces) that will be added to the event when it is displayed on each view. Useful for marking an event as selected / active etc
     allDay: false // set to true to display the event as an all day event on the day view
@@ -194,8 +176,8 @@ module.controller('ctrl', function (moment, $scope, calendarConfig) {
     endsAt: moment().startOf('week').add(2, 'days').toDate(), // Optional - a javascript date object for when the event ends
    
     color: { // can also be calendarConfig.colorTypes.warning for shortcuts to the deprecated event types
-      primary: '#e3bc08', // .css("display", "block");he primary event color (should be darker than secondary)
-      secondary: '#fdf1ba' // the secondary event color (should be lighter than primary)
+        primary: '#ff0000', // .css("display", "block");he primary event color (should be darker than secondary)
+        secondary: '#ff0000' // the secondary event color (should be lighter than primary)
     },
     actions: [{ // an array of actions that will be displayed next to the event title
       label: '<i class=\'glyphicon glyphicon-pencil\'></i>', // the label of the action
@@ -211,8 +193,8 @@ module.controller('ctrl', function (moment, $scope, calendarConfig) {
 
 
 ];
+ 
  */
-
   $scope.viewDate = moment().startOf('month').toDate();
   //$scope.updateCloseEvents();
   
