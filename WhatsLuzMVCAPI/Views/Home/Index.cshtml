@@ -1,6 +1,5 @@
 ﻿
 
-
 <div class="panel-heading clearfix">
     <div>
         <div class="col-md-4">
@@ -17,13 +16,48 @@
             <label class="btn btn-primary" style="float: left;" ng-model="calConfig.calendarView" btn-radio="'week'">Week</label>
             <label class="btn btn-primary" style="float: left;" ng-model="calConfig.calendarView" btn-radio="'month'">Month</label>
         </div>
-       
-
 
     </div>
     <!-- <p class="text-center"><a href = "#" class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#eventAddition-modal">Open Login Modal</a></p> -->
 
 </div>
+
+
+    <div class="row search_menu">
+        <div class="col-md-5">
+            <div class="input-group" id="adv-search">
+                <input type="text" class="form-control" placeholder="Search for CIK, Filer, Ticker, Person..." />
+                <div class="input-group-btn">
+                    <div class="btn-group" role="group">
+                        <div class="dropdown dropdown-lg">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                            <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                <form class="form-horizontal" role="form">
+                                    <div class="form-group">
+                                        <label for="filter">Category</label>
+                                        <select class="form-control categories">
+                                            <option selected>Any</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contain">Places</label>
+                                        <input class="form-control" type="text" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contain">Date</label>
+                                        <input class="form-control" type="text" />
+                                    </div>
+                                    <button type="submit" class="btn btn-primary" id="gosearch"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                </form>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
 <div class="container-fluid">
@@ -159,7 +193,7 @@
         </div>
         <div class="form-group">
             <label class="labelEvent" for="categories">Category <span class="asterisk">*</span></label>
-            <select id="categories" class="form-control" required></select>
+            <select  class="form-control categories"  required></select>
         </div>
         <div class="form-group">
             <label class="labelEvent">Date and Time <span class="asterisk">*</span></label>

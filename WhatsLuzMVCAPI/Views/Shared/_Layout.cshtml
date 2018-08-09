@@ -37,6 +37,15 @@
     <script src="~/Scripts/script.js"></script>
     <script src="~/Scripts/Functions.js"></script>
 
+    <!-- Firebase -->
+
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+    <script src="~/Scripts/firebase.js"></script>
+
+    <!-- SearchFilter -->
+    
+    <link href="~/Content/SearchMenu.css" rel="stylesheet" id="bootstrap-css">
+
 
 </head>
 <body ng-controller="ctrl" style="height: 100%">
@@ -49,13 +58,21 @@
                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
                 <li>@Html.ActionLink("About", "About", "Home")</li>
                 <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            
+                <li>
+                    <a href="#" class="fireFacebooklogin" style="padding: 6px 16px;">
+                        <p style="margin: 0 0 0 0;">  Login </p>
+                    </a>
+                </li>
+                <li>@Html.ActionLink("Admin", "Admin", "Home") </li>
             </ul>
+                
          
         </div>
+        
 
+        @RenderBody()
 
-            @RenderBody()
-       
 
 
 

@@ -21,7 +21,7 @@ namespace WhatsLuzMVCAPI.Controllers
             return View();
         }
 
-        [HttpPost]
+        
         public ActionResult Login(HttpRequestMessage value)
         {
             /*

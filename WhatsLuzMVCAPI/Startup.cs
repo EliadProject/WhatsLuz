@@ -12,13 +12,8 @@ namespace WhatsLuzMVCAPI
     {
         public void Configuration(IAppBuilder app)
         {
-            app.UseCookieAuthentication(new CookieAuthenticationOptions
-            {
-                CookieName = "Project1_ApplicationCookie",
-                LoginPath = new PathString("/Home/LoginPage"),
-                
-
-            });
+            
+            
             // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=316888
         }
     }

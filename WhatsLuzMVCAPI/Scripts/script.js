@@ -17,14 +17,19 @@ $(document).ready(function () {
 
     }); 
     */
-
+    $.g
 
 
     //Retrieving cateogies from Database
     $.getJSON('http://localhost:61733/api/Category')
         .done(function (data) {
             $.each(data, function (key, item) {
-                $('<option>', { text: item }).appendTo($('#categories'));
+                /*
+                $(".categories").each(function () {    //loop over each list item
+                    
+                });
+                */
+                $('<option>', { text: item }).appendTo($('.categories'));
             });
         });
 
@@ -62,6 +67,8 @@ $(document).ready(function () {
             addEvent(json_sport_event);
         }
     });
+
+    
         
         
 
@@ -70,59 +77,4 @@ $(document).ready(function () {
 });
 
 
- /*
-    function addEvent(sport_event) {
-        $.ajax({
-            type: "POST",
-            url: "http://localhost:61733/api/Events",
-            data: sport_event,
-            success: function () {
-                alert('success');
-            },
-            error: function (XMLHttpReqest, textStatus, errorThrown) {
-                alert(errorThrown);
-            }
-        });
-    }
-    */
-    /*
-    $('#sport_event_join').click(function () {
-        var check_disabled = $(this).attr("class");
-        if (check_disabled.includes("disabled") == true) {
-
-        }
-    }
-    */
- /*
-    $('#form_eventSport_send').click(function () {
-        var check_disabled = $(this).attr("class");
-        if (check_disabled.includes("disabled") == true) {
-            
-        }
-        else {
-            var sport_event = new Object();
-            //retrieve forms values 
-            sport_event.title = $("#title").val();
-            sport_event.categories = $("#categories").val();
-            sport_event.datetime = $("#datetime").val();
-            sport_event.attendies = $("#attendies").val();
-            sport_event.duration = $("#duration").val();
-            sport_event.location = $("#location").val();
-            sport_event.notes = $("#notes").val();
-            
-
-
-            //converting to json
-            var json_sport_event = JSON.stringify(sport_event);
-
-            addEvent(json_sport_event);
-
-
-           
-        }
-
-
-
-
-    });
-    */
+ 
