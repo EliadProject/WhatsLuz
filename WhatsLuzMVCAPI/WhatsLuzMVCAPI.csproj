@@ -475,6 +475,9 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\eliadvert.jpg" />
+    <Content Include="Images\haymiz.jpg" />
+    <Content Include="Images\saggiehen.jpg" />
     <Content Include="Scripts\angular-1.6.4\angular-animate.js" />
     <Content Include="Scripts\angular-1.6.4\angular-animate.min.js" />
     <Content Include="Scripts\angular-1.6.4\angular-aria.js" />
