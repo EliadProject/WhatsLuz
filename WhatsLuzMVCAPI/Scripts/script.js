@@ -6,9 +6,24 @@ $(document).ready(function () {
 
 
     $('.firefilter').click(function () {
-        categories = $("#categories_create").val();
-        var filter_data = JSON.stringify(categories);
+
+        var filter_obj= new Object();
+        filter_obj.place = $("#places_filter").val();
+        filter_obj.date = $("#date_filter").val();
+     
+        var filter_data = JSON.stringify(filter_obj);
+
+        /*
+        var jsonObject = {
+            "category": "any",
+            "place": "any",
+            "date": "any"
+        };
+
+        var jsonjson = JSON.stringify(jsonObject);
+        */
         angular.element(document.getElementById('ctrlid')).scope().getevents(filter_data);
+        console.log(filter_data);
     })
 
     /*

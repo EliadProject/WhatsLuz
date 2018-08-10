@@ -1,14 +1,14 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Linq;
-using System.Data.SqlClient;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
+using System.Web;
+using System.Web.DynamicData;
 using System.Web.Http;
+using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using Newtonsoft.Json.Linq;
 using WhatsLuzMVCAPI.Models;
 
 namespace WhatsLuzMVCAPI.Controllers
@@ -18,6 +18,9 @@ namespace WhatsLuzMVCAPI.Controllers
         // GET: api/Events
         public SportEvent_Parsed[] Get(HttpRequestMessage value)
         {
+
+            //Reading the content of the request
+            //string val = value.Content.ReadAsStringAsync().Result;
 
 
             var dataContext = new SqlConnectionDataContext();
@@ -49,6 +52,10 @@ namespace WhatsLuzMVCAPI.Controllers
 
         }
 
+
+
+
+
         // GET: api/Events/5
         public string Get(int id)
         {
@@ -57,6 +64,9 @@ namespace WhatsLuzMVCAPI.Controllers
             return "value";
         }
 
+
+
+        [System.Web.Http.ActionName("createEvent")]
         // POST: api/Events
         public string Post(HttpRequestMessage value)
         {
@@ -143,5 +153,6 @@ namespace WhatsLuzMVCAPI.Controllers
 
 
         }
+       
     }
 }

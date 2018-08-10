@@ -30,7 +30,7 @@ function checkJoin() {
 function addEvent(sport_event) {
     $.ajax({
         type: "POST",
-        url: "http://localhost:61733/api/Events",
+        url: "http://localhost:61733/api/Events/createEvent",
         data: sport_event,
         success: function () {
             alert('success');

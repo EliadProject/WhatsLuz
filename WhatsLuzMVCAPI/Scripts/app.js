@@ -14,11 +14,14 @@ module.controller('ctrl', function (moment, $scope, calendarConfig) {
         }
     });
 
-    $scope.getevents = function (filter_data)
-    {
+    $scope.getevents = function (filter_data) {
+        $scope.events = [];
         $.ajax({
-            url: "http://localhost:61733/api/Events",
+            type: "POST",
+            url: "http://localhost:61733/SportEvents/getEvents",
             data: filter_data,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
             accepts: "application/json",
             async: false,
             success: function (data, status, xhr) {
@@ -29,13 +32,16 @@ module.controller('ctrl', function (moment, $scope, calendarConfig) {
 
                 for (i in data) {
 
-
+                    
                     // data[i].startsAt = moment(data[i].startsAt).toDate();
                     //data[i].endsAt = moment(data[i].endsAt).toDate();
 
                     //data[i].startsAt = moment().startOf('week').add(3, 'days').toDate();
                     //data[i].endsAt =moment().startOf('week').add(3, 'days').toDate();
 
+                    data[i].startsAt = new Date(parseInt(data[i].startsAt.replace("/Date(", "").replace(")/", ""), 10));
+
+                    /*
                     //Retrieve Date data for convertion for startsAt
                     splitT = data[i].startsAt.split("T");
                     splitDash = splitT[0].split("-");
@@ -47,7 +53,10 @@ module.controller('ctrl', function (moment, $scope, calendarConfig) {
                     hour = splitDots[0];
                     min = splitDots[1];
                     data[i].startsAt = new Date(year, month, day, hour, min);
+                    */
+                    data[i].endsAt = new Date(parseInt(data[i].endsAt.replace("/Date(", "").replace(")/", ""), 10));
 
+                    /*
                     //Retrieve Date data for convertion for endsAt
                     splitT = data[i].endsAt.split("T");
                     splitDash = splitT[0].split("-");
@@ -59,7 +68,7 @@ module.controller('ctrl', function (moment, $scope, calendarConfig) {
                     hour = splitDots[0];
                     min = splitDots[1];
                     data[i].endsAt = new Date(year, month, day, hour, min);
-
+                    */
                     $scope.events.push(data[i]);
 
                 }
@@ -71,7 +80,7 @@ module.controller('ctrl', function (moment, $scope, calendarConfig) {
         });
     }
    
-    $scope.events = [];
+
         
        
     
@@ -134,8 +143,8 @@ module.controller('ctrl', function (moment, $scope, calendarConfig) {
             }
         }
 
- /*
-  
+ 
+  /*
   $scope.events = [
   
   {
@@ -193,8 +202,8 @@ module.controller('ctrl', function (moment, $scope, calendarConfig) {
 
 
 ];
- 
  */
+ 
   $scope.viewDate = moment().startOf('month').toDate();
   //$scope.updateCloseEvents();
   

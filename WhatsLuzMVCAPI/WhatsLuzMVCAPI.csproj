@@ -448,11 +448,13 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SportEventsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\FilterModel.cs" />
     <Compile Include="Models\SportEvent_Parsed.cs" />
     <Compile Include="Models\HttpConnection.cs" />
     <Compile Include="Models\SqlConnection.designer.cs">
@@ -3351,6 +3353,8 @@
     <Content Include="Scripts\bootstrap-datetimepicker-master\test\screen-capture\t4.html" />
     <Content Include="Scripts\bootstrap-datetimepicker-master\test\screen-capture\t5.html" />
     <Content Include="Scripts\bootstrap-datetimepicker-master\test\timezoneDataHelper.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.css" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap-rtl-master\.gitignore" />
     <Content Include="Scripts\bootstrap-rtl-master\.gitmodules" />
     <Content Include="Scripts\bootstrap-rtl-master\assets\ico\favicon.png" />
@@ -4689,6 +4693,7 @@
     <Content Include="Scripts\Functions.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-3.2.1.min.js" />
     <Content Include="Scripts\js\he.js" />
     <Content Include="Scripts\js\jquery-1.11.3.js" />
     <Content Include="Scripts\js\main.js" />
@@ -4697,10 +4702,13 @@
     <Content Include="Scripts\js\ui-bootstrap-tpls.min.js" />
     <Content Include="Scripts\LoginPage.css" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\script.js" />
     <Content Include="Scripts\style.css" />
+    <Content Include="Scripts\validator.js" />
+    <Content Include="Scripts\validator.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
