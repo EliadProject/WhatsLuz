@@ -1,4 +1,5 @@
 ﻿
+
 $(document).ready(function () {
     //get all events
     data = "";
@@ -7,7 +8,9 @@ $(document).ready(function () {
 
     $('.firefilter').click(function () {
 
-        var filter_obj= new Object();
+        var filter_obj = new Object();
+
+        filter_obj.category = $("#categories_filter").val();
         filter_obj.place = $("#places_filter").val();
         filter_obj.date = $("#date_filter").val();
      
@@ -15,7 +18,8 @@ $(document).ready(function () {
 
     
         angular.element(document.getElementById('ctrlid')).scope().getevents(filter_data);
-        console.log(filter_data);
+
+       
     })
 
     /*

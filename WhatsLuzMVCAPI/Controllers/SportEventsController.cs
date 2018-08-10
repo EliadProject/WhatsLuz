@@ -26,12 +26,18 @@ namespace WhatsLuzMVCAPI.Controllers
 
 
             filter = filterPrep(filter);
-
+            List<SportEvent> list_sportEvents;
             var dataContext = new SqlConnectionDataContext();
-            Table<SportEvent> table_sportEvents = dataContext.SportEvents;
-            //IEnumerator<SportEvent> enu_sportEvents = table_sportEvents.GetEnumerator();
-            List<SportEvent> list_sportEvents = table_sportEvents.ToList();
-
+            if(filter.category == null)
+            {
+                //dont need filter
+                 list_sportEvents = getAllEvents(dataContext);
+            }
+            else
+            {
+                //need filter
+                 list_sportEvents = getFilterEvents(dataContext,getCategoryID(dataContext,filter.category));
+            }
 
             SportEvent_Parsed[] toString = new SportEvent_Parsed[list_sportEvents.Count];
             for (int i = 0; i < list_sportEvents.Count; i++)
@@ -48,21 +54,7 @@ namespace WhatsLuzMVCAPI.Controllers
 
        
 
-        // POST: SportEvents/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
         [HttpPost]
         public void createEvent(SportEventModel sportEventModel)
         {
@@ -148,23 +140,30 @@ namespace WhatsLuzMVCAPI.Controllers
             {
                 if (filtermodel.category.Equals("Any"))
                 {
-                    filtermodel.category = "";
+                    filtermodel.category = null;
                 }
             }
             return filtermodel;
         }
-        /*
-        static public UserAccount getFilterEvents(SqlConnectionDataContext db, string categoryName)
+        
+        static public List<SportEvent> getFilterEvents(SqlConnectionDataContext db, int catID)
         {
-            SportEvent sevent =
+            List<SportEvent> list_sportEvents =
             (from se in db.SportEvents
-                join cat in db.Categories
+             where se.CategoryID == catID
+             select se).ToList();
+            return list_sportEvents;
 
 
-                select u).FirstOrDefault();
-            return usera;
         }
-        */
+        static public List<SportEvent> getAllEvents(SqlConnectionDataContext db)
+        {
+            Table<SportEvent> table_sportEvents = db.SportEvents;
+            //IEnumerator<SportEvent> enu_sportEvents = table_sportEvents.GetEnumerator();
+            List<SportEvent> list_sportEvents = table_sportEvents.ToList();
+            return list_sportEvents;
+        }
+
 
         static public string getCategoryName (SqlConnectionDataContext db, int catID)
         {
