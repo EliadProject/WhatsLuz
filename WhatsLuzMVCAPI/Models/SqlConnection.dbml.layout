@@ -1,56 +1,63 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="SqlConnection">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 10.5" name="SqlConnection">
   <DataContextMoniker Name="/SqlConnectionDataContext" />
   <nestedChildShapes>
-    <classShape Id="0aca47bf-1256-4a85-a976-624643c24d0c" absoluteBounds="3.75, 4.375, 2, 1.3862939453125005">
+    <classShape Id="a32384e7-4bc4-4d69-a8b9-3833726e448b" absoluteBounds="0.5, 2.875, 2, 1.3862939453125005">
       <DataClassMoniker Name="/SqlConnectionDataContext/Category" />
       <nestedChildShapes>
-        <elementListCompartment Id="dcf57a2a-5a46-4d22-b7ae-92f3d765c7a0" absoluteBounds="3.765, 4.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="040b9115-8aea-43fa-b1db-932d9097bcbe" absoluteBounds="0.515, 3.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="5f337d5b-bad5-45dc-9a85-c894707e327b" absoluteBounds="6.5, 3.875, 2, 2.1554996744791666">
-      <DataClassMoniker Name="/SqlConnectionDataContext/Place" />
-      <nestedChildShapes>
-        <elementListCompartment Id="9cab5c56-1406-4e41-9947-6ffe9ae91760" absoluteBounds="6.515, 4.335, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="e9c806f4-49d9-4368-97cc-5910530e0065" absoluteBounds="0.75, 4.75, 2, 2.7324039713541666">
-      <DataClassMoniker Name="/SqlConnectionDataContext/SportEvent" />
-      <nestedChildShapes>
-        <elementListCompartment Id="deb6f326-7aa9-4182-965e-060ab685a176" absoluteBounds="0.765, 5.21, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="dca12a84-3b8a-4bef-9d0b-c6dfe1d998e5" absoluteBounds="0.75, 1, 2, 2.3478011067708335">
+    <classShape Id="bd0c0360-40b5-4242-9f6c-55d3567ebd75" absoluteBounds="3.25, 7.875, 2, 2.3478011067708344">
       <DataClassMoniker Name="/SqlConnectionDataContext/UserAccount" />
       <nestedChildShapes>
-        <elementListCompartment Id="d6661175-da89-4483-b07c-2de4255c1348" absoluteBounds="0.765, 1.46, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="7da5db8e-fa12-4faf-8bf6-55b5dc1b03a4" absoluteBounds="3.265, 8.335, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="4848935f-e9ea-4acc-a026-ebe29f95e87e" absoluteBounds="3.5, 1.375, 2, 1.3862939453125003">
+    <classShape Id="01c438cc-20b1-42f5-af67-392c6882fd9f" absoluteBounds="6, 4.25, 2, 1.3862939453125005">
       <DataClassMoniker Name="/SqlConnectionDataContext/Users_Event" />
       <nestedChildShapes>
-        <elementListCompartment Id="139386d2-304d-43dd-a6bf-7dab57112df1" absoluteBounds="3.515, 1.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="897cf07e-5f75-4c16-ae1b-2c70fc4fa6dc" absoluteBounds="6.015, 4.71, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5.75 : 5.06814697265625); (6.5 : 5.06814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/SqlConnectionDataContext/Category/Category_Place" />
-      <nodes>
-        <classShapeMoniker Id="0aca47bf-1256-4a85-a976-624643c24d0c" />
-        <classShapeMoniker Id="5f337d5b-bad5-45dc-9a85-c894707e327b" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 6.65309895833333); (3.59375 : 6.65309895833333); (3.59375 : 2.7612939453125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/SqlConnectionDataContext/SportEvent/SportEvent_Users_Event" />
-      <nodes>
-        <classShapeMoniker Id="e9c806f4-49d9-4368-97cc-5910530e0065" />
-        <classShapeMoniker Id="4848935f-e9ea-4acc-a026-ebe29f95e87e" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 2.06814697265625); (3.5 : 2.06814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <classShape Id="09cb0fce-67dc-4465-9524-ceed17fa1372" absoluteBounds="3.25, 3.625, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/SqlConnectionDataContext/SportEvent" />
+      <nestedChildShapes>
+        <elementListCompartment Id="550df788-0d77-4cc1-a58c-2fdbdf387e39" absoluteBounds="3.265, 4.085, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b10f66da-0507-4c0f-9117-2909d8dda892" absoluteBounds="3.25, 0.75, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/SqlConnectionDataContext/Place" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e6705dd4-02a1-433f-9e86-6ba60a53b4c7" absoluteBounds="3.265, 1.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.25 : 9.04890055338542); (7 : 9.04890055338542); (7 : 5.6362939453125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/SqlConnectionDataContext/UserAccount/UserAccount_Users_Event" />
       <nodes>
-        <classShapeMoniker Id="dca12a84-3b8a-4bef-9d0b-c6dfe1d998e5" />
-        <classShapeMoniker Id="4848935f-e9ea-4acc-a026-ebe29f95e87e" />
+        <classShapeMoniker Id="bd0c0360-40b5-4242-9f6c-55d3567ebd75" />
+        <classShapeMoniker Id="01c438cc-20b1-42f5-af67-392c6882fd9f" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.25 : 4.94314697265625); (6 : 4.94314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/SqlConnectionDataContext/SportEvent/SportEvent_Users_Event" />
+      <nodes>
+        <classShapeMoniker Id="09cb0fce-67dc-4465-9524-ceed17fa1372" />
+        <classShapeMoniker Id="01c438cc-20b1-42f5-af67-392c6882fd9f" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.5 : 3.94314697265625); (3.25 : 3.94314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/SqlConnectionDataContext/Category/Category_SportEvent" />
+      <nodes>
+        <classShapeMoniker Id="a32384e7-4bc4-4d69-a8b9-3833726e448b" />
+        <classShapeMoniker Id="09cb0fce-67dc-4465-9524-ceed17fa1372" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.5 : 2.875); (1.5 : 1.8124995); (3.25 : 1.8124995)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/SqlConnectionDataContext/Category/Category_Place" />
+      <nodes>
+        <classShapeMoniker Id="a32384e7-4bc4-4d69-a8b9-3833726e448b" />
+        <classShapeMoniker Id="b10f66da-0507-4c0f-9117-2909d8dda892" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

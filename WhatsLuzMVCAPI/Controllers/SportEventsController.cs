@@ -37,45 +37,16 @@ namespace WhatsLuzMVCAPI.Controllers
             for (int i = 0; i < list_sportEvents.Count; i++)
             {
                 //string json = JsonConvert.SerializeObject(list_sportEvents[i]);
-                toString[i] = parsedSportEvent(list_sportEvents[i]);
+                toString[i] = parsedSportEvent(dataContext,list_sportEvents[i]);
 
             }
            
             
             return Json(toString, JsonRequestBehavior.AllowGet);
 
-
-         
-
         }
 
-        // GET: SportEvents/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: SportEvents/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: SportEvents/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+       
 
         // POST: SportEvents/Delete/5
         [HttpPost]
@@ -100,7 +71,8 @@ namespace WhatsLuzMVCAPI.Controllers
             SportEvent sportEvent = new SportEvent();
 
             sportEvent.OwnerID = Environment.UserName.ToString();
-            sportEvent.CategoryName = sportEventModel.category;
+
+            sportEvent.CategoryID = getCategoryID(dataContext, sportEventModel.category);
             sportEvent.Date = DateTime.Parse(sportEventModel.datetime);
             if (sportEventModel.duration == 0)
             {
@@ -145,14 +117,14 @@ namespace WhatsLuzMVCAPI.Controllers
             
         }
 
-        static public SportEvent_Parsed parsedSportEvent(SportEvent sportEvent)
+        static public SportEvent_Parsed parsedSportEvent(SqlConnectionDataContext dataContext, SportEvent sportEvent)
         {
             //SportEvent_Parsed parsed = new SportEvent_Parsed(sportEvent);
 
             SportEvent_Parsed sportEvent_parsed = new SportEvent_Parsed()
             {
                 title = sportEvent.title,
-                category = sportEvent.CategoryName,
+                category = getCategoryName(dataContext,sportEvent.CategoryID),
                 owner = sportEvent.OwnerID.ToString(),
                 max_attendies = sportEvent.MaxAttendies,
                 location = sportEvent.location,
@@ -193,6 +165,19 @@ namespace WhatsLuzMVCAPI.Controllers
             return usera;
         }
         */
+
+        static public string getCategoryName (SqlConnectionDataContext db, int catID)
+        {
+            return (from cat in db.Categories
+                    where cat.CategoryID == catID
+                    select cat.Name).FirstOrDefault().ToString();
+        }
+        static public int getCategoryID(SqlConnectionDataContext db, string catName)
+        {
+            return (from cat in db.Categories
+                    where cat.Name == catName
+                    select cat.CategoryID).FirstOrDefault();
+        }
     }
    
 }
