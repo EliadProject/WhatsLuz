@@ -1,4 +1,22 @@
-﻿
+﻿ <!-- Calander Libaries -->
+<link rel="stylesheet" href="/scripts/bower_components/angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.css">
+<script src="~/scripts/js/moment.min.js"></script>
+<script src="/scripts/js/ui-bootstrap-tpls.min.js"></script>
+<script src="/scripts/bower_components/angular-bootstrap-calendar/dist/js/angular-bootstrap-calendar.js"></script>
+<script src="/scripts/bower_components/angular-bootstrap-calendar/dist/js/angular-bootstrap-calendar-tpls.js"></script>
+<script src="/scripts/app.js"></script>
+
+<!-- Datetime picker -->
+<link href="~/scripts/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+<script src="/scripts/js/moment-with-locales.min.js"></script>
+<script src="/scripts/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+<!-- Sport Event Form -->
+<script src="~/Scripts/validator.js"></script>
+
+<!-- SearchFilter -->
+
+<link href="~/Content/SearchMenu.css" rel="stylesheet" id="bootstrap-css">
 
 <div class="panel-heading clearfix">
     <div>
@@ -23,40 +41,40 @@
 </div>
 
 
-    <div class="row search_menu">
-        <div class="col-md-5">
-            <div class="input-group" id="adv-search">
-                <input type="text" class="form-control" placeholder="Search for CIK, Filer, Ticker, Person..." />
-                <div class="input-group-btn">
-                    <div class="btn-group" role="group">
-                        <div class="dropdown dropdown-lg">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
-                            <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                <form class="form-horizontal" role="form">
-                                    <div class="form-group">
-                                        <label for="filter">Category</label>
-                                        <select id="categories_filter" class="form-control categories">
-                                            <option selected>Any</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="contain">Places</label>
-                                        <input class="form-control" type="text" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="contain">Date</label>
-                                        <input class="form-control" type="text" />
-                                    </div>
-                                    <button type="submit" class="btn btn-primary firefilter"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                                </form>
-                            </div>
+<div class="row search_menu">
+    <div class="col-md-5">
+        <div class="input-group" id="adv-search">
+            <input type="text" class="form-control" placeholder="Search for CIK, Filer, Ticker, Person..." />
+            <div class="input-group-btn">
+                <div class="btn-group" role="group">
+                    <div class="dropdown dropdown-lg">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                        <div class="dropdown-menu dropdown-menu-right" role="menu">
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <label for="filter">Category</label>
+                                    <select id="categories_filter" class="form-control categories">
+                                        <option selected>Any</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contain">Places</label>
+                                    <input class="form-control" type="text" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="contain">Date</label>
+                                    <input class="form-control" type="text" />
+                                </div>
+                                <button type="submit" class="btn btn-primary firefilter"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                            </form>
                         </div>
-                        <button type="button" class="btn btn-primary firefilter"><span class="glyphicon glyphicon-search" aria-hidden="true" ></span></button>
                     </div>
+                    <button type="button" class="btn btn-primary firefilter"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 
 
@@ -193,7 +211,7 @@
         </div>
         <div class="form-group">
             <label class="labelEvent" for="categories">Category <span class="asterisk">*</span></label>
-            <select id="categories_create" class="form-control categories"  required></select>
+            <select id="categories_create" class="form-control categories" required></select>
         </div>
         <div class="form-group">
             <label class="labelEvent">Date and Time <span class="asterisk">*</span></label>
@@ -294,12 +312,12 @@
                     </ul>
                 </div>
             </div>
-            <!--/.row--> 
+            <!--/.row-->
         </div>
-        <!--/.container--> 
+        <!--/.container-->
     </div>
     <!--/.footer-->
-    
+
     <div class="footer-bottom">
         <div class="container">
             <p class="pull-left"> Copyright © Footer E-commerce Plugin 2014. All right reserved. </p>
@@ -309,23 +327,25 @@
                     <li><i class="fa fa-cc-mastercard"></i></li>
                     <li><i class="fa fa-cc-amex"></i></li>
                     <li><i class="fa fa-cc-paypal"></i></li>
-                </ul> 
+                </ul>
             </div>
         </div>
     </div>
-    <!--/.footer-bottom--> 
+    <!--/.footer-bottom-->
 </footer>
 
 <style>
     .full {
-        width: 100%;    
+        width: 100%;
     }
+
     .gap {
         height: 30px;
         width: 100%;
         clear: both;
         display: block;
     }
+
     .footer {
         background: #EDEFF1;
         height: auto;
@@ -335,36 +355,43 @@
         border-bottom: 1px solid #CCCCCC;
         border-top: 1px solid #DDDDDD;
     }
-    .footer p {
-        margin: 0;
-    }
-    .footer img {
-        max-width: 100%;
-    }
-    .footer h3 {
-        border-bottom: 1px solid #BAC1C8;
-        color: #54697E;
-        font-size: 18px;
-        font-weight: 600;
-        line-height: 27px;
-        padding: 40px 0 10px;
-        text-transform: uppercase;
-    }
-    .footer ul {
-        font-size: 13px;
-        list-style-type: none;
-        margin-left: 0;
-        padding-left: 0;
-        margin-top: 15px;
-        color: #7F8C8D;
-    }
-    .footer ul li a {
-        padding: 0 0 5px 0;
-        display: block;
-    }
-    .footer a {
-        color: #78828D
-    }
+
+        .footer p {
+            margin: 0;
+        }
+
+        .footer img {
+            max-width: 100%;
+        }
+
+        .footer h3 {
+            border-bottom: 1px solid #BAC1C8;
+            color: #54697E;
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 27px;
+            padding: 40px 0 10px;
+            text-transform: uppercase;
+        }
+
+        .footer ul {
+            font-size: 13px;
+            list-style-type: none;
+            margin-left: 0;
+            padding-left: 0;
+            margin-top: 15px;
+            color: #7F8C8D;
+        }
+
+            .footer ul li a {
+                padding: 0 0 5px 0;
+                display: block;
+            }
+
+        .footer a {
+            color: #78828D
+        }
+
     .supportLi h4 {
         font-size: 20px;
         font-weight: lighter;
@@ -372,6 +399,7 @@
         margin-bottom: 0 !important;
         padding-bottom: 0;
     }
+
     .newsletter-box input#appendedInputButton {
         background: #FFFFFF;
         display: inline-block;
@@ -380,6 +408,7 @@
         clear: both;
         width: 100%;
     }
+
     .newsletter-box .btn {
         border: medium none;
         -webkit-border-radius: 3px;
@@ -393,13 +422,16 @@
         width: 100%;
         color: #fff;
     }
+
     .newsletter-box {
         overflow: hidden;
     }
+
     .bg-gray {
         background-image: -moz-linear-gradient(center bottom, #BBBBBB 0%, #F0F0F0 100%);
         box-shadow: 0 1px 0 #B4B3B3;
     }
+
     .social li {
         background: none repeat scroll 0 0 #B5B5B5;
         border: 2px solid #B5B5B5;
@@ -421,35 +453,42 @@
         -ms-transition: all 0.5s ease 0s;
         -o-transition: all 0.5s ease 0s;
     }
-    .social li:hover {
-        transform: scale(1.15) rotate(360deg);
-        -webkit-transform: scale(1.1) rotate(360deg);
-        -moz-transform: scale(1.1) rotate(360deg);
-        -ms-transform: scale(1.1) rotate(360deg);
-        -o-transform: scale(1.1) rotate(360deg);
-    }
-    .social li a {
-        color: #EDEFF1;
-    }
-    .social li:hover {
-        border: 2px solid #2c3e50;
-        background: #2c3e50;
-    }
-    .social li a i {
-        font-size: 16px;
-        margin: 0 0 0 5px;
-        color: #EDEFF1 !important;
-    }
+
+        .social li:hover {
+            transform: scale(1.15) rotate(360deg);
+            -webkit-transform: scale(1.1) rotate(360deg);
+            -moz-transform: scale(1.1) rotate(360deg);
+            -ms-transform: scale(1.1) rotate(360deg);
+            -o-transform: scale(1.1) rotate(360deg);
+        }
+
+        .social li a {
+            color: #EDEFF1;
+        }
+
+        .social li:hover {
+            border: 2px solid #2c3e50;
+            background: #2c3e50;
+        }
+
+        .social li a i {
+            font-size: 16px;
+            margin: 0 0 0 5px;
+            color: #EDEFF1 !important;
+        }
+
     .footer-bottom {
         background: #E3E3E3;
         border-top: 1px solid #DDDDDD;
         padding-top: 10px;
         padding-bottom: 10px;
     }
-    .footer-bottom p.pull-left {
-        padding-top: 6px;
-    }
+
+        .footer-bottom p.pull-left {
+            padding-top: 6px;
+        }
+
     .payments {
-        font-size: 1.5em;	
+        font-size: 1.5em;
     }
 </style>
