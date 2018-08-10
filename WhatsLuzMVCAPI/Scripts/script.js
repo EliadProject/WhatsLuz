@@ -13,15 +13,7 @@ $(document).ready(function () {
      
         var filter_data = JSON.stringify(filter_obj);
 
-        /*
-        var jsonObject = {
-            "category": "any",
-            "place": "any",
-            "date": "any"
-        };
-
-        var jsonjson = JSON.stringify(jsonObject);
-        */
+    
         angular.element(document.getElementById('ctrlid')).scope().getevents(filter_data);
         console.log(filter_data);
     })
@@ -78,9 +70,9 @@ $(document).ready(function () {
             var sport_event = new Object();
             //retrieve forms values 
             sport_event.title = $("#title").val();
-            sport_event.categories = $("#categories_create").val();
+            sport_event.category = $("#categories_create").val();
             sport_event.datetime = $("#datetime").val();
-            sport_event.attendies = $("#attendies").val();
+            sport_event.max_attendies = $("#attendies").val();
             sport_event.duration = $("#duration").val();
             sport_event.location = $("#location").val();
             sport_event.notes = $("#notes").val();

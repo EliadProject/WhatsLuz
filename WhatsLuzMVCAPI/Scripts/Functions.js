@@ -30,13 +30,15 @@ function checkJoin() {
 function addEvent(sport_event) {
     $.ajax({
         type: "POST",
-        url: "http://localhost:61733/api/Events/createEvent",
+        url: "http://localhost:61733/SportEvents/createEvent",
         data: sport_event,
+        contentType: "application/json; charset=utf-8",
         success: function () {
-            alert('success');
+            location.reload();
         },
         error: function (XMLHttpReqest, textStatus, errorThrown) {
-            alert(errorThrown);
+            alert(errorThrown.textStatus);
         }
+        
     });
 }

@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using WhatsLuzMVCAPI.Models;
 
 namespace WhatsLuzMVCAPI.Controllers
@@ -90,6 +91,58 @@ namespace WhatsLuzMVCAPI.Controllers
             {
                 return View();
             }
+        }
+        [HttpPost]
+        public void createEvent(SportEventModel sportEventModel)
+        {
+
+            var dataContext = new SqlConnectionDataContext();           
+            SportEvent sportEvent = new SportEvent();
+
+            sportEvent.OwnerID = Environment.UserName.ToString();
+            sportEvent.CategoryName = sportEventModel.category;
+            sportEvent.Date = DateTime.Parse(sportEventModel.datetime);
+            if (sportEventModel.duration == 0)
+            {
+                sportEvent.Duration = 120; 
+            }
+            else
+            {
+                sportEvent.Duration = sportEventModel.duration;
+            }
+           
+            if(sportEventModel.max_attendies == 0)
+            {
+                sportEvent.MaxAttendies = 12;
+            }
+            else
+            {
+                sportEvent.MaxAttendies = sportEventModel.max_attendies;
+            }
+
+            sportEvent.location = sportEventModel.location;
+            sportEvent.notes = sportEventModel.notes;
+
+            if (sportEventModel.title == null)
+            {
+                sportEvent.title = "No Title" ;
+            }
+            else
+            {
+                sportEvent.title = sportEventModel.title;
+            }
+  
+            dataContext.SportEvents.InsertOnSubmit(sportEvent);
+            try
+            {
+                dataContext.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            
+            
         }
 
         static public SportEvent_Parsed parsedSportEvent(SportEvent sportEvent)

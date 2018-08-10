@@ -446,7 +446,6 @@
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CookieController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
-    <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SportEventsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -455,6 +454,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\FilterModel.cs" />
+    <Compile Include="Models\SportEventModel.cs" />
     <Compile Include="Models\SportEvent_Parsed.cs" />
     <Compile Include="Models\HttpConnection.cs" />
     <Compile Include="Models\SqlConnection.designer.cs">
