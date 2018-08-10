@@ -11,13 +11,13 @@ namespace WhatsLuzMVCAPI.Controllers
     
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
+            ViewBag.Title = "WhatsLuz";
 
             return View();
         }
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Title = "About the Team";
 
             return View();
         }

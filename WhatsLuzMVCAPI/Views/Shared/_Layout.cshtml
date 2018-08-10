@@ -46,7 +46,52 @@
 
     <link href="~/Content/SearchMenu.css" rel="stylesheet" id="bootstrap-css">
 
+    <style>
+        h1.page-header {
+            margin-top: -5px;
+        }
 
+        .sidebar {
+            padding-left: 0;
+        }
+
+        .main-container {
+            background: #FFF;
+            padding-top: 15px;
+            margin-top: -20px;
+        }
+
+        .footer {
+            width: 100%;
+        }
+
+        .label, .glyphicon {
+            margin-right: 5px;
+        }
+
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .navbar-login
+        {
+            width: 305px;
+            padding: 10px;
+            padding-bottom: 0px;
+        }
+
+        .navbar-login-session
+        {
+            padding: 10px;
+            padding-bottom: 0px;
+            padding-top: 0px;
+        }
+
+        .icon-size
+        {
+            font-size: 87px;
+        }
+    </style>
    
 
 </head>
@@ -55,29 +100,137 @@
    
     
     <div class="panel panel-primary">
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                <li>@Html.ActionLink("About", "About", "Home")</li>
-                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-            
-                <li>
-                    <a href="#" class="fireFacebooklogin" style="padding: 6px 16px;">
-                        <p style="margin: 0 0 0 0;">  Login </p>
+        <nav class="navbar navbar-default navbar-static-top">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">
+                        WhatsLuz
                     </a>
-                </li>
-                <li>@Html.ActionLink("Admin", "Admin", "Home") </li>
-            </ul>
-                
-         
-        </div>
-        
-
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="/Home/Index"><span class="glyphicon glyphicon-home"></span>Dashboard</a></li>
+                        <li><a href="/Home/About"><span class="glyphicon glyphicon-calendar"></span>About</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="glyphicon glyphicon-list-alt"></span>Widgets <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="http://www.jquery2dotnet.com">Action</a></li>
+                                <li><a href="http://www.jquery2dotnet.com">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">One more separated link</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="glyphicon glyphicon-search"></span>Search <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu" style="min-width: 300px;">
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <form class="navbar-form navbar-left" role="search">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" placeholder="Search" />
+                                                    <span class="input-group-btn">
+                                                        <button class="btn btn-primary" type="button">
+                                                            Go!
+                                                        </button>
+                                                    </span>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="glyphicon glyphicon-comment"></span>Chats <span class="label label-primary">42</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#"><span class="label label-warning">7:00 AM</span>Hi :)</a></li>
+                                <li><a href="#"><span class="label label-warning">8:00 AM</span>How are you?</a></li>
+                                <li><a href="#"><span class="label label-warning">9:00 AM</span>What are you doing?</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#" class="text-center">View All</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="glyphicon glyphicon-envelope"></span>Inbox <span class="label label-info">32</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#"><span class="label label-warning">4:00 AM</span>Favourites Snippet</a></li>
+                                <li><a href="#"><span class="label label-warning">4:30 AM</span>Email marketing</a></li>
+                                <li>
+                                    <a href="#">
+                                        <span class="label label-warning">5:00 AM</span>Subscriber focused email
+                                        design
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li><a href="#" class="text-center">View All</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="glyphicon glyphicon-user"></span> 
+                                <strong>Admin</strong>
+                                <span class="glyphicon glyphicon-chevron-down"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <div class="navbar-login">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <p class="text-center">
+                                                    <span class="glyphicon glyphicon-user icon-size"></span>
+                                                </p>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <p class="text-left"><strong>Nombre Apellido</strong></p>
+                                                <p class="text-left small">correoElectronico@email.com</p>
+                                                <p class="text-left">
+                                                    <a href="#" class="btn btn-primary btn-block btn-sm">Actualizar Datos</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <div class="navbar-login navbar-login-session">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <p>
+                                                    <a href="#" class="btn btn-danger btn-block">Cerrar Sesion</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div><!-- /.container-fluid -->
+        </nav>
         @RenderBody()
-
-
-
-
     </div>
 
 
