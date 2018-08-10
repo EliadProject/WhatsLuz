@@ -4715,7 +4715,7 @@
     <Content Include="Views\Home\LoginPage.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Admin.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Home\Admin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -18,7 +18,7 @@ Package.onUse(function (api) {
     'dist/fonts/glyphicons-halflings-regular.svg',
     'dist/fonts/glyphicons-halflings-regular.ttf',
     'dist/fonts/glyphicons-halflings-regular.woff',
-    'dist/fonts/glyphicons-halflings-regular.woff'
+    'dist/fonts/glyphicons-halflings-regular.woff2'
   ];
   if (api.addAssets) {
     api.addAssets(assets, 'client');
