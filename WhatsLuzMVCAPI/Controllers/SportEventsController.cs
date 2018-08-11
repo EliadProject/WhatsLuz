@@ -17,42 +17,34 @@ namespace WhatsLuzMVCAPI.Controllers
        
 
         // POST: SportEvents/getEvents
+        //recives filter parameters in FilterModel object
         [HttpPost]
         public ActionResult GetEvents(FilterModel filter)
         {
 
-            //Reading the content of the request
-            //string val = value.Content.ReadAsStringAsync().Result;
-
-
+           
+            //customize filter model for quering
             filter = filterPrep(filter);
-            List<SportEvent> list_sportEvents;
+
+            List<SportEvent_Parsed> sportEvents;
             var dataContext = new SqlConnectionDataContext();
             if(filter.category == null)
             {
                 //dont need filter
-                 list_sportEvents = getAllEvents(dataContext);
+                 sportEvents = getAllEvents(dataContext);  
             }
             else
             {
                 //need filter
-                 list_sportEvents = getFilterEvents(dataContext,getCategoryID(dataContext,filter.category));
+                 sportEvents = getFilterEvents(dataContext,filter.category);  
             }
+            return Json(sportEvents, JsonRequestBehavior.AllowGet);
 
-            SportEvent_Parsed[] toString = new SportEvent_Parsed[list_sportEvents.Count];
-            for (int i = 0; i < list_sportEvents.Count; i++)
-            {
-                //string json = JsonConvert.SerializeObject(list_sportEvents[i]);
-                toString[i] = parsedSportEvent(dataContext,list_sportEvents[i]);
 
-            }
-           
-            
-            return Json(toString, JsonRequestBehavior.AllowGet);
+
+
 
         }
-
-       
 
         
         [HttpPost]
@@ -109,31 +101,7 @@ namespace WhatsLuzMVCAPI.Controllers
             
         }
 
-        static public SportEvent_Parsed parsedSportEvent(SqlConnectionDataContext dataContext, SportEvent sportEvent)
-        {
-            //SportEvent_Parsed parsed = new SportEvent_Parsed(sportEvent);
-
-            SportEvent_Parsed sportEvent_parsed = new SportEvent_Parsed()
-            {
-                title = sportEvent.title,
-                category = getCategoryName(dataContext,sportEvent.CategoryID),
-                owner = sportEvent.OwnerID.ToString(),
-                max_attendies = sportEvent.MaxAttendies,
-                location = sportEvent.location,
-                notes = sportEvent.notes,
-                startsAt = sportEvent.Date,
-                endsAt = sportEvent.Date.AddMinutes(sportEvent.Duration),
-                color = "#ff0000"
-            };
-
-            //string toreturn = (JsonConvert.SerializeObject(sportEvent_parsed)).Replace(@"\","");
-            JavaScriptSerializer java = new JavaScriptSerializer();
-            string toreturn = JsonConvert.SerializeObject(sportEvent_parsed, Formatting.Indented);
-            //string toreturn = java.Serialize(sportEvent_parsed).Replace(@"\", "");
-            return sportEvent_parsed;
-
-
-        }
+       
         static public FilterModel filterPrep(FilterModel filtermodel)
         {
             if (filtermodel.category != null)
@@ -146,22 +114,52 @@ namespace WhatsLuzMVCAPI.Controllers
             return filtermodel;
         }
         
-        static public List<SportEvent> getFilterEvents(SqlConnectionDataContext db, int catID)
+        static public List<SportEvent_Parsed> getFilterEvents(SqlConnectionDataContext db, string catName)
         {
-            List<SportEvent> list_sportEvents =
-            (from se in db.SportEvents
-             where se.CategoryID == catID
-             select se).ToList();
-            return list_sportEvents;
+            
+            List<SportEvent_Parsed> sportsEvents =  (from se in db.SportEvents
+                               join cat in db.Categories on se.CategoryID equals cat.CategoryID
+                               where (cat.Name == catName)
+                               select new SportEvent_Parsed()
+                               {
+                                   title = se.title,
+                                   category = cat.Name,
+                                   owner = se.OwnerID.ToString(),
+                                   max_attendies = se.MaxAttendies,
+                                   location = se.location,
+                                   notes = se.notes,
+                                   startsAt = se.Date,
+                                   endsAt = se.Date.AddMinutes(se.Duration),
+                                   color = "ff0000"
+                                   
+                               }).ToList();
 
+            return sportsEvents;
+
+
+           
 
         }
-        static public List<SportEvent> getAllEvents(SqlConnectionDataContext db)
+        static public List<SportEvent_Parsed> getAllEvents(SqlConnectionDataContext db)
         {
-            Table<SportEvent> table_sportEvents = db.SportEvents;
-            //IEnumerator<SportEvent> enu_sportEvents = table_sportEvents.GetEnumerator();
-            List<SportEvent> list_sportEvents = table_sportEvents.ToList();
-            return list_sportEvents;
+
+            List<SportEvent_Parsed> sportsEvents = (from se in db.SportEvents
+                                                    join cat in db.Categories on se.CategoryID equals cat.CategoryID  
+                                                    select new SportEvent_Parsed()
+                                                    {
+                                                        title = se.title,
+                                                        category = cat.Name,
+                                                        owner = se.OwnerID.ToString(),
+                                                        max_attendies = se.MaxAttendies,
+                                                        location = se.location,
+                                                        notes = se.notes,
+                                                        startsAt = se.Date,
+                                                        endsAt = se.Date.AddMinutes(se.Duration),
+                                                        color = "ff0000"
+
+                                                    }).ToList();
+
+            return sportsEvents;
         }
 
 
