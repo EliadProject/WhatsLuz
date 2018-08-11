@@ -443,6 +443,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CookieController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -452,6 +453,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CategoryStatistics.cs" />
     <Compile Include="Models\FilterModel.cs" />
     <Compile Include="Models\SportEventModel.cs" />
     <Compile Include="Models\SportEvent_Parsed.cs" />
@@ -4688,6 +4690,9 @@
     <Content Include="Scripts\bower_components\moment\templates\default.js" />
     <Content Include="Scripts\bower_components\moment\templates\locale-header.js" />
     <Content Include="Scripts\bower_components\moment\templates\test-header.js" />
+    <Content Include="Scripts\Statistics\d3\d3pie.js" />
+    <Content Include="Scripts\Statistics\d3\d3pie.min.js" />
+    <Content Include="Scripts\Statistics\d3\Donut3D.js" />
     <Content Include="Scripts\firebase.js" />
     <Content Include="Scripts\Functions.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -4705,6 +4710,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\script.js" />
+    <Content Include="Scripts\Statistics\statistics.js" />
     <Content Include="Scripts\style.css" />
     <Content Include="Scripts\validator.js" />
     <Content Include="Scripts\validator.min.js" />
@@ -4727,6 +4733,7 @@
     <Content Include="Views\Admin.cshtml" />
     <Content Include="Views\Home\Admin.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Admin\Statistics.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

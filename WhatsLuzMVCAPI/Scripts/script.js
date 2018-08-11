@@ -5,7 +5,6 @@ $(document).ready(function () {
     data = "";
     angular.element(document.getElementById('ctrlid')).scope().getevents(data);
 
-
     $('.firefilter').click(function () {
 
         var filter_obj = new Object();
@@ -41,16 +40,12 @@ $(document).ready(function () {
     */
     
 
+   
 
     //Retrieving cateogies from Database
-    $.getJSON('http://localhost:61733/api/Category')
+    $.getJSON('http://localhost:61733/Category/getCategoriesName')
         .done(function (data) {
-            $.each(data, function (key, item) {
-                /*
-                $(".categories").each(function () {    //loop over each list item
-                    
-                });
-                */
+            $.each(data, function (key, item) { 
                 $('<option>', { text: item }).appendTo($('.categories'));
             });
         });

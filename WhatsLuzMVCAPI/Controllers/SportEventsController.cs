@@ -101,7 +101,15 @@ namespace WhatsLuzMVCAPI.Controllers
             
         }
 
-       
+        public ActionResult getCategoriesStatistics()
+        {
+            var dataContext = new SqlConnectionDataContext();
+            List<CategoryStatistics> seStatistics = getSportEventStatistics(dataContext);          
+            return Json(seStatistics, JsonRequestBehavior.AllowGet); ;
+        }
+
+
+
         static public FilterModel filterPrep(FilterModel filtermodel)
         {
             if (filtermodel.category != null)
@@ -160,6 +168,24 @@ namespace WhatsLuzMVCAPI.Controllers
                                                     }).ToList();
 
             return sportsEvents;
+        }
+
+        static public List<CategoryStatistics> getSportEventStatistics(SqlConnectionDataContext db)
+        {
+
+         
+            int count_all = db.SportEvents.Count();
+
+            List<CategoryStatistics> seStatistics = (from se in db.SportEvents
+                                                    join cat in db.Categories on se.CategoryID equals cat.CategoryID
+                                                    group cat by cat.Name into g
+                                                    select new CategoryStatistics
+                                                    {
+                                                        label = g.Key,
+                                                        value = 100.0 * g.Count() / count_all
+                                                    }).ToList();
+
+            return seStatistics;
         }
 
 

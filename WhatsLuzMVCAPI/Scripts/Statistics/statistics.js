@@ -1,0 +1,45 @@
+﻿
+    var newcontent = [];
+
+    $.ajax({
+        type: "GET",
+        url: 'http://localhost:61733/SportEvents/getCategoriesStatistics',
+        dataType: 'json',
+        async: false,
+        accepts: "application/json",
+        success: function (data) {
+            for (i in data) {
+                newcontent.push(
+               {
+                   label: data[i].label,
+                   value: data[i].value
+               });
+                console.log("I'm Here!")
+            }
+        }
+    });
+   
+    var pie = new d3pie("myPie", {
+        header: {
+            title: {
+                text: "Events Pie by Category"
+            }
+        },
+        data: {
+            content: newcontent
+        },
+
+        //Here further operations/animations can be added like click event, cut out the clicked pie section.
+        callbacks: {
+            onMouseoverSegment: function (info) {
+                console.log("mouse in", info);
+            },
+            onMouseoutSegment: function (info) {
+                console.log("mouseout:", info);
+            }
+        }
+    });
+
+   
+
+

@@ -5,14 +5,15 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Mvc;
 using WhatsLuzMVCAPI.Models;
 
 namespace WhatsLuzMVCAPI.Controllers
 {
-    public class CategoryController : ApiController
+    public class CategoryController : Controller
     {
-        // GET: api/Category
-        public IEnumerable<string> Get()
+        // GET: Category/getCategoriesName
+        public ActionResult getCategoriesName()
         {
             var dataContext = new SqlConnectionDataContext();
             Table<Category> table_Categories = dataContext.Categories;
@@ -24,8 +25,11 @@ namespace WhatsLuzMVCAPI.Controllers
                 toString[i] = list_Categories[i].Name ;
             }
             
-            return toString;
+            return Json(toString, JsonRequestBehavior.AllowGet); ;
         }
+
+
+        
 
         // GET: api/Category/5
         public string Get(int id)
