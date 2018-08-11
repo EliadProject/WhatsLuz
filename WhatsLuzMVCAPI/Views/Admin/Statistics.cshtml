@@ -1,24 +1,67 @@
-﻿
-@{
-    ViewBag.Title = "View";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿<title>@ViewBag.Title</title>
+
+<style>
+    h1.page-header {
+        margin-top: -5px;
+    }
+
+    .sidebar {
+        padding-left: 0;
+    }
+
+    .main-container {
+        background: #FFF;
+        padding-top: 15px;
+        margin-top: -20px;
+    }
+
+    .footer {
+        width: 100%;
+    }
+
+    .label, .glyphicon {
+        margin-right: 5px;
+    }
+</style>
+<br />
+<!------ Include the above in your HEAD tag ---------->
+<div class="container-fluid main-container">
+    <div class="col-md-2 sidebar">
+        <ul class="nav nav-pills nav-stacked">
+            <li class="active"><a href="/Admin/Index">Home</a></li>
+            <li><a href="/Admin/Users">Users</a></li>
+            <li><a href="/Admin/Statistics"> Statistics </a></li>
+            <li><a href="#">Link</a></li>
+            <li><a href="#">Link</a></li>
+        </ul>
+    </div>
+    <div class="col-md-10 content">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Dashboard
+            </div>
+            <h2>Statistics</h2>
+            <div id="myPie"></div>
+
+
+            <script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+            <!-- <script src="https://d3js.org/d3-selection.v1.js"></script> -->
+
+            <script src="~/Scripts/Statistics/d3/d3pie.js"></script>
+            <script src="~/Scripts/Statistics/d3/d3pie.min.js"></script>
+            <script src="~/Scripts/Statistics/statistics.js"></script>
+        </div>
+    </div>
+
+</div>
 
 
 
-<h2>Statistics</h2>
-<div id="myPie"></div>
-
-
-<script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script>
-<!-- <script src="https://d3js.org/d3-selection.v1.js"></script> -->
- 
-<script src="~/Scripts/Statistics/d3/d3pie.js"></script>
-<script src="~/Scripts/Statistics/d3/d3pie.min.js"></script>
-<script src="~/Scripts/Statistics/statistics.js"></script>
 
 
 
-  
+
+
+
 
 

@@ -22,5 +22,12 @@ namespace WhatsLuzMVCAPI.Controllers
 
             return View();
         }
+
+        public ActionResult Statistics()
+        {
+            ViewBag.Title = "Statistics";
+
+            return View();
+        }
     }
 }
