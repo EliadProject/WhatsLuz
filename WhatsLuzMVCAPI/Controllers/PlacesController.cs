@@ -12,23 +12,27 @@ namespace WhatsLuzMVCAPI.Controllers
     {
         // GET: Places/getPlacesName
         public ActionResult getPlacesName()
-        {
+        {   
             var dataContext = new SqlConnectionDataContext();
             Table<Place> table_Places = dataContext.Places;
             List<Place> list_Places = table_Places.ToList();
             string[] toString = new string[list_Places.Count];
-            for (int i = 0; i < list_Places.Count; i++)
-            {
+            for (int i = 0; i < list_Places.Count; i++){
                 toString[i] = list_Places[i].Name;
             }
 
-            return Json(toString, JsonRequestBehavior.AllowGet); ;
+            return Json(toString, JsonRequestBehavior.AllowGet);
         }
 
-        // GET: Places/Details/5
-        public ActionResult Details(int id)
+        // GET: Places/GetLocationCordinatesByName
+        public ActionResult GetLocationCordinatesByName(String name)
         {
-            return View();
+            var dataContext = new SqlConnectionDataContext();
+            Table<Place> table_Places = dataContext.Places;
+            List<Place> list_Places = table_Places.ToList();
+            Place p =list_Places.Find(location => location.Name == "Tedi");
+            string[] toString = { p.lat.ToString() , p.lng.ToString() };
+            return Json(toString, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Places/Create
