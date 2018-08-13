@@ -11,6 +11,9 @@
 <script src="/scripts/js/moment-with-locales.min.js"></script>
 <script src="/scripts/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 
+<!-- Google Maps -->
+
+
 <!-- Sport Event Form -->
 <script src="~/Scripts/validator.js"></script>
 
@@ -165,7 +168,6 @@
 
 </div>
 
-
 <!-- ShowEvent -->
 
 <div class="modal fade " id="eventShow-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
@@ -192,6 +194,21 @@
     </form>
 </div>
 
+<!-- Google Maps -->
+<div ng-show="showMap" id="map" style="width:400px;height:300px"></div>
+
+<script>
+    function myMap() {
+        var myCenter = new google.maps.LatLng(51.508742, -0.120850);
+        var mapCanvas = document.getElementById("map");
+        var mapOptions = { center: myCenter, zoom: 5 };
+        var map = new google.maps.Map(mapCanvas, mapOptions);
+        var marker = new google.maps.Marker({ position: myCenter });
+        marker.setMap(map);
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzeATlrOQAWD95ok3AMuTQuqwSi_0NHX4&callback=myMap"></script>
+
 <!-- Event creation form -->
 <div class="fade sport_event" id="eventAddition-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
 
@@ -205,43 +222,47 @@
     </div>
     <hr />
     <form data-toggle="validator" role="form" action="#">
+      
         <div class="form-group">
             <label class="labelEvent">Title</label>
             <input type="text" id="title" class="form-control" maxlength="50" placeholder="Write title" />
         </div>
+        
         <div class="form-group">
             <label class="labelEvent" for="categories">Category <span class="asterisk">*</span></label>
             <select id="categories_create" class="form-control categories" required></select>
         </div>
+
         <div class="form-group">
             <label class="labelEvent">Date and Time <span class="asterisk">*</span></label>
             <div class='input-group date form-group' id='datetimepicker1'>
-
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
                 <input type='text' class="form-control" id="datetime" data-error="Choose date and time" required />
-
-
             </div>
         </div>
+        
         <div class="form-group">
             <label class="labelEvent">Maximum Attendies</label>
             <input type="number" id="attendies" min="2" max="50" class="form-control" placeholder="Write the maximum attendies number" />
         </div>
+        
         <div class="form-group">
             <label class="labelEvent">Duration</label>
             <input type="number" id="duration" min="30" max="300" class="form-control" placeholder="Write the duration in munutes" />
         </div>
+        
         <div class="form-group">
-            <label class="labelEvent">Location<span class="asterisk">*</span></label>
-            <input type="text" id="location" class="form-control" placeholder="Write the location" maxlength="50" data-error="No location" required />
-            <div class="help-block with-errors"></div>
+            <label class="labelEvent" for="places">Location<span class="asterisk">*</span></label>
+            <select id="places_create" class="form-control places" required></select>
+            <a><span ng-mouseover="showMap=true" ng-mouseleave="showMap=false" class="glyphicon glyphicon-map-marker"></span></a>
+            <!-- <div class="help-block with-errors"></div> -->
         </div>
+
         <div class="form-group">
             <label class="labelEvent">Notes<span class="asterisk"></span></label>
             <textarea id="notes" class="form-control" rows="4" placeholder="Write notes" maxlength="200"></textarea>
-
         </div>
 
         <div class="form-group">
@@ -318,5 +339,3 @@
 <!--/.container-->
 <!--</div>-->
 <!--/.footer-->
-
-

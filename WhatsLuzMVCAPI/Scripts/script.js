@@ -50,6 +50,13 @@ $(document).ready(function () {
             });
         });
 
+    //Retrieving places from Database
+    $.getJSON('http://localhost:61733/places/getplacesname')
+        .done(function (data) {
+            $.each(data, function (key, item) {
+                $('<option>', { text: item }).appendTo($('.places'));
+            });
+        });
 
     //customizing datetimepicker
     $('#datetimepicker1').datetimepicker(

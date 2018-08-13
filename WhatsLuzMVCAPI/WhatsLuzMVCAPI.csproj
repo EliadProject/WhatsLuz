@@ -448,6 +448,7 @@
     <Compile Include="Controllers\CookieController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PlacesController.cs" />
     <Compile Include="Controllers\SportEventsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -4765,6 +4766,7 @@
     <Folder Include="Views\Auth\" />
     <Folder Include="Views\Category\" />
     <Folder Include="Views\Cookie\" />
+    <Folder Include="Views\Places\" />
     <Folder Include="Views\Users\" />
   </ItemGroup>
   <ItemGroup>
