@@ -4,6 +4,7 @@ using System.Data.Linq;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 using WhatsLuzMVCAPI.Models;
 
 namespace WhatsLuzMVCAPI.Controllers
@@ -25,20 +26,31 @@ namespace WhatsLuzMVCAPI.Controllers
         }
 
         // GET: Places/GetLocationCordinatesByName
+        [HttpPost]
         public ActionResult GetLocationCordinatesByName(String name)
         {
             var dataContext = new SqlConnectionDataContext();
             Table<Place> table_Places = dataContext.Places;
             List<Place> list_Places = table_Places.ToList();
-            Place p =list_Places.Find(location => location.Name == "Tedi");
+            Place p =list_Places.Find(location => location.Name == name);
             string[] toString = { p.lat.ToString() , p.lng.ToString() };
             return Json(toString, JsonRequestBehavior.AllowGet);
         }
 
-        // GET: Places/Create
-        public ActionResult Create()
+        // GET: Places
+        public String getAllPlaces()
         {
-            return View();
+            
+            var dataContext = new SqlConnectionDataContext();
+            Table<Place> table_Places = dataContext.Places;
+            List<Place> list_Places = table_Places.ToList();
+            String result = JsonConvert.SerializeObject(list_Places, Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
+
+            return result;
         }
 
         // POST: Places/Create

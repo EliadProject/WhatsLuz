@@ -195,19 +195,7 @@
 </div>
 
 <!-- Google Maps -->
-<div ng-show="showMap" id="map" style="width:400px;height:300px"></div>
 
-<script>
-    function myMap() {
-        var myCenter = new google.maps.LatLng(51.508742, -0.120850);
-        var mapCanvas = document.getElementById("map");
-        var mapOptions = { center: myCenter, zoom: 5 };
-        var map = new google.maps.Map(mapCanvas, mapOptions);
-        var marker = new google.maps.Marker({ position: myCenter });
-        marker.setMap(map);
-    }
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzeATlrOQAWD95ok3AMuTQuqwSi_0NHX4&callback=myMap"></script>
 
 <!-- Event creation form -->
 <div class="fade sport_event" id="eventAddition-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
@@ -255,8 +243,55 @@
         
         <div class="form-group">
             <label class="labelEvent" for="places">Location<span class="asterisk">*</span></label>
-            <select id="places_create" class="form-control places" required></select>
-            <a><span ng-mouseover="showMap=true" ng-mouseleave="showMap=false" class="glyphicon glyphicon-map-marker"></span></a>
+            <select id="places_create" class="form-control places" onchange="loadDoc()" required></select>
+            <a><span ng-click="showMap = ! showMap" class="glyphicon glyphicon-map-marker"></span></a>
+            <div ng-show="showMap" id="map" style="width:300px;height:250px"></div>
+            <p id="demo"></p>
+            <script>
+
+                function loadDoc() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("demo").innerHTML = this.responseText;
+                    }
+                };
+
+                }
+
+                var newcontent = [];
+
+                $.ajax({
+                    type: "GET",
+                    url: 'http://localhost:61733/places/getAllPlaces',
+                    dataType: 'json',
+                    async: false,
+                    accepts: "application/json",
+                    success: function (data) {
+                        
+                        for (i in data) {
+                            newcontent.push(
+                                {
+                                    Name: data[i].label,
+                                    lat: data[i].,
+                                    lng: data[i].value,
+                                });
+                            console.log("I'm Here!")
+                        }
+                        
+                    }
+                });
+
+                function myMap() {
+                    var myCenter = new google.maps.LatLng(51.508742, -0.120850);
+                    var mapCanvas = document.getElementById("map");
+                    var mapOptions = { center: myCenter, zoom: 8 };
+                    var map = new google.maps.Map(mapCanvas, mapOptions);
+                    var marker = new google.maps.Marker({ position: myCenter });
+                    marker.setMap(map);
+                }
+            </script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzeATlrOQAWD95ok3AMuTQuqwSi_0NHX4&callback=myMap"></script>
             <!-- <div class="help-block with-errors"></div> -->
         </div>
 
