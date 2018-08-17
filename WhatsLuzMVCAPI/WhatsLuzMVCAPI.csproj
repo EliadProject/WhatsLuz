@@ -20,7 +20,7 @@
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44307</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode />
@@ -3054,7 +3054,7 @@
     <Content Include="Scripts\angular-1.6.4\i18n\angular-locale_zu.js" />
     <Content Include="Scripts\angular-1.6.4\version.txt" />
     <Content Include="Scripts\angular.js" />
-    <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\calender\app.js" />
     <Content Include="Scripts\bootstrap-3.3.7\.gitattributes" />
     <Content Include="Scripts\bootstrap-3.3.7\.gitignore" />
     <Content Include="Scripts\bootstrap-3.3.7\dist\css\bootstrap-theme.css" />
@@ -4694,8 +4694,7 @@
     <Content Include="Scripts\Statistics\d3\d3pie.js" />
     <Content Include="Scripts\Statistics\d3\d3pie.min.js" />
     <Content Include="Scripts\Statistics\d3\Donut3D.js" />
-    <Content Include="Scripts\firebase.js" />
-    <Content Include="Scripts\Functions.js" />
+    <Content Include="Scripts\login\firebase.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />
@@ -4705,16 +4704,16 @@
     <Content Include="Scripts\js\moment-with-locales.min.js" />
     <Content Include="Scripts\js\moment.js" />
     <Content Include="Scripts\js\ui-bootstrap-tpls.min.js" />
-    <Content Include="Scripts\LoginPage.css" />
+    <Content Include="Content\LoginPage.css" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\script.js" />
+    <Content Include="Scripts\calender\script.js" />
     <Content Include="Scripts\Statistics\statistics.js" />
-    <Content Include="Scripts\style.css" />
-    <Content Include="Scripts\validator.js" />
-    <Content Include="Scripts\validator.min.js" />
+    <Content Include="Content\style.css" />
+    <Content Include="Scripts\calender\validator.js" />
+    <Content Include="Scripts\calender\validator.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
