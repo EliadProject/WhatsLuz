@@ -1,24 +1,43 @@
 ﻿
 @{
     ViewBag.Title = "LoginPage";
+    Layout = "";
 }
 
-
 <!-- Firebase -->
+<html ng-app="app">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
 
-<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
-<script src="~/Scripts/login/firebase.js"></script>
+    <!-- Base libaries -->
+    <link href="~/scripts/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    @*<link href="/scripts/bootstrap-rtl-master/dist/css/bootstrap-rtl.css" rel="stylesheet">*@
+    <script src="/scripts/angular-1.6.4/angular.js"></script>
+    @*<script type="text/javascript" src="/scripts/js/jquery-1.11.3.js"></script>*@
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <script src="/scripts/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+
+    <!-- General -->
+    <link rel="stylesheet" href="~/Content/style.css">
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+    <script src="~/Scripts/login/firebase.js"></script>
+</head>
+<body>
 
 
 
+    <h2> Login Page</h2>
+    <h3> Please login</h3>
 
-<h2> Login Page</h2>
-<h3> Please login</h3>
-
-<a href="#" class="fireFacebooklogin" style="padding: 6px 16px;">
-    <p style="margin: 0 0 0 0;">  Login </p>
-</a>
-
+    <a href="#" class="fireFacebooklogin" style="padding: 6px 16px;">
+        <p style="margin: 0 0 0 0;">  Login </p>
+    </a>
+</body>
+</html>
 
 
 

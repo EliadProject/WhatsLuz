@@ -22,46 +22,54 @@ namespace WhatsLuzMVCAPI.Controllers
         }
 
         
-        public ActionResult Login(HttpRequestMessage value)
+        [HttpPost]
+        public ActionResult Login(UserModel value)
         {
-            /*
-             var dataContext = new SqlConnectionDataContext();
+            string MD5Hash="";
+
+            var dataContext = new SqlConnectionDataContext();
 
              JObject json;
              UserAccount userAccount;
 
-             //Reading the content of the request
-             string val = value.Content.ReadAsStringAsync().Result;
-
-             //converting the request to json
-             json = JObject.Parse(val);
-
+            
              //parsing json
-             string DisplayName = json["displayName"].ToString();
-             string Email = json["email"].ToString();
-             string PhotoURL = json["photoURL"].ToString();
+             string DisplayName = value.displayName.ToString();
+             string Email = value.email.ToString();
+             string PhotoURL = value.photoURL.ToString();
              
              //retrieve user from database 
-             string Userfid = json["fid"].ToString();
-             */
-            // userAccount = getUser(dataContext, Userfid);
+             string Userfid = value.fid.ToString();
 
-            FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket
-                            (
-                            1, "Puki", DateTime.Now, DateTime.Now.AddMinutes(15), false, "Chooki"
-                            );
+             userAccount = getUser(dataContext, Userfid);
 
-             string enTicket = FormsAuthentication.Encrypt(authTicket);
-             HttpCookie faCookie = new HttpCookie("Cookie1", enTicket);
-             Response.Cookies.Add(faCookie);
+            if (userAccount != null)
+            {
+                //update his details
+                Console.WriteLine("Registred");
+                updateUser(dataContext, userAccount, DisplayName, Email, PhotoURL);
+                MD5Hash = userAccount.Hash;
+            }
+            else if (userAccount == null)
+            {
+                //create hash
+                MD5Hash = ManageCookie.SHA256Hash(Userfid);
 
-             
+                //register user
+                createUser(dataContext, Userfid, DisplayName, Email, PhotoURL,MD5Hash);
+            }
+            Response.Cookies.Add(ManageCookie.CreateCookie(MD5Hash));
+
+
             return RedirectToAction("Index","Home");
 
 
         }
+
+        
+
         //get user by his facebook id
-        /*
+
         static public UserAccount getUser(SqlConnectionDataContext db, string userfID)
         {
             UserAccount usera =
@@ -70,7 +78,7 @@ namespace WhatsLuzMVCAPI.Controllers
     select u).FirstOrDefault();
             return usera;
         }
-        */
+        
 
         //update all facebook details
         static public void updateUser(SqlConnectionDataContext db, UserAccount u, string displayName, string Email, string photoURL)
@@ -78,10 +86,11 @@ namespace WhatsLuzMVCAPI.Controllers
             u.DisplayName = displayName;
             u.Email = Email;
             u.PhotoURL = photoURL;
+            u.LastLogon = DateTime.Now;
             db.SubmitChanges();
         }
         //create user from facebook
-        static public void createUser(SqlConnectionDataContext db, string fid, string displayName, string Email, string photoURL)
+        static public void createUser(SqlConnectionDataContext db, string fid, string displayName, string Email, string photoURL,string Hash)
         {
             //creating instance user
             UserAccount u = new UserAccount();
@@ -90,6 +99,8 @@ namespace WhatsLuzMVCAPI.Controllers
             u.Email = Email;
             u.PhotoURL = photoURL;
             u.isAdmin = 0;
+            u.LastLogon = DateTime.Now;
+            u.Hash =  Hash;
 
             //update database
             db.UserAccounts.InsertOnSubmit(u);

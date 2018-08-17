@@ -456,6 +456,7 @@
     </Compile>
     <Compile Include="Models\CategoryStatistics.cs" />
     <Compile Include="Models\FilterModel.cs" />
+    <Compile Include="Models\ManageCookie.cs" />
     <Compile Include="Models\SportEventModel.cs" />
     <Compile Include="Models\SportEvent_Parsed.cs" />
     <Compile Include="Models\HttpConnection.cs" />
@@ -464,6 +465,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SqlConnection.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

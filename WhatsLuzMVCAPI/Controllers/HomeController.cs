@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WhatsLuzMVCAPI.Models;
 
 namespace WhatsLuzMVCAPI.Controllers
 {
     public class HomeController : Controller
     {
-    
         public ActionResult Index()
         {
             ViewBag.Title = "WhatsLuz";
+
+            if (ManageCookie.CheckCookieExists() == null)
+                return RedirectToAction("LoginPage");
+
+            ViewBag.isAdmin = ManageCookie.isAdmin();
 
             return View();
         }

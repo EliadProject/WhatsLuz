@@ -30,6 +30,9 @@ namespace WhatsLuzMVCAPI.Models
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
+    partial void InsertUserAccount(UserAccount instance);
+    partial void UpdateUserAccount(UserAccount instance);
+    partial void DeleteUserAccount(UserAccount instance);
     partial void InsertCategory(Category instance);
     partial void UpdateCategory(Category instance);
     partial void DeleteCategory(Category instance);
@@ -39,9 +42,6 @@ namespace WhatsLuzMVCAPI.Models
     partial void InsertSportEvent(SportEvent instance);
     partial void UpdateSportEvent(SportEvent instance);
     partial void DeleteSportEvent(SportEvent instance);
-    partial void InsertUserAccount(UserAccount instance);
-    partial void UpdateUserAccount(UserAccount instance);
-    partial void DeleteUserAccount(UserAccount instance);
     partial void InsertUsers_Event(Users_Event instance);
     partial void UpdateUsers_Event(Users_Event instance);
     partial void DeleteUsers_Event(Users_Event instance);
@@ -77,6 +77,14 @@ namespace WhatsLuzMVCAPI.Models
 			OnCreated();
 		}
 		
+		public System.Data.Linq.Table<UserAccount> UserAccounts
+		{
+			get
+			{
+				return this.GetTable<UserAccount>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Category> Categories
 		{
 			get
@@ -101,20 +109,294 @@ namespace WhatsLuzMVCAPI.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<UserAccount> UserAccounts
-		{
-			get
-			{
-				return this.GetTable<UserAccount>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Users_Event> Users_Events
 		{
 			get
 			{
 				return this.GetTable<Users_Event>();
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.UserAccounts")]
+	public partial class UserAccount : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _UserID;
+		
+		private string _Hash;
+		
+		private string _FacebookID;
+		
+		private string _DisplayName;
+		
+		private string _Email;
+		
+		private System.Nullable<System.DateTime> _LastLogon;
+		
+		private string _Address;
+		
+		private string _PhotoURL;
+		
+		private byte _isAdmin;
+		
+		private EntitySet<Users_Event> _Users_Events;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnUserIDChanging(int value);
+    partial void OnUserIDChanged();
+    partial void OnHashChanging(string value);
+    partial void OnHashChanged();
+    partial void OnFacebookIDChanging(string value);
+    partial void OnFacebookIDChanged();
+    partial void OnDisplayNameChanging(string value);
+    partial void OnDisplayNameChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnLastLogonChanging(System.Nullable<System.DateTime> value);
+    partial void OnLastLogonChanged();
+    partial void OnAddressChanging(string value);
+    partial void OnAddressChanged();
+    partial void OnPhotoURLChanging(string value);
+    partial void OnPhotoURLChanged();
+    partial void OnisAdminChanging(byte value);
+    partial void OnisAdminChanged();
+    #endregion
+		
+		public UserAccount()
+		{
+			this._Users_Events = new EntitySet<Users_Event>(new Action<Users_Event>(this.attach_Users_Events), new Action<Users_Event>(this.detach_Users_Events));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int UserID
+		{
+			get
+			{
+				return this._UserID;
+			}
+			set
+			{
+				if ((this._UserID != value))
+				{
+					this.OnUserIDChanging(value);
+					this.SendPropertyChanging();
+					this._UserID = value;
+					this.SendPropertyChanged("UserID");
+					this.OnUserIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Hash", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string Hash
+		{
+			get
+			{
+				return this._Hash;
+			}
+			set
+			{
+				if ((this._Hash != value))
+				{
+					this.OnHashChanging(value);
+					this.SendPropertyChanging();
+					this._Hash = value;
+					this.SendPropertyChanged("Hash");
+					this.OnHashChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FacebookID", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string FacebookID
+		{
+			get
+			{
+				return this._FacebookID;
+			}
+			set
+			{
+				if ((this._FacebookID != value))
+				{
+					this.OnFacebookIDChanging(value);
+					this.SendPropertyChanging();
+					this._FacebookID = value;
+					this.SendPropertyChanged("FacebookID");
+					this.OnFacebookIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DisplayName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string DisplayName
+		{
+			get
+			{
+				return this._DisplayName;
+			}
+			set
+			{
+				if ((this._DisplayName != value))
+				{
+					this.OnDisplayNameChanging(value);
+					this.SendPropertyChanging();
+					this._DisplayName = value;
+					this.SendPropertyChanged("DisplayName");
+					this.OnDisplayNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastLogon", DbType="Date")]
+		public System.Nullable<System.DateTime> LastLogon
+		{
+			get
+			{
+				return this._LastLogon;
+			}
+			set
+			{
+				if ((this._LastLogon != value))
+				{
+					this.OnLastLogonChanging(value);
+					this.SendPropertyChanging();
+					this._LastLogon = value;
+					this.SendPropertyChanged("LastLogon");
+					this.OnLastLogonChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address", DbType="NVarChar(50)")]
+		public string Address
+		{
+			get
+			{
+				return this._Address;
+			}
+			set
+			{
+				if ((this._Address != value))
+				{
+					this.OnAddressChanging(value);
+					this.SendPropertyChanging();
+					this._Address = value;
+					this.SendPropertyChanged("Address");
+					this.OnAddressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhotoURL", DbType="NVarChar(MAX)")]
+		public string PhotoURL
+		{
+			get
+			{
+				return this._PhotoURL;
+			}
+			set
+			{
+				if ((this._PhotoURL != value))
+				{
+					this.OnPhotoURLChanging(value);
+					this.SendPropertyChanging();
+					this._PhotoURL = value;
+					this.SendPropertyChanged("PhotoURL");
+					this.OnPhotoURLChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_isAdmin", DbType="TinyInt NOT NULL")]
+		public byte isAdmin
+		{
+			get
+			{
+				return this._isAdmin;
+			}
+			set
+			{
+				if ((this._isAdmin != value))
+				{
+					this.OnisAdminChanging(value);
+					this.SendPropertyChanging();
+					this._isAdmin = value;
+					this.SendPropertyChanged("isAdmin");
+					this.OnisAdminChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserAccount_Users_Event", Storage="_Users_Events", ThisKey="UserID", OtherKey="UserID")]
+		public EntitySet<Users_Event> Users_Events
+		{
+			get
+			{
+				return this._Users_Events;
+			}
+			set
+			{
+				this._Users_Events.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Users_Events(Users_Event entity)
+		{
+			this.SendPropertyChanging();
+			entity.UserAccount = this;
+		}
+		
+		private void detach_Users_Events(Users_Event entity)
+		{
+			this.SendPropertyChanging();
+			entity.UserAccount = null;
 		}
 	}
 	
@@ -352,7 +634,7 @@ namespace WhatsLuzMVCAPI.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NChar(15) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string Name
 		{
 			get
@@ -396,7 +678,7 @@ namespace WhatsLuzMVCAPI.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="NChar(150)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="NVarChar(50)")]
 		public string Description
 		{
 			get
@@ -416,7 +698,7 @@ namespace WhatsLuzMVCAPI.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address", DbType="NChar(15) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string Address
 		{
 			get
@@ -875,264 +1157,6 @@ namespace WhatsLuzMVCAPI.Models
 		{
 			this.SendPropertyChanging();
 			entity.SportEvent = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.UserAccounts")]
-	public partial class UserAccount : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _UserID;
-		
-		private string _FacebookID;
-		
-		private string _DisplayName;
-		
-		private string _Email;
-		
-		private System.Nullable<System.DateTime> _LastLogon;
-		
-		private string _Address;
-		
-		private string _PhotoURL;
-		
-		private byte _isAdmin;
-		
-		private EntitySet<Users_Event> _Users_Events;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnUserIDChanging(int value);
-    partial void OnUserIDChanged();
-    partial void OnFacebookIDChanging(string value);
-    partial void OnFacebookIDChanged();
-    partial void OnDisplayNameChanging(string value);
-    partial void OnDisplayNameChanged();
-    partial void OnEmailChanging(string value);
-    partial void OnEmailChanged();
-    partial void OnLastLogonChanging(System.Nullable<System.DateTime> value);
-    partial void OnLastLogonChanged();
-    partial void OnAddressChanging(string value);
-    partial void OnAddressChanged();
-    partial void OnPhotoURLChanging(string value);
-    partial void OnPhotoURLChanged();
-    partial void OnisAdminChanging(byte value);
-    partial void OnisAdminChanged();
-    #endregion
-		
-		public UserAccount()
-		{
-			this._Users_Events = new EntitySet<Users_Event>(new Action<Users_Event>(this.attach_Users_Events), new Action<Users_Event>(this.detach_Users_Events));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int UserID
-		{
-			get
-			{
-				return this._UserID;
-			}
-			set
-			{
-				if ((this._UserID != value))
-				{
-					this.OnUserIDChanging(value);
-					this.SendPropertyChanging();
-					this._UserID = value;
-					this.SendPropertyChanged("UserID");
-					this.OnUserIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FacebookID", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string FacebookID
-		{
-			get
-			{
-				return this._FacebookID;
-			}
-			set
-			{
-				if ((this._FacebookID != value))
-				{
-					this.OnFacebookIDChanging(value);
-					this.SendPropertyChanging();
-					this._FacebookID = value;
-					this.SendPropertyChanged("FacebookID");
-					this.OnFacebookIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DisplayName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string DisplayName
-		{
-			get
-			{
-				return this._DisplayName;
-			}
-			set
-			{
-				if ((this._DisplayName != value))
-				{
-					this.OnDisplayNameChanging(value);
-					this.SendPropertyChanging();
-					this._DisplayName = value;
-					this.SendPropertyChanged("DisplayName");
-					this.OnDisplayNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string Email
-		{
-			get
-			{
-				return this._Email;
-			}
-			set
-			{
-				if ((this._Email != value))
-				{
-					this.OnEmailChanging(value);
-					this.SendPropertyChanging();
-					this._Email = value;
-					this.SendPropertyChanged("Email");
-					this.OnEmailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastLogon", DbType="Date")]
-		public System.Nullable<System.DateTime> LastLogon
-		{
-			get
-			{
-				return this._LastLogon;
-			}
-			set
-			{
-				if ((this._LastLogon != value))
-				{
-					this.OnLastLogonChanging(value);
-					this.SendPropertyChanging();
-					this._LastLogon = value;
-					this.SendPropertyChanged("LastLogon");
-					this.OnLastLogonChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address", DbType="NVarChar(50)")]
-		public string Address
-		{
-			get
-			{
-				return this._Address;
-			}
-			set
-			{
-				if ((this._Address != value))
-				{
-					this.OnAddressChanging(value);
-					this.SendPropertyChanging();
-					this._Address = value;
-					this.SendPropertyChanged("Address");
-					this.OnAddressChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhotoURL", DbType="NVarChar(MAX)")]
-		public string PhotoURL
-		{
-			get
-			{
-				return this._PhotoURL;
-			}
-			set
-			{
-				if ((this._PhotoURL != value))
-				{
-					this.OnPhotoURLChanging(value);
-					this.SendPropertyChanging();
-					this._PhotoURL = value;
-					this.SendPropertyChanged("PhotoURL");
-					this.OnPhotoURLChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_isAdmin", DbType="TinyInt NOT NULL")]
-		public byte isAdmin
-		{
-			get
-			{
-				return this._isAdmin;
-			}
-			set
-			{
-				if ((this._isAdmin != value))
-				{
-					this.OnisAdminChanging(value);
-					this.SendPropertyChanging();
-					this._isAdmin = value;
-					this.SendPropertyChanged("isAdmin");
-					this.OnisAdminChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserAccount_Users_Event", Storage="_Users_Events", ThisKey="UserID", OtherKey="UserID")]
-		public EntitySet<Users_Event> Users_Events
-		{
-			get
-			{
-				return this._Users_Events;
-			}
-			set
-			{
-				this._Users_Events.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Users_Events(Users_Event entity)
-		{
-			this.SendPropertyChanging();
-			entity.UserAccount = this;
-		}
-		
-		private void detach_Users_Events(Users_Event entity)
-		{
-			this.SendPropertyChanging();
-			entity.UserAccount = null;
 		}
 	}
 	

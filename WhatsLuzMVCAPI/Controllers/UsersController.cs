@@ -32,9 +32,12 @@ namespace WhatsLuzMVCAPI.Controllers
         }
         
         [HttpPost]
-        // POST: api/Users
+        // POST: Users/Post
         public void Post(HttpRequestMessage value)
         {
+
+
+
             var dataContext = new SqlConnectionDataContext();
 
             JObject json;
@@ -76,7 +79,8 @@ namespace WhatsLuzMVCAPI.Controllers
             HttpCookie faCookie = new HttpCookie("Cookie1", enTicket);
             Response.Cookies.Add(faCookie);
             */
-            bool auth = User.Identity.IsAuthenticated;
+           // bool auth = User.Identity.IsAuthenticated;
+
             if (userAccount != null)
             {
                 //update his details
@@ -88,7 +92,7 @@ namespace WhatsLuzMVCAPI.Controllers
                 //register user
                 createUser(dataContext, Userfid, DisplayName, Email, PhotoURL);
             }
-          
+
             //Managing Permission Level
             /*
             if (userAccount.isAdmin == 1)
@@ -98,10 +102,10 @@ namespace WhatsLuzMVCAPI.Controllers
             }
             */
 
-
-
-
+           
         }
+
+        
 
         // PUT: api/Users/5
         public void Put(int id, [FromBody]string value)

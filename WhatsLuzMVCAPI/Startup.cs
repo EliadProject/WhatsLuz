@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
@@ -10,6 +11,11 @@ namespace WhatsLuzMVCAPI
 {
     public class Startup
     {
+        public void ConfigureServices(IServiceCollection services)
+        {
+            
+        }
+
         public void Configuration(IAppBuilder app)
         {
             

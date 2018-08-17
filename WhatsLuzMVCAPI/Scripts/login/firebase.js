@@ -35,10 +35,11 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "http://localhost:61733/api/Users",
+                    url: "http://localhost:61733/Account/Login",
                     data: json_user,
+                    contentType: "application/json; charset=utf-8",
                     success: function () {
-                        alert('success');
+                        window.location = "/Home/Index";
                     },
                     error: function (XMLHttpReqest, textStatus, errorThrown) {
                         alert(errorThrown);
