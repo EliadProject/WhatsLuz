@@ -25,7 +25,7 @@ namespace WhatsLuzMVCAPI.Controllers
         [HttpPost]
         public ActionResult Login(UserModel value)
         {
-            string MD5Hash="";
+            string SHA256Hash = "";
 
             var dataContext = new SqlConnectionDataContext();
 
@@ -48,17 +48,17 @@ namespace WhatsLuzMVCAPI.Controllers
                 //update his details
                 Console.WriteLine("Registred");
                 updateUser(dataContext, userAccount, DisplayName, Email, PhotoURL);
-                MD5Hash = userAccount.Hash;
+                SHA256Hash = userAccount.Hash;
             }
             else if (userAccount == null)
             {
                 //create hash
-                MD5Hash = ManageCookie.SHA256Hash(Userfid);
+                SHA256Hash = ManageCookie.SHA256Hash(Userfid);
 
                 //register user
-                createUser(dataContext, Userfid, DisplayName, Email, PhotoURL,MD5Hash);
+                createUser(dataContext, Userfid, DisplayName, Email, PhotoURL, SHA256Hash);
             }
-            Response.Cookies.Add(ManageCookie.CreateCookie(MD5Hash));
+            Response.Cookies.Add(ManageCookie.CreateCookie(SHA256Hash));
 
 
             return RedirectToAction("Index","Home");
@@ -67,6 +67,11 @@ namespace WhatsLuzMVCAPI.Controllers
         }
 
         
+        public ActionResult Logoff()
+        {  
+            ManageCookie.deleteCookie();
+            return RedirectToAction("LoginPage", "Home");
+        }
 
         //get user by his facebook id
 

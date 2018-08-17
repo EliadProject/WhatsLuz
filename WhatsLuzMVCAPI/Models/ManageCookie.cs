@@ -9,17 +9,16 @@ namespace WhatsLuzMVCAPI.Models
 {
     public class ManageCookie
     {
-        /*
-        static UserAccount User = null;
+        
+        public static UserAccount user = null;
         public static bool isAdmin()
         {
-            user = CheckCookieExists();
-            if (user == null)
-                return false;
-            return (user.isAdmin == 1);
-            
+                user = CheckCookieExists();
+                if (user == null)
+                    return false;
+                return (user.isAdmin == 1);                    
         }
-        */
+        
         public static UserAccount CheckCookieExists()
         {
             HttpCookie cookie = HttpContext.Current.Request.Cookies["FacebookCookie"];
@@ -28,7 +27,8 @@ namespace WhatsLuzMVCAPI.Models
 
             String SHA256Hash = cookie.Value.ToString();
             var dataContext = new SqlConnectionDataContext();
-            return getUserByHash(dataContext, SHA256Hash);
+            user = getUserByHash(dataContext, SHA256Hash);
+            return user;
             
 
         }
@@ -60,7 +60,11 @@ namespace WhatsLuzMVCAPI.Models
             StudentCookies.Expires = DateTime.Now.AddHours(1);
             return StudentCookies;
         }
-
+        public static void deleteCookie()
+        {
+            HttpContext.Current.Request.Cookies["FacebookCookie"].Expires = DateTime.Now.AddDays(-1);
+            user = null;
+        }
         private static UserAccount getUserByHash(SqlConnectionDataContext db,string SHA256Hash)
         {
             UserAccount usera =
