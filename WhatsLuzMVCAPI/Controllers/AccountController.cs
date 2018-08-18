@@ -68,8 +68,10 @@ namespace WhatsLuzMVCAPI.Controllers
 
         
         public ActionResult Logoff()
-        {  
-            ManageCookie.deleteCookie();
+        {
+            Response.Cookies["FacebookCookie"].Expires = DateTime.Now.AddDays(-10);
+            ManageCookie.user = null;
+            //ManageCookie.deleteCookie();
             return RedirectToAction("LoginPage", "Home");
         }
 

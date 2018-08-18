@@ -2,6 +2,16 @@
 
 $(document).ready(function () {
 
+    $('#sport_event_join').click(function () {
+
+        /*
+        $('#eventShow-modal').modal({
+            keyboard: false,
+            show: false
+        });
+        */
+    });
+
     //on init page - retrieve all events with no filter
     data = "";
     angular.element(document.getElementById('ctrlid')).scope().getevents(data);
@@ -14,14 +24,14 @@ $(document).ready(function () {
         filter_obj.category = $("#categories_filter").val();
         filter_obj.place = $("#places_filter").val();
         filter_obj.date = $("#date_filter").val();
-     
+
         var filter_data = JSON.stringify(filter_obj);
 
-    
+
         angular.element(document.getElementById('ctrlid')).scope().getevents(filter_data);
 
-       
-    })
+
+    });
 
     /*
     $.get(

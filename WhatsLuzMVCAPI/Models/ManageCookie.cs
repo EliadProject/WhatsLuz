@@ -62,7 +62,7 @@ namespace WhatsLuzMVCAPI.Models
         }
         public static void deleteCookie()
         {
-            HttpContext.Current.Request.Cookies["FacebookCookie"].Expires = DateTime.Now.AddDays(-1);
+            HttpContext.Current.Request.Cookies["FacebookCookie"].Expires = DateTime.Now.AddDays(-10);
             user = null;
         }
         private static UserAccount getUserByHash(SqlConnectionDataContext db,string SHA256Hash)

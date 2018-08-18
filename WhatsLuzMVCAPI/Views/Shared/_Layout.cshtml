@@ -19,7 +19,7 @@
 
     <!-- General -->
     <link rel="stylesheet" href="~/Content/style.css">
-   
+
 
 
     <style>
@@ -49,26 +49,23 @@
             margin-bottom: 0px;
         }
 
-        .navbar-login
-        {
+        .navbar-login {
             width: 305px;
             padding: 10px;
             padding-bottom: 0px;
         }
 
-        .navbar-login-session
-        {
+        .navbar-login-session {
             padding: 10px;
             padding-bottom: 0px;
             padding-top: 0px;
         }
 
-        .icon-size
-        {
+        .icon-size {
             font-size: 87px;
         }
     </style>
-   
+
 
 </head>
 <body ng-controller="ctrl" style="height: 100%" id="ctrlid">
@@ -163,54 +160,119 @@
                                 <li><a href="#" class="text-center">View All</a></li>
                             </ul>
                         </li>
-                       @if (WhatsLuzMVCAPI.Models.ManageCookie.isAdmin())
-                       {
+                        @if (WhatsLuzMVCAPI.Models.ManageCookie.isAdmin())
+                        {
 
-                                <li class="dropdown">
-                                    <a href="/Admin/Index">
-                                        <i class="fa fa-user-circle" aria-hidden="true"></i> Admin Panel
-                                    </a>
-                                </li>
-                       }
+                            <li class="dropdown">
+                                <a href="/Admin/Index">
+                                    <i class="fa fa-user-circle" aria-hidden="true"></i> Admin Panel
+                                </a>
+                            </li>
+                        }
+                        @if (WhatsLuzMVCAPI.Models.ManageCookie.user == null)
+                        {
+                            <script>
+                                $(document).ready(function () {
+                                    $('.dropdown-toggle').dropdown();
+                                });
+                            </script>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                    <strong>
+                                        Unsignned
 
-                        
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <span class="glyphicon glyphicon-user"></span>
-                                <strong> @WhatsLuzMVCAPI.Models.ManageCookie.user.DisplayName </strong>
-                                <span class="glyphicon glyphicon-chevron-down"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <div class="navbar-login">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <p class="text-center">
-                                                    <img class="pull-left" src="@WhatsLuzMVCAPI.Models.ManageCookie.user.PhotoURL">
-                                                </p>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <p class="text-center"><strong>@WhatsLuzMVCAPI.Models.ManageCookie.user.DisplayName</strong></p>
-                                                <p class="text-center small">@WhatsLuzMVCAPI.Models.ManageCookie.user.Email</p>
+                                    </strong>
+                                    <span class="glyphicon glyphicon-chevron-down"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <div class="navbar-login">
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <p class="text-center">
+                                                        <span class="glyphicon glyphicon-user icon-size"></span>
+                                                    </p>
+                                                </div>
+                                                <div class="col-lg-8">
+                                                    <p class="text-center"><strong>Unsignned</strong></p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <div class="navbar-login navbar-login-session">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <p>
-                                                    <a href="/Account/Logoff" class="btn btn-danger btn-block">Logoff</a>
-                                                </p>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+
+                                        <div class="navbar-login navbar-login-session">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <p>
+                                                        <a href="/Home/LoginPage" class="btn btn-primary btn-block">Login</a>
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                            
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+
+
+                        @if (WhatsLuzMVCAPI.Models.ManageCookie.user != null)
+                        {
+
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                    <strong>
+
+                                        @WhatsLuzMVCAPI.Models.ManageCookie.user.DisplayName
+                                    </strong>
+                                    <span class="glyphicon glyphicon-chevron-down"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <div class="navbar-login">
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <p class="text-center">
+
+                                                        <img class="pull-left" src="@WhatsLuzMVCAPI.Models.ManageCookie.user.PhotoURL">
+                                                        @*<span class="glyphicon glyphicon-user icon-size"></span>*@
+                                                    </p>
+                                                </div>
+                                                <div class="col-lg-8">
+                                                    <p class="text-center"><strong>@WhatsLuzMVCAPI.Models.ManageCookie.user.DisplayName</strong></p>
+                                                    <p class="text-center small">@WhatsLuzMVCAPI.Models.ManageCookie.user.Email</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <div class="navbar-login navbar-login-session">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <p>
+                                                        <a href="/Account/Logoff" class="btn btn-danger btn-block">Logoff</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @*<div class="navbar-login navbar-login-session">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <p>
+                                        <a href="/Account/Login" class="btn btn-primary btn-block">Login</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>*@
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+
                     </ul>
                 </div>
             </div><!-- /.container-fluid -->
@@ -227,197 +289,197 @@
             </div>
             <!--/.footer-bottom-->
         </footer>
-  
-    
 
-    <style>
-        .full {
-            width: 100%;
-        }
 
-        .gap {
-            height: 30px;
-            width: 100%;
-            clear: both;
-            display: block;
-        }
 
-        .footer {
-            background: #EDEFF1;
-            height: auto;
-            padding-bottom: 30px;
-            position: relative;
-            width: 100%;
-            border-bottom: 1px solid #CCCCCC;
-            border-top: 1px solid #DDDDDD;
-        }
-
-            .footer p {
-                margin: 0;
+        <style>
+            .full {
+                width: 100%;
             }
 
-            .footer img {
-                max-width: 100%;
+            .gap {
+                height: 30px;
+                width: 100%;
+                clear: both;
+                display: block;
             }
 
-            .footer h3 {
-                border-bottom: 1px solid #BAC1C8;
-                color: #54697E;
-                font-size: 18px;
-                font-weight: 600;
-                line-height: 27px;
-                padding: 40px 0 10px;
-                text-transform: uppercase;
+            .footer {
+                background: #EDEFF1;
+                height: auto;
+                padding-bottom: 30px;
+                position: relative;
+                width: 100%;
+                border-bottom: 1px solid #CCCCCC;
+                border-top: 1px solid #DDDDDD;
             }
 
-            .footer ul {
-                font-size: 13px;
-                list-style-type: none;
-                margin-left: 0;
-                padding-left: 0;
-                margin-top: 15px;
-                color: #7F8C8D;
-            }
-
-                .footer ul li a {
-                    padding: 0 0 5px 0;
-                    display: block;
+                .footer p {
+                    margin: 0;
                 }
 
-            .footer a {
-                color: #78828D
+                .footer img {
+                    max-width: 100%;
+                }
+
+                .footer h3 {
+                    border-bottom: 1px solid #BAC1C8;
+                    color: #54697E;
+                    font-size: 18px;
+                    font-weight: 600;
+                    line-height: 27px;
+                    padding: 40px 0 10px;
+                    text-transform: uppercase;
+                }
+
+                .footer ul {
+                    font-size: 13px;
+                    list-style-type: none;
+                    margin-left: 0;
+                    padding-left: 0;
+                    margin-top: 15px;
+                    color: #7F8C8D;
+                }
+
+                    .footer ul li a {
+                        padding: 0 0 5px 0;
+                        display: block;
+                    }
+
+                .footer a {
+                    color: #78828D
+                }
+
+            .supportLi h4 {
+                font-size: 20px;
+                font-weight: lighter;
+                line-height: normal;
+                margin-bottom: 0 !important;
+                padding-bottom: 0;
             }
 
-        .supportLi h4 {
-            font-size: 20px;
-            font-weight: lighter;
-            line-height: normal;
-            margin-bottom: 0 !important;
-            padding-bottom: 0;
-        }
-
-        .newsletter-box input#appendedInputButton {
-            background: #FFFFFF;
-            display: inline-block;
-            float: left;
-            height: 30px;
-            clear: both;
-            width: 100%;
-        }
-
-        .newsletter-box .btn {
-            border: medium none;
-            -webkit-border-radius: 3px;
-            -moz-border-radius: 3px;
-            -o-border-radius: 3px;
-            -ms-border-radius: 3px;
-            border-radius: 3px;
-            display: inline-block;
-            height: 40px;
-            padding: 0;
-            width: 100%;
-            color: #fff;
-        }
-
-        .newsletter-box {
-            overflow: hidden;
-        }
-
-        .bg-gray {
-            background-image: -moz-linear-gradient(center bottom, #BBBBBB 0%, #F0F0F0 100%);
-            box-shadow: 0 1px 0 #B4B3B3;
-        }
-
-        .social li {
-            background: none repeat scroll 0 0 #B5B5B5;
-            border: 2px solid #B5B5B5;
-            -webkit-border-radius: 50%;
-            -moz-border-radius: 50%;
-            -o-border-radius: 50%;
-            -ms-border-radius: 50%;
-            border-radius: 50%;
-            float: left;
-            height: 36px;
-            line-height: 36px;
-            margin: 0 8px 0 0;
-            padding: 0;
-            text-align: center;
-            width: 36px;
-            transition: all 0.5s ease 0s;
-            -moz-transition: all 0.5s ease 0s;
-            -webkit-transition: all 0.5s ease 0s;
-            -ms-transition: all 0.5s ease 0s;
-            -o-transition: all 0.5s ease 0s;
-        }
-
-            .social li:hover {
-                transform: scale(1.15) rotate(360deg);
-                -webkit-transform: scale(1.1) rotate(360deg);
-                -moz-transform: scale(1.1) rotate(360deg);
-                -ms-transform: scale(1.1) rotate(360deg);
-                -o-transform: scale(1.1) rotate(360deg);
+            .newsletter-box input#appendedInputButton {
+                background: #FFFFFF;
+                display: inline-block;
+                float: left;
+                height: 30px;
+                clear: both;
+                width: 100%;
             }
 
-            .social li a {
-                color: #EDEFF1;
+            .newsletter-box .btn {
+                border: medium none;
+                -webkit-border-radius: 3px;
+                -moz-border-radius: 3px;
+                -o-border-radius: 3px;
+                -ms-border-radius: 3px;
+                border-radius: 3px;
+                display: inline-block;
+                height: 40px;
+                padding: 0;
+                width: 100%;
+                color: #fff;
             }
 
-            .social li:hover {
-                border: 2px solid #2c3e50;
-                background: #2c3e50;
+            .newsletter-box {
+                overflow: hidden;
             }
 
-            .social li a i {
-                font-size: 16px;
-                margin: 0 0 0 5px;
-                color: #EDEFF1 !important;
+            .bg-gray {
+                background-image: -moz-linear-gradient(center bottom, #BBBBBB 0%, #F0F0F0 100%);
+                box-shadow: 0 1px 0 #B4B3B3;
             }
 
-        .footer-bottom {
-            background: #E3E3E3;
-            border-top: 1px solid #DDDDDD;
-            padding-top: 10px;
-            padding-bottom: 10px;
-        }
-
-            .footer-bottom p.pull-left {
-                padding-top: 6px;
+            .social li {
+                background: none repeat scroll 0 0 #B5B5B5;
+                border: 2px solid #B5B5B5;
+                -webkit-border-radius: 50%;
+                -moz-border-radius: 50%;
+                -o-border-radius: 50%;
+                -ms-border-radius: 50%;
+                border-radius: 50%;
+                float: left;
+                height: 36px;
+                line-height: 36px;
+                margin: 0 8px 0 0;
+                padding: 0;
+                text-align: center;
+                width: 36px;
+                transition: all 0.5s ease 0s;
+                -moz-transition: all 0.5s ease 0s;
+                -webkit-transition: all 0.5s ease 0s;
+                -ms-transition: all 0.5s ease 0s;
+                -o-transition: all 0.5s ease 0s;
             }
 
-        .payments {
-            font-size: 1.5em;
-        }
-    </style>
+                .social li:hover {
+                    transform: scale(1.15) rotate(360deg);
+                    -webkit-transform: scale(1.1) rotate(360deg);
+                    -moz-transform: scale(1.1) rotate(360deg);
+                    -ms-transform: scale(1.1) rotate(360deg);
+                    -o-transform: scale(1.1) rotate(360deg);
+                }
+
+                .social li a {
+                    color: #EDEFF1;
+                }
+
+                .social li:hover {
+                    border: 2px solid #2c3e50;
+                    background: #2c3e50;
+                }
+
+                .social li a i {
+                    font-size: 16px;
+                    margin: 0 0 0 5px;
+                    color: #EDEFF1 !important;
+                }
+
+            .footer-bottom {
+                background: #E3E3E3;
+                border-top: 1px solid #DDDDDD;
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+
+                .footer-bottom p.pull-left {
+                    padding-top: 6px;
+                }
+
+            .payments {
+                font-size: 1.5em;
+            }
+        </style>
 
 
-    @*<div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                        <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
-                    </ul>
+        @*<div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
+                            <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
 
-    *@
-
+        *@
 
 
 
-    @*@Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
 
-        @RenderSection("scripts", required: false)
-    *@
+        @*@Scripts.Render("~/bundles/jquery")
+            @Scripts.Render("~/bundles/bootstrap")
+
+            @RenderSection("scripts", required: false)
+        *@
 </body>
 </html>
