@@ -176,7 +176,11 @@
 
 <!-- ShowEvent -->
     <div class="fade " id="eventShow-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+
         <form action="#" class="sport_event">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            </button>
             <label> {{ title }}  </label>
             <hr />
 
@@ -188,21 +192,26 @@
                 <li><div class="list_key"> Date: </div> {{ date }} </li>
                 <li><div class="list_key"> Start Time: </div> {{ startsAt }} </li>
                 <li><div class="list_key"> End Time: </div> {{ endsAt }} </li>
-
+                <li><div class="list_key"> Users </div> 
+                    <ul ng-repeat="user in users">
+                        <li> {{ user }} </li>
+                    </ul>
+                </li>
             </ul>
-
-
-            <br />
-
-
-            <button id="sport_event_join" type="submit" class="btn btn-primary" style="opacity: 1">Join</button>
-            <div id="join_status_id"> </div>
+          <br />
 
            
+
+
+                <button id="sport_event_join" type="submit" class="btn btn-primary" style="opacity: 1">Join</button>
+                <div id="join_status_id"> </div>
+
+
         </form>
     </div>
 
     <!-- Google Maps -->
+
     <!-- Event creation form -->
     <div class="fade sport_event" id="eventAddition-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
 

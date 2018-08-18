@@ -15,8 +15,6 @@ namespace WhatsLuzMVCAPI.Controllers
     public class SportEventsController : Controller
     {
       
-
-
         // POST: SportEvents/getEvents
         //recives filter parameters in FilterModel object
         [HttpPost]
@@ -143,6 +141,13 @@ namespace WhatsLuzMVCAPI.Controllers
                 }
     
             }
+        }
+        [HttpPost]
+        public ActionResult getUsers(int eventid)
+        {
+            var dataContext = new SqlConnectionDataContext();
+            List<String> users = getUsersByEvent(dataContext, eventid);
+            return Json(users, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -291,6 +296,14 @@ namespace WhatsLuzMVCAPI.Controllers
             return (from cat in db.Categories
                     where cat.Name == catName
                     select cat.CategoryID).FirstOrDefault();
+        }
+
+        static public List<String> getUsersByEvent(SqlConnectionDataContext db, int eventID)
+        {
+            return (from ue in db.Users_Events
+                    join ua in db.UserAccounts on ue.UserID equals ua.UserID
+                    where ue.EventID == eventID
+                    select ua.DisplayName).ToList();
         }
     }
 

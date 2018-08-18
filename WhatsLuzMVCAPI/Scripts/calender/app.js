@@ -47,8 +47,31 @@ module.controller('ctrl', function ($scope, calendarConfig) {
   //$scope.updateCloseEvents();
   
 
-  $scope.eventClicked = function(event) {       
-      $scope.eventID = event["eventID"];
+  $scope.eventClicked = function (event) {
+
+      var event_obj = new Object();
+      var eventID = event["eventID"]
+      event_obj.eventID = eventID;
+      var event_json = JSON.stringify(event_obj);
+
+      
+      $.ajax({
+          type: "POST",
+          url: "http://localhost:61733/SportEvents/getUsers",
+          data: event_json,
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+          accepts: "application/json",
+          async: false,
+          success: function (data, status, xhr) {
+              $scope.users = data;
+          }
+
+      });
+      
+
+
+      $scope.eventID = eventID;
       $scope.title = event["title"];
       $scope.category = event["category"];
       $scope.owner = event["owner"];
@@ -58,14 +81,14 @@ module.controller('ctrl', function ($scope, calendarConfig) {
       $scope.date = moment(event["startsAt"]).format("DD/MM/YYYY");
       $scope.startsAt = moment(event["startsAt"]).format("HH:mm");
       $scope.endsAt = moment(event["endsAt"]).format("HH:mm");
-         
-         
-         //make the eventShow-modal appear       
-            $('#eventShow-modal').modal({
-         // keyboard: true,
-         // show: true
-        })
-    }
+      $('#eventShow-modal').modal({
+           keyboard: true,
+           show: true
+      })
+     
+     
+     
+  };
 
 
     //This example below gives an example for event that can be viewed in this angular calender

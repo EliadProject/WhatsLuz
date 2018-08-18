@@ -40,6 +40,7 @@ $(document).ready(function () {
         var eventID = angular.element(document.getElementById('ctrlid')).scope().eventID;
         event_obj.eventID = eventID;
         var event_json = JSON.stringify(event_obj);
+
         $.ajax({
             type: "POST",
             url: "http://localhost:61733/SportEvents/Join",
@@ -51,7 +52,7 @@ $(document).ready(function () {
                 success: function (data, status, xhr) {
                     if (data == "Success") {
                         //dismiss modal 
-                        location.reload();
+                        $('#eventShow-modal').modal('hide');
                     }
                     else
                     {
@@ -111,8 +112,6 @@ $(document).ready(function () {
             sport_event.location = $("#location").val();
             sport_event.notes = $("#notes").val();
 
-
-
             //converting to json
             var json_sport_event = JSON.stringify(sport_event);
 
@@ -129,6 +128,7 @@ $(document).ready(function () {
             data: sport_event,
             contentType: "application/json; charset=utf-8",
             success: function () {
+                
                 location.reload();
             },
             error: function (XMLHttpReqest, textStatus, errorThrown) {
@@ -137,8 +137,11 @@ $(document).ready(function () {
 
         });
     }
+    $('#eventShow-modal').on('hidden.bs.modal', function () {
+        //init status text of join div
+        $("#join_status_id").text("");
 
-    
+    });
         
         
 
