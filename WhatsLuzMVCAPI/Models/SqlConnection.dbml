@@ -1,28 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="WhatsLuz" Class="SqlConnectionDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\WhatsLuz.mdf;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="WhatsLuzConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.SportEvents" Member="SportEvents">
-    <Type Name="SportEvent">
-      <Column Name="EventID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="Duration" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="MaxAttendies" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="CategoryID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="OwnerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="notes" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="title" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Users" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="location" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="SportEvent_Users_Event" Member="Users_Events" ThisKey="EventID" OtherKey="EventID" Type="Users_Event" />
-      <Association Name="Category_SportEvent" Member="Category" ThisKey="CategoryID" OtherKey="CategoryID" Type="Category" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Categories" Member="Categories">
     <Type Name="Category">
       <Column Name="CategoryID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Color" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Association Name="Category_SportEvent" Member="SportEvents" ThisKey="CategoryID" OtherKey="CategoryID" Type="SportEvent" />
       <Association Name="Category_Place" Member="Places" ThisKey="CategoryID" OtherKey="CategoryID" Type="Place" />
+      <Association Name="Category_SportEvent" Member="SportEvents" ThisKey="CategoryID" OtherKey="CategoryID" Type="SportEvent" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users_Events" Member="Users_Events">
+    <Type Name="Users_Event">
+      <Column Name="Event_User_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EventID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="SportEvent_Users_Event" Member="SportEvent" ThisKey="EventID" OtherKey="EventID" Type="SportEvent" IsForeignKey="true" />
+      <Association Name="UserAccount_Users_Event" Member="UserAccount" ThisKey="UserID" OtherKey="UserID" Type="UserAccount" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Places" Member="Places">
@@ -37,9 +30,26 @@
       <Association Name="Category_Place" Member="Category" ThisKey="CategoryID" OtherKey="CategoryID" Type="Category" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.SportEvents" Member="SportEvents">
+    <Type Name="SportEvent">
+      <Column Name="EventID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Duration" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="MaxAttendies" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CategoryID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="OwnerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="notes" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Users" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="location" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="SportEvent_Users_Event" Member="Users_Events" ThisKey="EventID" OtherKey="EventID" Type="Users_Event" />
+      <Association Name="Category_SportEvent" Member="Category" ThisKey="CategoryID" OtherKey="CategoryID" Type="Category" IsForeignKey="true" />
+      <Association Name="UserAccount_SportEvent" Member="UserAccount" ThisKey="OwnerID" OtherKey="UserID" Type="UserAccount" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.UserAccounts" Member="UserAccounts">
     <Type Name="UserAccount">
-      <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Hash" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="FacebookID" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="DisplayName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
@@ -49,15 +59,7 @@
       <Column Name="PhotoURL" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="isAdmin" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
       <Association Name="UserAccount_Users_Event" Member="Users_Events" ThisKey="UserID" OtherKey="UserID" Type="Users_Event" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Users_Events" Member="Users_Events">
-    <Type Name="Users_Event">
-      <Column Name="Event_User_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="EventID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="SportEvent_Users_Event" Member="SportEvent" ThisKey="EventID" OtherKey="EventID" Type="SportEvent" IsForeignKey="true" />
-      <Association Name="UserAccount_Users_Event" Member="UserAccount" ThisKey="UserID" OtherKey="UserID" Type="UserAccount" IsForeignKey="true" />
+      <Association Name="UserAccount_SportEvent" Member="SportEvents" ThisKey="UserID" OtherKey="OwnerID" Type="SportEvent" />
     </Type>
   </Table>
 </Database>

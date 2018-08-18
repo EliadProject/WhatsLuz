@@ -30,21 +30,21 @@ namespace WhatsLuzMVCAPI.Models
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertSportEvent(SportEvent instance);
-    partial void UpdateSportEvent(SportEvent instance);
-    partial void DeleteSportEvent(SportEvent instance);
     partial void InsertCategory(Category instance);
     partial void UpdateCategory(Category instance);
     partial void DeleteCategory(Category instance);
-    partial void InsertPlace(Place instance);
-    partial void UpdatePlace(Place instance);
-    partial void DeletePlace(Place instance);
-    partial void InsertUserAccount(UserAccount instance);
-    partial void UpdateUserAccount(UserAccount instance);
-    partial void DeleteUserAccount(UserAccount instance);
     partial void InsertUsers_Event(Users_Event instance);
     partial void UpdateUsers_Event(Users_Event instance);
     partial void DeleteUsers_Event(Users_Event instance);
+    partial void InsertPlace(Place instance);
+    partial void UpdatePlace(Place instance);
+    partial void DeletePlace(Place instance);
+    partial void InsertSportEvent(SportEvent instance);
+    partial void UpdateSportEvent(SportEvent instance);
+    partial void DeleteSportEvent(SportEvent instance);
+    partial void InsertUserAccount(UserAccount instance);
+    partial void UpdateUserAccount(UserAccount instance);
+    partial void DeleteUserAccount(UserAccount instance);
     #endregion
 		
 		public SqlConnectionDataContext() : 
@@ -77,19 +77,19 @@ namespace WhatsLuzMVCAPI.Models
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<SportEvent> SportEvents
-		{
-			get
-			{
-				return this.GetTable<SportEvent>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Category> Categories
 		{
 			get
 			{
 				return this.GetTable<Category>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Users_Event> Users_Events
+		{
+			get
+			{
+				return this.GetTable<Users_Event>();
 			}
 		}
 		
@@ -101,367 +101,20 @@ namespace WhatsLuzMVCAPI.Models
 			}
 		}
 		
+		public System.Data.Linq.Table<SportEvent> SportEvents
+		{
+			get
+			{
+				return this.GetTable<SportEvent>();
+			}
+		}
+		
 		public System.Data.Linq.Table<UserAccount> UserAccounts
 		{
 			get
 			{
 				return this.GetTable<UserAccount>();
 			}
-		}
-		
-		public System.Data.Linq.Table<Users_Event> Users_Events
-		{
-			get
-			{
-				return this.GetTable<Users_Event>();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SportEvents")]
-	public partial class SportEvent : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _EventID;
-		
-		private System.DateTime _Date;
-		
-		private double _Duration;
-		
-		private int _MaxAttendies;
-		
-		private int _CategoryID;
-		
-		private int _OwnerID;
-		
-		private string _notes;
-		
-		private string _title;
-		
-		private string _Users;
-		
-		private string _location;
-		
-		private EntitySet<Users_Event> _Users_Events;
-		
-		private EntityRef<Category> _Category;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnEventIDChanging(int value);
-    partial void OnEventIDChanged();
-    partial void OnDateChanging(System.DateTime value);
-    partial void OnDateChanged();
-    partial void OnDurationChanging(double value);
-    partial void OnDurationChanged();
-    partial void OnMaxAttendiesChanging(int value);
-    partial void OnMaxAttendiesChanged();
-    partial void OnCategoryIDChanging(int value);
-    partial void OnCategoryIDChanged();
-    partial void OnOwnerIDChanging(int value);
-    partial void OnOwnerIDChanged();
-    partial void OnnotesChanging(string value);
-    partial void OnnotesChanged();
-    partial void OntitleChanging(string value);
-    partial void OntitleChanged();
-    partial void OnUsersChanging(string value);
-    partial void OnUsersChanged();
-    partial void OnlocationChanging(string value);
-    partial void OnlocationChanged();
-    #endregion
-		
-		public SportEvent()
-		{
-			this._Users_Events = new EntitySet<Users_Event>(new Action<Users_Event>(this.attach_Users_Events), new Action<Users_Event>(this.detach_Users_Events));
-			this._Category = default(EntityRef<Category>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EventID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int EventID
-		{
-			get
-			{
-				return this._EventID;
-			}
-			set
-			{
-				if ((this._EventID != value))
-				{
-					this.OnEventIDChanging(value);
-					this.SendPropertyChanging();
-					this._EventID = value;
-					this.SendPropertyChanged("EventID");
-					this.OnEventIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="DateTime NOT NULL")]
-		public System.DateTime Date
-		{
-			get
-			{
-				return this._Date;
-			}
-			set
-			{
-				if ((this._Date != value))
-				{
-					this.OnDateChanging(value);
-					this.SendPropertyChanging();
-					this._Date = value;
-					this.SendPropertyChanged("Date");
-					this.OnDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Duration", DbType="Float NOT NULL")]
-		public double Duration
-		{
-			get
-			{
-				return this._Duration;
-			}
-			set
-			{
-				if ((this._Duration != value))
-				{
-					this.OnDurationChanging(value);
-					this.SendPropertyChanging();
-					this._Duration = value;
-					this.SendPropertyChanged("Duration");
-					this.OnDurationChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaxAttendies", DbType="Int NOT NULL")]
-		public int MaxAttendies
-		{
-			get
-			{
-				return this._MaxAttendies;
-			}
-			set
-			{
-				if ((this._MaxAttendies != value))
-				{
-					this.OnMaxAttendiesChanging(value);
-					this.SendPropertyChanging();
-					this._MaxAttendies = value;
-					this.SendPropertyChanged("MaxAttendies");
-					this.OnMaxAttendiesChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CategoryID", DbType="Int NOT NULL")]
-		public int CategoryID
-		{
-			get
-			{
-				return this._CategoryID;
-			}
-			set
-			{
-				if ((this._CategoryID != value))
-				{
-					if (this._Category.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnCategoryIDChanging(value);
-					this.SendPropertyChanging();
-					this._CategoryID = value;
-					this.SendPropertyChanged("CategoryID");
-					this.OnCategoryIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OwnerID", DbType="Int NOT NULL")]
-		public int OwnerID
-		{
-			get
-			{
-				return this._OwnerID;
-			}
-			set
-			{
-				if ((this._OwnerID != value))
-				{
-					this.OnOwnerIDChanging(value);
-					this.SendPropertyChanging();
-					this._OwnerID = value;
-					this.SendPropertyChanged("OwnerID");
-					this.OnOwnerIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_notes", DbType="NVarChar(MAX)")]
-		public string notes
-		{
-			get
-			{
-				return this._notes;
-			}
-			set
-			{
-				if ((this._notes != value))
-				{
-					this.OnnotesChanging(value);
-					this.SendPropertyChanging();
-					this._notes = value;
-					this.SendPropertyChanged("notes");
-					this.OnnotesChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="NVarChar(50)")]
-		public string title
-		{
-			get
-			{
-				return this._title;
-			}
-			set
-			{
-				if ((this._title != value))
-				{
-					this.OntitleChanging(value);
-					this.SendPropertyChanging();
-					this._title = value;
-					this.SendPropertyChanged("title");
-					this.OntitleChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Users", DbType="NVarChar(MAX)")]
-		public string Users
-		{
-			get
-			{
-				return this._Users;
-			}
-			set
-			{
-				if ((this._Users != value))
-				{
-					this.OnUsersChanging(value);
-					this.SendPropertyChanging();
-					this._Users = value;
-					this.SendPropertyChanged("Users");
-					this.OnUsersChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_location", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string location
-		{
-			get
-			{
-				return this._location;
-			}
-			set
-			{
-				if ((this._location != value))
-				{
-					this.OnlocationChanging(value);
-					this.SendPropertyChanging();
-					this._location = value;
-					this.SendPropertyChanged("location");
-					this.OnlocationChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SportEvent_Users_Event", Storage="_Users_Events", ThisKey="EventID", OtherKey="EventID")]
-		public EntitySet<Users_Event> Users_Events
-		{
-			get
-			{
-				return this._Users_Events;
-			}
-			set
-			{
-				this._Users_Events.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Category_SportEvent", Storage="_Category", ThisKey="CategoryID", OtherKey="CategoryID", IsForeignKey=true)]
-		public Category Category
-		{
-			get
-			{
-				return this._Category.Entity;
-			}
-			set
-			{
-				Category previousValue = this._Category.Entity;
-				if (((previousValue != value) 
-							|| (this._Category.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Category.Entity = null;
-						previousValue.SportEvents.Remove(this);
-					}
-					this._Category.Entity = value;
-					if ((value != null))
-					{
-						value.SportEvents.Add(this);
-						this._CategoryID = value.CategoryID;
-					}
-					else
-					{
-						this._CategoryID = default(int);
-					}
-					this.SendPropertyChanged("Category");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Users_Events(Users_Event entity)
-		{
-			this.SendPropertyChanging();
-			entity.SportEvent = this;
-		}
-		
-		private void detach_Users_Events(Users_Event entity)
-		{
-			this.SendPropertyChanging();
-			entity.SportEvent = null;
 		}
 	}
 	
@@ -477,9 +130,9 @@ namespace WhatsLuzMVCAPI.Models
 		
 		private string _Color;
 		
-		private EntitySet<SportEvent> _SportEvents;
-		
 		private EntitySet<Place> _Places;
+		
+		private EntitySet<SportEvent> _SportEvents;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -495,8 +148,8 @@ namespace WhatsLuzMVCAPI.Models
 		
 		public Category()
 		{
-			this._SportEvents = new EntitySet<SportEvent>(new Action<SportEvent>(this.attach_SportEvents), new Action<SportEvent>(this.detach_SportEvents));
 			this._Places = new EntitySet<Place>(new Action<Place>(this.attach_Places), new Action<Place>(this.detach_Places));
+			this._SportEvents = new EntitySet<SportEvent>(new Action<SportEvent>(this.attach_SportEvents), new Action<SportEvent>(this.detach_SportEvents));
 			OnCreated();
 		}
 		
@@ -560,19 +213,6 @@ namespace WhatsLuzMVCAPI.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Category_SportEvent", Storage="_SportEvents", ThisKey="CategoryID", OtherKey="CategoryID")]
-		public EntitySet<SportEvent> SportEvents
-		{
-			get
-			{
-				return this._SportEvents;
-			}
-			set
-			{
-				this._SportEvents.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Category_Place", Storage="_Places", ThisKey="CategoryID", OtherKey="CategoryID")]
 		public EntitySet<Place> Places
 		{
@@ -583,6 +223,19 @@ namespace WhatsLuzMVCAPI.Models
 			set
 			{
 				this._Places.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Category_SportEvent", Storage="_SportEvents", ThisKey="CategoryID", OtherKey="CategoryID")]
+		public EntitySet<SportEvent> SportEvents
+		{
+			get
+			{
+				return this._SportEvents;
+			}
+			set
+			{
+				this._SportEvents.Assign(value);
 			}
 		}
 		
@@ -606,6 +259,18 @@ namespace WhatsLuzMVCAPI.Models
 			}
 		}
 		
+		private void attach_Places(Place entity)
+		{
+			this.SendPropertyChanging();
+			entity.Category = this;
+		}
+		
+		private void detach_Places(Place entity)
+		{
+			this.SendPropertyChanging();
+			entity.Category = null;
+		}
+		
 		private void attach_SportEvents(SportEvent entity)
 		{
 			this.SendPropertyChanging();
@@ -617,17 +282,197 @@ namespace WhatsLuzMVCAPI.Models
 			this.SendPropertyChanging();
 			entity.Category = null;
 		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Users_Events")]
+	public partial class Users_Event : INotifyPropertyChanging, INotifyPropertyChanged
+	{
 		
-		private void attach_Places(Place entity)
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Event_User_ID;
+		
+		private int _EventID;
+		
+		private int _UserID;
+		
+		private EntityRef<SportEvent> _SportEvent;
+		
+		private EntityRef<UserAccount> _UserAccount;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnEvent_User_IDChanging(int value);
+    partial void OnEvent_User_IDChanged();
+    partial void OnEventIDChanging(int value);
+    partial void OnEventIDChanged();
+    partial void OnUserIDChanging(int value);
+    partial void OnUserIDChanged();
+    #endregion
+		
+		public Users_Event()
 		{
-			this.SendPropertyChanging();
-			entity.Category = this;
+			this._SportEvent = default(EntityRef<SportEvent>);
+			this._UserAccount = default(EntityRef<UserAccount>);
+			OnCreated();
 		}
 		
-		private void detach_Places(Place entity)
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Event_User_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Event_User_ID
 		{
-			this.SendPropertyChanging();
-			entity.Category = null;
+			get
+			{
+				return this._Event_User_ID;
+			}
+			set
+			{
+				if ((this._Event_User_ID != value))
+				{
+					this.OnEvent_User_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Event_User_ID = value;
+					this.SendPropertyChanged("Event_User_ID");
+					this.OnEvent_User_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EventID", DbType="Int NOT NULL")]
+		public int EventID
+		{
+			get
+			{
+				return this._EventID;
+			}
+			set
+			{
+				if ((this._EventID != value))
+				{
+					if (this._SportEvent.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnEventIDChanging(value);
+					this.SendPropertyChanging();
+					this._EventID = value;
+					this.SendPropertyChanged("EventID");
+					this.OnEventIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="Int NOT NULL")]
+		public int UserID
+		{
+			get
+			{
+				return this._UserID;
+			}
+			set
+			{
+				if ((this._UserID != value))
+				{
+					if (this._UserAccount.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUserIDChanging(value);
+					this.SendPropertyChanging();
+					this._UserID = value;
+					this.SendPropertyChanged("UserID");
+					this.OnUserIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SportEvent_Users_Event", Storage="_SportEvent", ThisKey="EventID", OtherKey="EventID", IsForeignKey=true)]
+		public SportEvent SportEvent
+		{
+			get
+			{
+				return this._SportEvent.Entity;
+			}
+			set
+			{
+				SportEvent previousValue = this._SportEvent.Entity;
+				if (((previousValue != value) 
+							|| (this._SportEvent.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SportEvent.Entity = null;
+						previousValue.Users_Events.Remove(this);
+					}
+					this._SportEvent.Entity = value;
+					if ((value != null))
+					{
+						value.Users_Events.Add(this);
+						this._EventID = value.EventID;
+					}
+					else
+					{
+						this._EventID = default(int);
+					}
+					this.SendPropertyChanged("SportEvent");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserAccount_Users_Event", Storage="_UserAccount", ThisKey="UserID", OtherKey="UserID", IsForeignKey=true)]
+		public UserAccount UserAccount
+		{
+			get
+			{
+				return this._UserAccount.Entity;
+			}
+			set
+			{
+				UserAccount previousValue = this._UserAccount.Entity;
+				if (((previousValue != value) 
+							|| (this._UserAccount.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._UserAccount.Entity = null;
+						previousValue.Users_Events.Remove(this);
+					}
+					this._UserAccount.Entity = value;
+					if ((value != null))
+					{
+						value.Users_Events.Add(this);
+						this._UserID = value.UserID;
+					}
+					else
+					{
+						this._UserID = default(int);
+					}
+					this.SendPropertyChanged("UserAccount");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	
@@ -878,6 +723,394 @@ namespace WhatsLuzMVCAPI.Models
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SportEvents")]
+	public partial class SportEvent : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _EventID;
+		
+		private System.DateTime _Date;
+		
+		private double _Duration;
+		
+		private int _MaxAttendies;
+		
+		private int _CategoryID;
+		
+		private int _OwnerID;
+		
+		private string _notes;
+		
+		private string _title;
+		
+		private string _Users;
+		
+		private string _location;
+		
+		private EntitySet<Users_Event> _Users_Events;
+		
+		private EntityRef<Category> _Category;
+		
+		private EntityRef<UserAccount> _UserAccount;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnEventIDChanging(int value);
+    partial void OnEventIDChanged();
+    partial void OnDateChanging(System.DateTime value);
+    partial void OnDateChanged();
+    partial void OnDurationChanging(double value);
+    partial void OnDurationChanged();
+    partial void OnMaxAttendiesChanging(int value);
+    partial void OnMaxAttendiesChanged();
+    partial void OnCategoryIDChanging(int value);
+    partial void OnCategoryIDChanged();
+    partial void OnOwnerIDChanging(int value);
+    partial void OnOwnerIDChanged();
+    partial void OnnotesChanging(string value);
+    partial void OnnotesChanged();
+    partial void OntitleChanging(string value);
+    partial void OntitleChanged();
+    partial void OnUsersChanging(string value);
+    partial void OnUsersChanged();
+    partial void OnlocationChanging(string value);
+    partial void OnlocationChanged();
+    #endregion
+		
+		public SportEvent()
+		{
+			this._Users_Events = new EntitySet<Users_Event>(new Action<Users_Event>(this.attach_Users_Events), new Action<Users_Event>(this.detach_Users_Events));
+			this._Category = default(EntityRef<Category>);
+			this._UserAccount = default(EntityRef<UserAccount>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EventID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int EventID
+		{
+			get
+			{
+				return this._EventID;
+			}
+			set
+			{
+				if ((this._EventID != value))
+				{
+					this.OnEventIDChanging(value);
+					this.SendPropertyChanging();
+					this._EventID = value;
+					this.SendPropertyChanged("EventID");
+					this.OnEventIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="DateTime NOT NULL")]
+		public System.DateTime Date
+		{
+			get
+			{
+				return this._Date;
+			}
+			set
+			{
+				if ((this._Date != value))
+				{
+					this.OnDateChanging(value);
+					this.SendPropertyChanging();
+					this._Date = value;
+					this.SendPropertyChanged("Date");
+					this.OnDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Duration", DbType="Float NOT NULL")]
+		public double Duration
+		{
+			get
+			{
+				return this._Duration;
+			}
+			set
+			{
+				if ((this._Duration != value))
+				{
+					this.OnDurationChanging(value);
+					this.SendPropertyChanging();
+					this._Duration = value;
+					this.SendPropertyChanged("Duration");
+					this.OnDurationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaxAttendies", DbType="Int NOT NULL")]
+		public int MaxAttendies
+		{
+			get
+			{
+				return this._MaxAttendies;
+			}
+			set
+			{
+				if ((this._MaxAttendies != value))
+				{
+					this.OnMaxAttendiesChanging(value);
+					this.SendPropertyChanging();
+					this._MaxAttendies = value;
+					this.SendPropertyChanged("MaxAttendies");
+					this.OnMaxAttendiesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CategoryID", DbType="Int NOT NULL")]
+		public int CategoryID
+		{
+			get
+			{
+				return this._CategoryID;
+			}
+			set
+			{
+				if ((this._CategoryID != value))
+				{
+					if (this._Category.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCategoryIDChanging(value);
+					this.SendPropertyChanging();
+					this._CategoryID = value;
+					this.SendPropertyChanged("CategoryID");
+					this.OnCategoryIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OwnerID", DbType="Int NOT NULL")]
+		public int OwnerID
+		{
+			get
+			{
+				return this._OwnerID;
+			}
+			set
+			{
+				if ((this._OwnerID != value))
+				{
+					if (this._UserAccount.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnOwnerIDChanging(value);
+					this.SendPropertyChanging();
+					this._OwnerID = value;
+					this.SendPropertyChanged("OwnerID");
+					this.OnOwnerIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_notes", DbType="NVarChar(MAX)")]
+		public string notes
+		{
+			get
+			{
+				return this._notes;
+			}
+			set
+			{
+				if ((this._notes != value))
+				{
+					this.OnnotesChanging(value);
+					this.SendPropertyChanging();
+					this._notes = value;
+					this.SendPropertyChanged("notes");
+					this.OnnotesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="NVarChar(50)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this.OntitleChanging(value);
+					this.SendPropertyChanging();
+					this._title = value;
+					this.SendPropertyChanged("title");
+					this.OntitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Users", DbType="NVarChar(MAX)")]
+		public string Users
+		{
+			get
+			{
+				return this._Users;
+			}
+			set
+			{
+				if ((this._Users != value))
+				{
+					this.OnUsersChanging(value);
+					this.SendPropertyChanging();
+					this._Users = value;
+					this.SendPropertyChanged("Users");
+					this.OnUsersChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_location", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string location
+		{
+			get
+			{
+				return this._location;
+			}
+			set
+			{
+				if ((this._location != value))
+				{
+					this.OnlocationChanging(value);
+					this.SendPropertyChanging();
+					this._location = value;
+					this.SendPropertyChanged("location");
+					this.OnlocationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SportEvent_Users_Event", Storage="_Users_Events", ThisKey="EventID", OtherKey="EventID")]
+		public EntitySet<Users_Event> Users_Events
+		{
+			get
+			{
+				return this._Users_Events;
+			}
+			set
+			{
+				this._Users_Events.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Category_SportEvent", Storage="_Category", ThisKey="CategoryID", OtherKey="CategoryID", IsForeignKey=true)]
+		public Category Category
+		{
+			get
+			{
+				return this._Category.Entity;
+			}
+			set
+			{
+				Category previousValue = this._Category.Entity;
+				if (((previousValue != value) 
+							|| (this._Category.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Category.Entity = null;
+						previousValue.SportEvents.Remove(this);
+					}
+					this._Category.Entity = value;
+					if ((value != null))
+					{
+						value.SportEvents.Add(this);
+						this._CategoryID = value.CategoryID;
+					}
+					else
+					{
+						this._CategoryID = default(int);
+					}
+					this.SendPropertyChanged("Category");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserAccount_SportEvent", Storage="_UserAccount", ThisKey="OwnerID", OtherKey="UserID", IsForeignKey=true)]
+		public UserAccount UserAccount
+		{
+			get
+			{
+				return this._UserAccount.Entity;
+			}
+			set
+			{
+				UserAccount previousValue = this._UserAccount.Entity;
+				if (((previousValue != value) 
+							|| (this._UserAccount.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._UserAccount.Entity = null;
+						previousValue.SportEvents.Remove(this);
+					}
+					this._UserAccount.Entity = value;
+					if ((value != null))
+					{
+						value.SportEvents.Add(this);
+						this._OwnerID = value.UserID;
+					}
+					else
+					{
+						this._OwnerID = default(int);
+					}
+					this.SendPropertyChanged("UserAccount");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Users_Events(Users_Event entity)
+		{
+			this.SendPropertyChanging();
+			entity.SportEvent = this;
+		}
+		
+		private void detach_Users_Events(Users_Event entity)
+		{
+			this.SendPropertyChanging();
+			entity.SportEvent = null;
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.UserAccounts")]
 	public partial class UserAccount : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -903,6 +1136,8 @@ namespace WhatsLuzMVCAPI.Models
 		private byte _isAdmin;
 		
 		private EntitySet<Users_Event> _Users_Events;
+		
+		private EntitySet<SportEvent> _SportEvents;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -931,10 +1166,11 @@ namespace WhatsLuzMVCAPI.Models
 		public UserAccount()
 		{
 			this._Users_Events = new EntitySet<Users_Event>(new Action<Users_Event>(this.attach_Users_Events), new Action<Users_Event>(this.detach_Users_Events));
+			this._SportEvents = new EntitySet<SportEvent>(new Action<SportEvent>(this.attach_SportEvents), new Action<SportEvent>(this.detach_SportEvents));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int UserID
 		{
 			get
@@ -1127,6 +1363,19 @@ namespace WhatsLuzMVCAPI.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserAccount_SportEvent", Storage="_SportEvents", ThisKey="UserID", OtherKey="OwnerID")]
+		public EntitySet<SportEvent> SportEvents
+		{
+			get
+			{
+				return this._SportEvents;
+			}
+			set
+			{
+				this._SportEvents.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1158,197 +1407,17 @@ namespace WhatsLuzMVCAPI.Models
 			this.SendPropertyChanging();
 			entity.UserAccount = null;
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Users_Events")]
-	public partial class Users_Event : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Event_User_ID;
-		
-		private int _EventID;
-		
-		private int _UserID;
-		
-		private EntityRef<SportEvent> _SportEvent;
-		
-		private EntityRef<UserAccount> _UserAccount;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnEvent_User_IDChanging(int value);
-    partial void OnEvent_User_IDChanged();
-    partial void OnEventIDChanging(int value);
-    partial void OnEventIDChanged();
-    partial void OnUserIDChanging(int value);
-    partial void OnUserIDChanged();
-    #endregion
-		
-		public Users_Event()
+		private void attach_SportEvents(SportEvent entity)
 		{
-			this._SportEvent = default(EntityRef<SportEvent>);
-			this._UserAccount = default(EntityRef<UserAccount>);
-			OnCreated();
+			this.SendPropertyChanging();
+			entity.UserAccount = this;
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Event_User_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int Event_User_ID
+		private void detach_SportEvents(SportEvent entity)
 		{
-			get
-			{
-				return this._Event_User_ID;
-			}
-			set
-			{
-				if ((this._Event_User_ID != value))
-				{
-					this.OnEvent_User_IDChanging(value);
-					this.SendPropertyChanging();
-					this._Event_User_ID = value;
-					this.SendPropertyChanged("Event_User_ID");
-					this.OnEvent_User_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EventID", DbType="Int NOT NULL")]
-		public int EventID
-		{
-			get
-			{
-				return this._EventID;
-			}
-			set
-			{
-				if ((this._EventID != value))
-				{
-					if (this._SportEvent.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnEventIDChanging(value);
-					this.SendPropertyChanging();
-					this._EventID = value;
-					this.SendPropertyChanged("EventID");
-					this.OnEventIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="Int NOT NULL")]
-		public int UserID
-		{
-			get
-			{
-				return this._UserID;
-			}
-			set
-			{
-				if ((this._UserID != value))
-				{
-					if (this._UserAccount.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnUserIDChanging(value);
-					this.SendPropertyChanging();
-					this._UserID = value;
-					this.SendPropertyChanged("UserID");
-					this.OnUserIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SportEvent_Users_Event", Storage="_SportEvent", ThisKey="EventID", OtherKey="EventID", IsForeignKey=true)]
-		public SportEvent SportEvent
-		{
-			get
-			{
-				return this._SportEvent.Entity;
-			}
-			set
-			{
-				SportEvent previousValue = this._SportEvent.Entity;
-				if (((previousValue != value) 
-							|| (this._SportEvent.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._SportEvent.Entity = null;
-						previousValue.Users_Events.Remove(this);
-					}
-					this._SportEvent.Entity = value;
-					if ((value != null))
-					{
-						value.Users_Events.Add(this);
-						this._EventID = value.EventID;
-					}
-					else
-					{
-						this._EventID = default(int);
-					}
-					this.SendPropertyChanged("SportEvent");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserAccount_Users_Event", Storage="_UserAccount", ThisKey="UserID", OtherKey="UserID", IsForeignKey=true)]
-		public UserAccount UserAccount
-		{
-			get
-			{
-				return this._UserAccount.Entity;
-			}
-			set
-			{
-				UserAccount previousValue = this._UserAccount.Entity;
-				if (((previousValue != value) 
-							|| (this._UserAccount.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._UserAccount.Entity = null;
-						previousValue.Users_Events.Remove(this);
-					}
-					this._UserAccount.Entity = value;
-					if ((value != null))
-					{
-						value.Users_Events.Add(this);
-						this._UserID = value.UserID;
-					}
-					else
-					{
-						this._UserID = default(int);
-					}
-					this.SendPropertyChanged("UserAccount");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
+			this.SendPropertyChanging();
+			entity.UserAccount = null;
 		}
 	}
 }

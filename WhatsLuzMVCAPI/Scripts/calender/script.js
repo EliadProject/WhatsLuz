@@ -2,15 +2,7 @@
 
 $(document).ready(function () {
 
-    $('#sport_event_join').click(function () {
-
-        /*
-        $('#eventShow-modal').modal({
-            keyboard: false,
-            show: false
-        });
-        */
-    });
+   
 
     //on init page - retrieve all events with no filter
     data = "";
@@ -39,20 +31,38 @@ $(document).ready(function () {
     );
 
         
-
-        //join event function
-        //checks if the user is one of attendies/owner of the event
-
+ */
+   
+    //join event function
+   //checks if the user is one of attendies/owner of the event
     $('#sport_event_join').click(function () {
-        var cookie = document.cookie;
-        var username = cookie.split('=')[1];
-        var owner_id = $("#owner_id").text().replace(/\s/g, '');
-
-        if (username == owner_id)
-            alert("לא ניתן להצטרף, אתה הוא בעל האירוע");
+        var event_obj = new Object();
+        var eventID = angular.element(document.getElementById('ctrlid')).scope().eventID;
+        event_obj.eventID = eventID;
+        var event_json = JSON.stringify(event_obj);
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:61733/SportEvents/Join",
+            data: event_json,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",               
+                async: false,
+                accepts: "application/json",
+                success: function (data, status, xhr) {
+                    if (data == "Success") {
+                        //dismiss modal 
+                        location.reload();
+                    }
+                    else
+                    {
+                        $("#join_status_id").text(data);
+                    }
+                }
+            });
+         
 
     }); 
-    */
+    
    
 
 
@@ -83,7 +93,8 @@ $(document).ready(function () {
         });
    
 
-    //create event function
+    //
+    
     $('#form_eventSport_send').click(function () {
         var check_disabled = $(this).attr("class");
         if (check_disabled.includes("disabled") == true) {

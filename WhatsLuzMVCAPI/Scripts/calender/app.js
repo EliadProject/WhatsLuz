@@ -42,20 +42,13 @@ module.controller('ctrl', function ($scope, calendarConfig) {
         });
     }
    
-
-       
-
-    
-   
- 
-  
  
   $scope.viewDate = moment().startOf('month').toDate();
   //$scope.updateCloseEvents();
   
 
   $scope.eventClicked = function(event) {       
-     
+      $scope.eventID = event["eventID"];
       $scope.title = event["title"];
       $scope.category = event["category"];
       $scope.owner = event["owner"];
@@ -69,8 +62,8 @@ module.controller('ctrl', function ($scope, calendarConfig) {
          
          //make the eventShow-modal appear       
             $('#eventShow-modal').modal({
-          keyboard: true,
-          show: true
+         // keyboard: true,
+         // show: true
         })
     }
 

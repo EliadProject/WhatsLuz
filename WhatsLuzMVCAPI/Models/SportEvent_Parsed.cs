@@ -9,7 +9,9 @@ namespace WhatsLuzMVCAPI.Models
     [JsonObject(MemberSerialization.OptIn)]
     public class SportEvent_Parsed
     {
-        
+        [JsonProperty]
+        public int eventID { get; set; }
+
         [JsonProperty]
         public string title { get; set; }
 

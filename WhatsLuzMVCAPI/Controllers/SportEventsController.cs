@@ -14,6 +14,7 @@ namespace WhatsLuzMVCAPI.Controllers
 {
     public class SportEventsController : Controller
     {
+      
 
 
         // POST: SportEvents/getEvents
@@ -39,10 +40,6 @@ namespace WhatsLuzMVCAPI.Controllers
                 sportEvents = getFilterEvents(dataContext, filter.category, filter.place);
             }
             return Json(sportEvents, JsonRequestBehavior.AllowGet);
-
-
-
-
 
         }
 
@@ -107,23 +104,25 @@ namespace WhatsLuzMVCAPI.Controllers
             List<CategoryStatistics> seStatistics = getSportEventStatistics(dataContext);
             return Json(seStatistics, JsonRequestBehavior.AllowGet); ;
         }
+
         [HttpPost]
-        public String Join(int eventid)
+        public ActionResult Join(int eventid)
         {
             var dataContext = new SqlConnectionDataContext();
-
             UserAccount loggedAccount = ManageCookie.user;
-            int userID = loggedAccount.UserID;
+            
             if (loggedAccount == null)
             {
-                return "User is not logged in!";
-            }
+                return Json("User is not logged in!", JsonRequestBehavior.AllowGet); 
+               
+            }           
+            int userID = loggedAccount.UserID;
             //check if owner
             int ownerID = getOwnerID(dataContext, eventid);
             if (ownerID == userID)
             {
                 //user is the owner of event 
-                return "User is the owner";
+                return Json("User is the owner", JsonRequestBehavior.AllowGet);            
             }
             else
             {
@@ -132,19 +131,18 @@ namespace WhatsLuzMVCAPI.Controllers
                 if (user_event_id == 0)
                 {
                     //user is not among the ettendies, he can join
-                    //join user
-                    return "Success";
+                    addUserToEvent(dataContext, eventid, userID);
+                    return Json("Success", JsonRequestBehavior.AllowGet); 
+
+                   
                 }
                 else
                 {
-                    return "User is among the attendies";
+                    return Json("User is among the attendies", JsonRequestBehavior.AllowGet); 
+                    
                 }
-                    
-                    
+    
             }
-
-
-
         }
 
 
@@ -165,7 +163,25 @@ namespace WhatsLuzMVCAPI.Controllers
             return filtermodel;
         }
 
+        static public void addUserToEvent(SqlConnectionDataContext db, int eventID, int userID)
+        {
+            Users_Event ue = new Users_Event();
+            ue.EventID = eventID;
+            ue.UserID = userID;
+            db.Users_Events.InsertOnSubmit(ue);
+            try
+            {
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
 
+
+
+        }
+       
         static public int getOwnerID(SqlConnectionDataContext db, int eventID)
         {
             int ownerID = (from se in db.SportEvents
@@ -176,6 +192,7 @@ namespace WhatsLuzMVCAPI.Controllers
         static public int checkUserFromUsers_Event(SqlConnectionDataContext db, int eventID, int userID)
         {
             int Event_User_ID = (from ue in db.Users_Events
+                                 
                                  where ue.EventID == eventID && ue.UserID == userID
                                  select ue.Event_User_ID).FirstOrDefault();
             return Event_User_ID;
@@ -186,11 +203,13 @@ namespace WhatsLuzMVCAPI.Controllers
             List<SportEvent_Parsed> sportEvents;
             var query = (from se in db.SportEvents
                          join cat in db.Categories on se.CategoryID equals cat.CategoryID
+                         join us in db.UserAccounts on se.OwnerID equals us.UserID
                          select new SportEvent_Parsed()
                          {
+                             eventID = se.EventID,
                              title = se.title,
                              category = cat.Name,
-                             owner = se.OwnerID.ToString(),
+                             owner = us.DisplayName,
                              max_attendies = se.MaxAttendies,
                              location = se.location,
                              notes = se.notes,
@@ -214,9 +233,6 @@ namespace WhatsLuzMVCAPI.Controllers
 
             return sportEvents;
 
-
-
-
         }
 
 
@@ -226,11 +242,13 @@ namespace WhatsLuzMVCAPI.Controllers
 
             List<SportEvent_Parsed> sportsEvents = (from se in db.SportEvents
                                                     join cat in db.Categories on se.CategoryID equals cat.CategoryID
+                                                    join us in db.UserAccounts on se.OwnerID equals us.UserID
                                                     select new SportEvent_Parsed()
                                                     {
+                                                        eventID = se.EventID,
                                                         title = se.title,
                                                         category = cat.Name,
-                                                        owner = se.OwnerID.ToString(),
+                                                        owner = us.DisplayName,
                                                         max_attendies = se.MaxAttendies,
                                                         location = se.location,
                                                         notes = se.notes,
