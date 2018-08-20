@@ -21,22 +21,12 @@ namespace WhatsLuzMVCAPI.Controllers
         public ActionResult GetEvents(FilterModel filter)
         {
 
-
             //customize filter model for quering
             filter = filterPrep(filter);
 
             List<SportEvent_Parsed> sportEvents;
-            var dataContext = new SqlConnectionDataContext();
-            if (filter.category == null)
-            {
-                //dont need filter
-                sportEvents = getAllEvents(dataContext);
-            }
-            else
-            {
-                //need filter
-                sportEvents = getFilterEvents(dataContext, filter.category, filter.place);
-            }
+            var dataContext = new SqlConnectionDataContext();   
+            sportEvents = getFilterEvents(dataContext, filter.category, filter.place);
             return Json(sportEvents, JsonRequestBehavior.AllowGet);
 
         }
@@ -71,7 +61,7 @@ namespace WhatsLuzMVCAPI.Controllers
                 sportEvent.MaxAttendies = sportEventModel.max_attendies;
             }
 
-            sportEvent.location = sportEventModel.location;
+            sportEvent.PlaceID = getPlaceIDByName(dataContext,sportEventModel.location);
             sportEvent.notes = sportEventModel.notes;
 
             if (sportEventModel.title == null)
@@ -168,6 +158,14 @@ namespace WhatsLuzMVCAPI.Controllers
             return filtermodel;
         }
 
+        static public int getPlaceIDByName(SqlConnectionDataContext db, string placeName)
+        {
+            return (from p in db.Places
+                    where p.Name == placeName
+                    select p.Id).FirstOrDefault();
+        }
+
+
         static public void addUserToEvent(SqlConnectionDataContext db, int eventID, int userID)
         {
             Users_Event ue = new Users_Event();
@@ -203,12 +201,13 @@ namespace WhatsLuzMVCAPI.Controllers
             return Event_User_ID;
         }
         static public List<SportEvent_Parsed> getFilterEvents(SqlConnectionDataContext db, string catName, string place)
-        {
-            string whereClause = "";
+        {         
             List<SportEvent_Parsed> sportEvents;
             var query = (from se in db.SportEvents
                          join cat in db.Categories on se.CategoryID equals cat.CategoryID
                          join us in db.UserAccounts on se.OwnerID equals us.UserID
+                         join p in db.Places on se.PlaceID equals p.Id
+                      //   join p in db.Places on 
                          select new SportEvent_Parsed()
                          {
                              eventID = se.EventID,
@@ -216,7 +215,7 @@ namespace WhatsLuzMVCAPI.Controllers
                              category = cat.Name,
                              owner = us.DisplayName,
                              max_attendies = se.MaxAttendies,
-                             location = se.location,
+                             location = p.Name,
                              notes = se.notes,
                              startsAt = se.Date,
                              endsAt = se.Date.AddMinutes(se.Duration),
@@ -224,17 +223,19 @@ namespace WhatsLuzMVCAPI.Controllers
 
                          }).ToList();
 
+            //Filter by category name
             if (!String.IsNullOrWhiteSpace(catName))
+            {       
+                query = query.Where(p => p.category == catName).ToList();
+            }
+            //Filter by place name
+            if(!String.IsNullOrWhiteSpace(place))
             {
-                //whereClause+= "category == " + catName;
-                sportEvents = query.Where(p => p.category == catName).ToList();
+                query = query.Where(p => p.location == place).ToList();
+            }
 
-                //sportEvents = query.AsQueryable().w .Where("category == @0",  catName);
-            }
-            else
-            {
-                sportEvents = query.ToList();
-            }
+            sportEvents = query.ToList();
+        
 
             return sportEvents;
 
@@ -248,6 +249,7 @@ namespace WhatsLuzMVCAPI.Controllers
             List<SportEvent_Parsed> sportsEvents = (from se in db.SportEvents
                                                     join cat in db.Categories on se.CategoryID equals cat.CategoryID
                                                     join us in db.UserAccounts on se.OwnerID equals us.UserID
+                                                    join p in db.Places on se.PlaceID equals p.Id
                                                     select new SportEvent_Parsed()
                                                     {
                                                         eventID = se.EventID,
@@ -255,7 +257,7 @@ namespace WhatsLuzMVCAPI.Controllers
                                                         category = cat.Name,
                                                         owner = us.DisplayName,
                                                         max_attendies = se.MaxAttendies,
-                                                        location = se.location,
+                                                        location = p.Name,
                                                         notes = se.notes,
                                                         startsAt = se.Date,
                                                         endsAt = se.Date.AddMinutes(se.Duration),
