@@ -16,6 +16,9 @@
 <!-- Sport Event Form -->
 <script src="~/Scripts/calender/validator.js"></script>
 
+<!-- Weather JS API -->
+<script src="~/Scripts/Weather/weather.js"></script>
+
 <!-- SearchFilter -->
 <link href="~/Content/SearchMenu.css" rel="stylesheet" id="bootstrap-css">
 
@@ -175,95 +178,97 @@
 </div>
 
 <!-- ShowEvent -->
-    <div class="fade " id="eventShow-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+<div class="fade " id="eventShow-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
 
-        <form action="#" class="sport_event">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-            </button>
-            <label> {{ title }}  </label>
-            <hr />
-
-            <ul>
-                <li><div class="list_key">Owner: </div> <div id="owner_id" style="display:initial"> {{ owner }} </div> </li>
-                <li> <div class="list_key">Category: </div> {{ category }} </li>
-                <li><div class="list_key"> Maximum Attendies: </div>{{ max_attendies }} </li>
-                <li><div class="list_key"> Location: </div> {{ location }} </li>
-                <li><div class="list_key"> Date: </div> {{ date }} </li>
-                <li><div class="list_key"> Start Time: </div> {{ startsAt }} </li>
-                <li><div class="list_key"> End Time: </div> {{ endsAt }} </li>
-                <li><div class="list_key"> Users </div> 
-                    <ul ng-repeat="user in users">
-                        <li> {{ user }} </li>
-                    </ul>
-                </li>
-            </ul>
-          <br />
-
-           
-
-
-                <button id="sport_event_join" type="submit" class="btn btn-primary" style="opacity: 1">Join</button>
-                <div id="join_status_id"> </div>
-
-
-        </form>
-    </div>
-
-    <!-- Google Maps -->
-
-    <!-- Event creation form -->
-    <div class="fade sport_event" id="eventAddition-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-
-        <div>
-
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-            </button>
-
-            <h3>Event Creation</h3>
-        </div>
+    <form action="#" class="sport_event">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        </button>
+        <label> {{ title }}  </label>
         <hr />
-        <form data-toggle="validator" role="form" action="#">
 
-            <div class="form-group">
-                <label class="labelEvent">Title</label>
-                <input type="text" id="title" class="form-control" maxlength="50" placeholder="Write title" />
+        <ul>
+            <li><div class="list_key">Owner: </div> <div id="owner_id" style="display:initial"> {{ owner }} </div> </li>
+            <li> <div class="list_key">Category: </div> {{ category }} </li>
+            <li><div class="list_key"> Maximum Attendies: </div>{{ max_attendies }} </li>
+            <li><div class="list_key"> Location: </div> {{ location }} </li>
+            <li><div class="list_key"> Date: </div> {{ date }} </li>
+            <li><div class="list_key"> Start Time: </div> {{ startsAt }} </li>
+            <li><div class="list_key"> End Time: </div> {{ endsAt }} </li>
+            <li>
+                <div class="list_key"> Users </div>
+                <ul ng-repeat="user in users">
+                    <li> {{ user }} </li>
+                </ul>
+            </li>
+        </ul>
+        <br />
+
+
+
+
+        <button id="sport_event_join" type="submit" class="btn btn-primary" style="opacity: 1">Join</button>
+        <div id="join_status_id"> </div>
+
+
+    </form>
+</div>
+
+<!-- Google Maps -->
+<!-- Event creation form -->
+<div class="fade sport_event" id="eventAddition-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+
+    <div>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        </button>
+
+        <h3>Event Creation</h3>
+    </div>
+    <hr />
+    <form data-toggle="validator" role="form" action="#">
+
+        <div class="form-group">
+            <label class="labelEvent">Title</label>
+            <input type="text" id="title" class="form-control" maxlength="50" placeholder="Write title" />
+        </div>
+
+        <div class="form-group">
+            <label class="labelEvent" for="categories">Category <span class="asterisk">*</span></label>
+            <select id="categories_create" class="form-control categories" required></select>
+        </div>
+
+        <div class="form-group">
+            <label class="labelEvent">Date and Time <span class="asterisk">*</span></label>
+            <div class='input-group date form-group' id='datetimepicker1'>
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+                <input type='text' class="form-control" id="datetime" data-error="Choose date and time" required />
             </div>
+        </div>
 
-            <div class="form-group">
-                <label class="labelEvent" for="categories">Category <span class="asterisk">*</span></label>
-                <select id="categories_create" class="form-control categories" required></select>
-            </div>
+        <div class="form-group">
+            <label class="labelEvent">Maximum Attendies</label>
+            <input type="number" id="attendies" min="2" max="50" class="form-control" placeholder="Write the maximum attendies number" />
+        </div>
 
-            <div class="form-group">
-                <label class="labelEvent">Date and Time <span class="asterisk">*</span></label>
-                <div class='input-group date form-group' id='datetimepicker1'>
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                    <input type='text' class="form-control" id="datetime" data-error="Choose date and time" required />
-                </div>
-            </div>
+        <div class="form-group">
+            <label class="labelEvent">Duration</label>
+            <input type="number" id="duration" min="30" max="300" class="form-control" placeholder="Write the duration in munutes" />
+        </div>
 
-            <div class="form-group">
-                <label class="labelEvent">Maximum Attendies</label>
-                <input type="number" id="attendies" min="2" max="50" class="form-control" placeholder="Write the maximum attendies number" />
-            </div>
+        <div class="form-group">
+            <label class="labelEvent" for="places">Location<span class="asterisk">*</span></label>
+            <select id="location" class="form-control places" onchange="getTemperature()" required></select>
+            <br /><u>Weather Status:</u> <span id="weather">None</span>
+            <br />
+            <a><span ng-click="showMap = ! showMap" class="glyphicon glyphicon-map-marker"></span></a>
+            <div ng-show="showMap" id="map" style="width:300px;height:250px"></div>
+            <p id="demo"></p>
 
-            <div class="form-group">
-                <label class="labelEvent">Duration</label>
-                <input type="number" id="duration" min="30" max="300" class="form-control" placeholder="Write the duration in munutes" />
-            </div>
-
-            <div class="form-group">
-                <label class="labelEvent" for="places">Location<span class="asterisk">*</span></label>
-                <select id="location" class="form-control places" onchange="loadDoc()" required></select>
-                <a><span ng-click="showMap = ! showMap" class="glyphicon glyphicon-map-marker"></span></a>
-                <div ng-show="showMap" id="map" style="width:300px;height:250px"></div>
-                <p id="demo"></p>
-                <script>
-
+            <script type="text/javascript">
                 function loadDoc() {
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function() {
@@ -305,87 +310,87 @@
                     var marker = new google.maps.Marker({ position: myCenter });
                     marker.setMap(map);
                 }
-                </script>
-                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzeATlrOQAWD95ok3AMuTQuqwSi_0NHX4&callback=myMap"></script>
-                <!-- <div class="help-block with-errors"></div> -->
-            </div>
+            </script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzeATlrOQAWD95ok3AMuTQuqwSi_0NHX4&callback=myMap"></script>
+            <!-- <div class="help-block with-errors"></div> -->
+        </div>
 
-            <div class="form-group">
-                <label class="labelEvent">Notes<span class="asterisk"></span></label>
-                <textarea id="notes" class="form-control" rows="4" placeholder="Write notes" maxlength="200"></textarea>
-            </div>
+        <div class="form-group">
+            <label class="labelEvent">Notes<span class="asterisk"></span></label>
+            <textarea id="notes" class="form-control" rows="4" placeholder="Write notes" maxlength="200"></textarea>
+        </div>
 
-            <div class="form-group">
-                <button id="form_eventSport_send" type="submit" class="btn btn-primary">Create</button>
-            </div>
-        </form>
+        <div class="form-group">
+            <button id="form_eventSport_send" type="submit" class="btn btn-primary">Create</button>
+        </div>
+    </form>
 
 
 
-    </div>
+</div>
 
-    <!--
-    <footer>
-        <div class="footer" id="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
-                        <h3> Lorem Ipsum </h3>
-                        <ul>
-                            <li> <a href="#"> Lorem Ipsum </a> </li>
-                            <li> <a href="#"> Lorem Ipsum </a> </li>
-                            <li> <a href="#"> Lorem Ipsum </a> </li>
-                            <li> <a href="#"> Lorem Ipsum </a> </li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
-                        <h3> Lorem Ipsum </h3>
-                        <ul>
-                            <li> <a href="#"> Lorem Ipsum </a> </li>
-                            <li> <a href="#"> Lorem Ipsum </a> </li>
-                            <li> <a href="#"> Lorem Ipsum </a> </li>
-                            <li> <a href="#"> Lorem Ipsum </a> </li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
-                        <h3> Lorem Ipsum </h3>
-                        <ul>
-                            <li> <a href="#"> Lorem Ipsum </a> </li>
-                            <li> <a href="#"> Lorem Ipsum </a> </li>
-                            <li> <a href="#"> Lorem Ipsum </a> </li>
-                            <li> <a href="#"> Lorem Ipsum </a> </li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
-                        <h3> Lorem Ipsum </h3>
-                        <ul>
-                            <li> <a href="#"> Lorem Ipsum </a> </li>
-                            <li> <a href="#"> Lorem Ipsum </a> </li>
-                            <li> <a href="#"> Lorem Ipsum </a> </li>
-                            <li> <a href="#"> Lorem Ipsum </a> </li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3  col-md-3 col-sm-6 col-xs-12 ">
-                        <h3> Lorem Ipsum </h3>
-                        <ul>
-                            <li>
-                                <div class="input-append newsletter-box text-center">
-                                    <input type="text" class="full text-center" placeholder="Email ">
-                                    <button class="btn  bg-gray" type="button"> Lorem ipsum <i class="fa fa-long-arrow-right"> </i> </button>
-                                </div>
-                            </li>
-                        </ul>
-                        <ul class="social">
-                            <li> <a href="#"> <i class=" fa fa-facebook">   </i> </a> </li>
-                            <li> <a href="#"> <i class="fa fa-twitter">   </i> </a> </li>
-                            <li> <a href="#"> <i class="fa fa-google-plus">   </i> </a> </li>
-                            <li> <a href="#"> <i class="fa fa-pinterest">   </i> </a> </li>
-                            <li> <a href="#"> <i class="fa fa-youtube">   </i> </a> </li>
-                        </ul>
-                    </div>
+<!--
+<footer>
+    <div class="footer" id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+                    <h3> Lorem Ipsum </h3>
+                    <ul>
+                        <li> <a href="#"> Lorem Ipsum </a> </li>
+                        <li> <a href="#"> Lorem Ipsum </a> </li>
+                        <li> <a href="#"> Lorem Ipsum </a> </li>
+                        <li> <a href="#"> Lorem Ipsum </a> </li>
+                    </ul>
                 </div>
-                <!--/.row-->
-    <!-- </div>-->
-    <!--/.container-->
-    <!--</div>-->
-    <!--/.footer-->
+                <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+                    <h3> Lorem Ipsum </h3>
+                    <ul>
+                        <li> <a href="#"> Lorem Ipsum </a> </li>
+                        <li> <a href="#"> Lorem Ipsum </a> </li>
+                        <li> <a href="#"> Lorem Ipsum </a> </li>
+                        <li> <a href="#"> Lorem Ipsum </a> </li>
+                    </ul>
+                </div>
+                <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+                    <h3> Lorem Ipsum </h3>
+                    <ul>
+                        <li> <a href="#"> Lorem Ipsum </a> </li>
+                        <li> <a href="#"> Lorem Ipsum </a> </li>
+                        <li> <a href="#"> Lorem Ipsum </a> </li>
+                        <li> <a href="#"> Lorem Ipsum </a> </li>
+                    </ul>
+                </div>
+                <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+                    <h3> Lorem Ipsum </h3>
+                    <ul>
+                        <li> <a href="#"> Lorem Ipsum </a> </li>
+                        <li> <a href="#"> Lorem Ipsum </a> </li>
+                        <li> <a href="#"> Lorem Ipsum </a> </li>
+                        <li> <a href="#"> Lorem Ipsum </a> </li>
+                    </ul>
+                </div>
+                <div class="col-lg-3  col-md-3 col-sm-6 col-xs-12 ">
+                    <h3> Lorem Ipsum </h3>
+                    <ul>
+                        <li>
+                            <div class="input-append newsletter-box text-center">
+                                <input type="text" class="full text-center" placeholder="Email ">
+                                <button class="btn  bg-gray" type="button"> Lorem ipsum <i class="fa fa-long-arrow-right"> </i> </button>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="social">
+                        <li> <a href="#"> <i class=" fa fa-facebook">   </i> </a> </li>
+                        <li> <a href="#"> <i class="fa fa-twitter">   </i> </a> </li>
+                        <li> <a href="#"> <i class="fa fa-google-plus">   </i> </a> </li>
+                        <li> <a href="#"> <i class="fa fa-pinterest">   </i> </a> </li>
+                        <li> <a href="#"> <i class="fa fa-youtube">   </i> </a> </li>
+                    </ul>
+                </div>
+            </div>
+            <!--/.row-->
+<!-- </div>-->
+<!--/.container-->
+<!--</div>-->
+<!--/.footer-->
