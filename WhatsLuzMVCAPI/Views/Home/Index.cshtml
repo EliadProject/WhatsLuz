@@ -262,57 +262,26 @@
         <div class="form-group">
             <label class="labelEvent" for="places">Location<span class="asterisk">*</span></label>
             <select id="location" class="form-control places" onchange="getTemperature()" required></select>
-            <br /><u>Weather Status:</u> <span id="weather">None</span>
             <br />
             <a><span ng-click="showMap = ! showMap" class="glyphicon glyphicon-map-marker"></span></a>
-            <div ng-show="showMap" id="map" style="width:300px;height:250px"></div>
-            <p id="demo"></p>
+            <u>Weather Status:</u> <span id="weather">None</span>
+            <div ng-show="showMap" id="map" style="width:300px;height:300px"></div>
 
             <script type="text/javascript">
-                function loadDoc() {
-                var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        document.getElementById("demo").innerHTML = this.responseText;
-                    }
-                };
-
-                }
-
-                var newcontent = [];
-
-                $.ajax({
-                    type: "GET",
-                    url: 'http://localhost:61733/places/getAllPlaces',
-                    dataType: 'json',
-                    async: false,
-                    accepts: "application/json",
-                    success: function (data) {
-
-                        for (i in data) {
-                            newcontent.push(
-                                {
-                                    Name: data[i].label,
-                                    lat: data[i].,
-                                    lng: data[i].value,
-                                });
-                            console.log("I'm Here!")
-                        }
-
-                    }
+               
+                function GetMap() {
+                map = new Microsoft.Maps.Map('#map', {center: new Microsoft.Maps.Location(31.76904,35.21633),
+                zoom: 15});
+        
+                var center = map.getCenter();
+                var pin = new Microsoft.Maps.Pushpin(center, {
+                    icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png'
                 });
 
-                function myMap() {
-                    var myCenter = new google.maps.LatLng(51.508742, -0.120850);
-                    var mapCanvas = document.getElementById("map");
-                    var mapOptions = { center: myCenter, zoom: 8 };
-                    var map = new google.maps.Map(mapCanvas, mapOptions);
-                    var marker = new google.maps.Marker({ position: myCenter });
-                    marker.setMap(map);
+                map.entities.push(pin);
                 }
             </script>
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzeATlrOQAWD95ok3AMuTQuqwSi_0NHX4&callback=myMap"></script>
-            <!-- <div class="help-block with-errors"></div> -->
+            <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AhdNPwOo5F5H88MCVm8lfm8eW4wLzYo9z7BXBKzlCbJ-DugYtez5DKxZrsFHJY25' async defer></script>
         </div>
 
         <div class="form-group">
