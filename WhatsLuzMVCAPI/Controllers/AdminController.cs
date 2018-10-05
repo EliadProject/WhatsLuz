@@ -57,6 +57,19 @@ namespace WhatsLuzMVCAPI.Controllers
 
         }
 
+        [HttpGet]
+        public ActionResult EditPlace(int id)
+        {
+            if (ManageCookie.isAdmin() == false)
+                return RedirectToAction("Index", "Home");
+            ViewBag.Title = "Place Edit";
+
+            ViewBag.placeInfo = AdminModel.getPlaceInfo(id);
+
+            return View();
+
+        }
+
         [HttpPost]
         public ActionResult EditUser(FormCollection userUpdate)
         {
@@ -70,10 +83,23 @@ namespace WhatsLuzMVCAPI.Controllers
 
         }
 
+        [HttpPost]
+        public ActionResult EditPlace(FormCollection userUpdate)
+        {
+            if (ManageCookie.isAdmin() == false)
+                return RedirectToAction("Index", "Home");
+            ViewBag.Title = "Place Edit";
+
+            bool isUpdate = AdminModel.updatePlaceInput(userUpdate);
+
+            return RedirectToAction("Places");
+
+        }
+
         [HttpGet]
         public ActionResult Delete(int userID)
         {
-            AdminModel.removeUserByEmail(userID);
+            AdminModel.removeUserByID(userID);
 
             return RedirectToAction("Users");
         }
