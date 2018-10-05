@@ -25,7 +25,7 @@ namespace WhatsLuzMVCAPI.Controllers
             return Json(toString, JsonRequestBehavior.AllowGet);
         }
 
-        // GET: Places/GetLocationCordinatesByName
+        // Post: Places/GetLocationCordinatesByName
         [HttpPost]
         public ActionResult GetLocationCordinatesByName(String name)
         {
@@ -39,6 +39,22 @@ namespace WhatsLuzMVCAPI.Controllers
 
         // GET: Places
         public String getAllPlaces()
+        {
+
+            var dataContext = new SqlConnectionDataContext();
+            Table<Place> table_Places = dataContext.Places;
+            List<Place> list_Places = table_Places.ToList();
+            String result = JsonConvert.SerializeObject(list_Places, Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
+
+            return result;
+        }
+
+        // GET: Places
+        public String getAllPlacesInfo()
         {
             
             var dataContext = new SqlConnectionDataContext();

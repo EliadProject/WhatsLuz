@@ -93,6 +93,13 @@ namespace WhatsLuzMVCAPI.Controllers
             return Json(seStatistics, JsonRequestBehavior.AllowGet); ;
         }
 
+        public ActionResult getTopTenPlacesStatistics()
+        {
+            var dataContext = new SqlConnectionDataContext();
+            List<CategoryStatistics> seStatistics = getPlacesStatistics(dataContext);
+            return Json(seStatistics, JsonRequestBehavior.AllowGet); ;
+        }
+
         [HttpPost]
         public ActionResult Join(int eventid)
         {
@@ -282,6 +289,23 @@ namespace WhatsLuzMVCAPI.Controllers
                                                          label = g.Key,
                                                          value = 100.0 * g.Count() / count_all
                                                      }).ToList();
+
+            return seStatistics;
+        }
+
+        static public List<CategoryStatistics> getPlacesStatistics(SqlConnectionDataContext db)
+        {
+
+
+            int count_all = db.SportEvents.Count();
+
+            List<CategoryStatistics> seStatistics = (from p in db.Places
+                                                     group p.Address by p.Address into g
+                                                     select new CategoryStatistics
+                                                     {
+                                                         label = g.Key,
+                                                         value = 100.0 * g.Count() / count_all
+                                                     }).Take(10).ToList(); // Limit in SQL = Take in Linq to SQL.
 
             return seStatistics;
         }
