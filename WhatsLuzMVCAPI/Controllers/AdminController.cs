@@ -31,6 +31,45 @@ namespace WhatsLuzMVCAPI.Controllers
             return View();
 
         }
+
+        public ActionResult Places()
+        {
+            if (ManageCookie.isAdmin() == false)
+                return RedirectToAction("Index", "Home");
+            ViewBag.Title = "Places Managments";
+
+            ViewBag.PlacesList = AdminModel.getPlacesList();
+
+            return View();
+
+        }
+
+        [HttpGet]
+        public ActionResult EditUser(int id)
+        {
+            if (ManageCookie.isAdmin() == false)
+                return RedirectToAction("Index", "Home");
+            ViewBag.Title = "User Edit";
+
+            ViewBag.userInfo = AdminModel.getUserInfo(id);
+
+            return View();
+
+        }
+
+        [HttpPost]
+        public ActionResult EditUser(FormCollection userUpdate)
+        {
+            if (ManageCookie.isAdmin() == false)
+                return RedirectToAction("Index", "Home");
+            ViewBag.Title = "User Edit";
+
+            bool isUpdate = AdminModel.updateUserInput(userUpdate);
+
+            return RedirectToAction("Users");
+
+        }
+
         [HttpGet]
         public ActionResult Delete(int userID)
         {

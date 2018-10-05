@@ -33,7 +33,7 @@
             <li class="active"><a href="/Admin/Index">Home</a></li>
             <li><a href="/Admin/Users">Users</a></li>
             <li><a href="/Admin/Statistics">Statistics</a></li>
-            <li><a href="#">Link</a></li>
+            <li><a href="/Admin/Places">Places</a></li>
             <li><a href="#">Link</a></li>
         </ul>
     </div>
@@ -64,9 +64,9 @@
                                                 <span class="text-muted small text-truncate">@userList[i].Email</span>
                                             </div>
                                             <div style="float:right;padding:10px;">
-                                                <button type="button" class="btn btn-primary">Edit User</button>
+                                                <a href="/Admin/EditUser?id=@userList[i].UserID" class="btn btn-primary">Edit User</a>
                                                 <br />
-                                                <button type="button" class="btn btn-danger" style="margin-top: 5px;">Delete User</button>
+                                                <a href="/Admin/Delete?userID=@userList[i].UserID" style="margin-top: 5px;" class="btn btn-danger">Delete User</a>
                                             </div>
                                         </div>
                                     </div>
