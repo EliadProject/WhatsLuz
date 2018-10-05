@@ -455,6 +455,7 @@
     <Compile Include="Models\AdminModel.cs" />
     <Compile Include="Models\CategoryStatistics.cs" />
     <Compile Include="Models\FilterModel.cs" />
+    <Compile Include="Models\FilterUsersModel.cs" />
     <Compile Include="Models\ManageCookie.cs" />
     <Compile Include="Models\SportEventModel.cs" />
     <Compile Include="Models\SportEvent_Parsed.cs" />
@@ -483,6 +484,7 @@
     <Content Include="Images\eliadvert.jpg" />
     <Content Include="Images\haymiz.jpg" />
     <Content Include="Images\saggiehen.jpg" />
+    <Content Include="Scripts\Admin\Users.js" />
     <Content Include="Scripts\angular-1.6.4\angular-animate.js" />
     <Content Include="Scripts\angular-1.6.4\angular-animate.min.js" />
     <Content Include="Scripts\angular-1.6.4\angular-aria.js" />

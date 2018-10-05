@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace WhatsLuzMVCAPI.Models
 {
@@ -27,6 +28,38 @@ namespace WhatsLuzMVCAPI.Models
                 db.UserAccounts.DeleteOnSubmit(user);
                 db.SubmitChanges();
             }
+        }
+        public static List<UserAccount> filterUsers(FilterUsersModel model)
+        {
+            //retrieving filter parameters
+            string name = model.name;
+            string address = model.address;
+            string email = model.email;
+            
+            var db = new SqlConnectionDataContext();
+
+            List<UserAccount> usersList;
+            var query = (from users in db.UserAccounts
+                         select users).ToList();
+
+            //Filter by display name name
+            if (!String.IsNullOrWhiteSpace(name))
+            {
+                query = query.Where(p => p.DisplayName.Contains(name)).ToList();
+            }
+            //Filter by address name
+            if (!String.IsNullOrWhiteSpace(address))
+            {
+                query = query.Where(p => p.Address.Contains(address)).ToList();
+            }
+            //Filter by email
+            if (!String.IsNullOrWhiteSpace(email))
+            {
+                query = query.Where(p => p.Email.Contains(email)).ToList();
+            }
+            usersList = query.ToList();
+
+            return usersList;
         }
     }
 }

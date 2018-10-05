@@ -75,8 +75,10 @@ namespace WhatsLuzMVCAPI.Controllers
             return RedirectToAction("LoginPage", "Home");
         }
 
-        //get user by his facebook id
+        
 
+
+        //get user by his facebook id
         static public UserAccount getUser(SqlConnectionDataContext db, string userfID)
         {
             UserAccount usera =
@@ -86,6 +88,8 @@ namespace WhatsLuzMVCAPI.Controllers
             return usera;
         }
         
+ 
+
 
         //update all facebook details
         static public void updateUser(SqlConnectionDataContext db, UserAccount u, string displayName, string Email, string photoURL)

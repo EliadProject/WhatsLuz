@@ -20,17 +20,28 @@ namespace WhatsLuzMVCAPI.Controllers
             return View();
         }
 
-        public ActionResult Users()
+        
+        public ActionResult Users(FilterUsersModel model)
         {
             if (ManageCookie.isAdmin() == false)
                 return RedirectToAction("Index", "Home");
             ViewBag.Title = "Users Managments";
 
-            ViewBag.UserList = AdminModel.getUsersList();
+            ViewBag.UserList = AdminModel.filterUsers(model);
+            //ViewBag.UserList = AdminModel.getUsersList();
 
             return View();
 
         }
+
+        [HttpPost]
+         public ActionResult filterUsers(FilterUsersModel model)
+        {
+
+            ViewBag.UserList = AdminModel.filterUsers(model);
+            return RedirectToAction("Users","Admin", model);
+        }
+
         [HttpGet]
         public ActionResult Delete(int userID)
         {
