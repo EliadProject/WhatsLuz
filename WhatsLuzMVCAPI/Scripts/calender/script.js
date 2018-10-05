@@ -15,7 +15,7 @@ $(document).ready(function () {
 
         filter_obj.category = $("#categories_filter").val();
         filter_obj.place = $("#places_filter").val();
-        filter_obj.date = $("#date_filter").val();
+        filter_obj.maxAttendies = $("#maxAttendies_filter").val();
 
         var filter_data = JSON.stringify(filter_obj);
 

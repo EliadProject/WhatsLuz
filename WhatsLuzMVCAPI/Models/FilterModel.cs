@@ -9,6 +9,6 @@ namespace WhatsLuzMVCAPI.Models
     {
         public string category { get; set; }
         public string place { get; set; }
-        public string date { get; set; }
+        public int maxAttendies { get; set; }
     }
 }

@@ -26,7 +26,7 @@ namespace WhatsLuzMVCAPI.Controllers
 
             List<SportEvent_Parsed> sportEvents;
             var dataContext = new SqlConnectionDataContext();   
-            sportEvents = getFilterEvents(dataContext, filter.category, filter.place);
+            sportEvents = getFilterEvents(dataContext, filter.category, filter.place,filter.maxAttendies);
             return Json(sportEvents, JsonRequestBehavior.AllowGet);
 
         }
@@ -207,7 +207,7 @@ namespace WhatsLuzMVCAPI.Controllers
                                  select ue.Event_User_ID).FirstOrDefault();
             return Event_User_ID;
         }
-        static public List<SportEvent_Parsed> getFilterEvents(SqlConnectionDataContext db, string catName, string place)
+        static public List<SportEvent_Parsed> getFilterEvents(SqlConnectionDataContext db, string catName, string place, int maxAttendies)
         {         
             List<SportEvent_Parsed> sportEvents;
             var query = (from se in db.SportEvents
@@ -240,7 +240,11 @@ namespace WhatsLuzMVCAPI.Controllers
             {
                 query = query.Where(p => p.location == place).ToList();
             }
-
+            //Filter by max attendies name
+            if (maxAttendies != 0)
+            {
+                query = query.Where(p => p.max_attendies < maxAttendies).ToList();
+            }
             sportEvents = query.ToList();
         
 
