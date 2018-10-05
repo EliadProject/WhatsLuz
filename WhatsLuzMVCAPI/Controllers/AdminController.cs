@@ -86,5 +86,6 @@ namespace WhatsLuzMVCAPI.Controllers
 
             return View();
         }
+        
     }
 }
