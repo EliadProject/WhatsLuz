@@ -22,6 +22,32 @@
     .label, .glyphicon {
         margin-right: 5px;
     }
+    .bar {
+        fill: steelblue;
+    }
+
+    .bar:hover {
+            fill: brown;
+    }
+
+    .axis {
+        font: 10px sans-serif;
+    }
+
+    .axis path,
+    .axis line {
+            fill: none;
+            stroke: #000;
+            shape-rendering: crispEdges;
+        }
+    
+   td{
+        border-style:dotted;
+    }
+   table{
+       margin-bottom:5px;
+   }
+
 </style>
 <br />
 <!------ Include the above in your HEAD tag ---------->
@@ -43,9 +69,17 @@
             <h2 style="text-align:center;">
                 Statistics
             </h2>
-            <div id="CatPie" style="float:right;margin-right:100px;"></div>
-            <div id="PlacesPie" style="margin-left:100px;"></div>
+            <table align="center">
+                <tr><td><div id="CatPie" style="float:right;margin-right:100px;"></div></td>
+                    <td><div style="height:100%; width:100%; "><h4 style="text-align: center">Top Ten Used Places</h4><div id="topCharts" style="float:right;margin-left:100px;"></div></div> </td>
+                </tr>
+            </table>
+            
+            
 
+
+            <script src="http://d3js.org/d3.v3.min.js"></script>
+            <script src="~/Scripts/Statistics/topCharts.js"></script>
 
             <script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script>
             <!-- <script src="https://d3js.org/d3-selection.v1.js"></script> -->
@@ -53,6 +87,8 @@
             <script src="~/Scripts/Statistics/d3/d3pie.js"></script>
             <script src="~/Scripts/Statistics/d3/d3pie.min.js"></script>
             <script src="~/Scripts/Statistics/statistics.js"></script>
+
+
         </div>
     </div>
 

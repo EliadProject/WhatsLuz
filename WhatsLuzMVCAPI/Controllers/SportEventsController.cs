@@ -303,13 +303,14 @@ namespace WhatsLuzMVCAPI.Controllers
 
             int count_all = db.SportEvents.Count();
 
-            List<CategoryStatistics> seStatistics = (from p in db.Places
-                                                     group p.Address by p.Address into g
+            List<CategoryStatistics> seStatistics = (from se in db.SportEvents
+                                                     join places in db.Places on se.PlaceID equals places.Id
+                                                     group places.Address by places.Address into g
                                                      select new CategoryStatistics
                                                      {
                                                          label = g.Key,
                                                          value = 100.0 * g.Count() / count_all
-                                                     }).Take(10).ToList(); // Limit in SQL = Take in Linq to SQL.
+                                                     })/*.Take(10)*/.ToList(); // Limit in SQL = Take in Linq to SQL.
 
             return seStatistics;
         }

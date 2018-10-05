@@ -4714,6 +4714,7 @@
     <Content Include="Content\style.css" />
     <Content Include="Scripts\calender\validator.js" />
     <Content Include="Scripts\calender\validator.min.js" />
+    <Content Include="Scripts\Statistics\topCharts.js" />
     <Content Include="Scripts\Weather\weather.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

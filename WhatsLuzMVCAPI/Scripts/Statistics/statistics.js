@@ -40,7 +40,7 @@
             }
         }
     });
-
+/*
     $.ajax({
         type: "GET",
         url: 'http://localhost:61733/SportEvents/getTopTenPlacesStatistics',
@@ -80,6 +80,5 @@
         }
     });
 
-   
 
-
+    */
