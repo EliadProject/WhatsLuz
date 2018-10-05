@@ -1,0 +1,115 @@
+﻿@model WhatsLuzMVCAPI.Models.UserAccount
+
+<title>@ViewBag.Title</title>
+
+<style>
+    h1.page-header {
+        margin-top: -5px;
+    }
+
+    .sidebar {
+        padding-left: 0;
+    }
+
+    .main-container {
+        background: #FFF;
+        padding-top: 15px;
+        margin-top: -20px;
+    }
+
+    .footer {
+        width: 100%;
+    }
+
+    .label, .glyphicon {
+        margin-right: 5px;
+    }
+</style>
+<br />
+<!------ Include the above in your HEAD tag ---------->
+<div class="container-fluid main-container">
+    <div class="col-md-2 sidebar">
+        <ul class="nav nav-pills nav-stacked">
+            <li class="active"><a href="/Admin/Index">Home</a></li>
+            <li><a href="/Admin/Users">Users</a></li>
+            <li><a href="/Admin/Statistics">Statistics</a></li>
+            <li><a href="/Admin/Places">Places</a></li>
+            <li><a href="#">Link</a></li>
+        </ul>
+    </div>
+    <div class="col-md-10 content">
+        <div class="container pull-left">
+            <!-- contacts card -->
+            <div class="" id="card_contacts">
+                <div id="contacts" class="" aria-expanded="true" style="">
+                    <div class="">
+                        <h2>Edit Place</h2>
+                        @{
+                            WhatsLuzMVCAPI.Models.Place placeInfo = ViewBag.placeInfo;
+                        }
+                        <form class="form-horizontal" method="post" style="float: left;">
+                            <input type="hidden" value="@placeInfo.Id" name="placeID" />
+                            <fieldset>
+                                <!-- Form Name -->
+                                <legend></legend>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="nome">Name:</label>
+                                    <div class="col-md-8">
+                                        <input id="nome" name="name" value="@placeInfo.Name" class="form-control input-md" type="text">
+
+                                    </div>
+                                </div>
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="nome">Profile:</label>
+                                    <div class="col-md-8">
+                                        <input id="nome" name="address" value="@placeInfo.Address" class="form-control input-md" type="text">
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="nome">Description:</label>
+                                    <div class="col-md-8">
+                                        <input id="nome" name="description" value="@placeInfo.Description" class="form-control input-md" type="text">
+
+                                    </div>
+                                </div>
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="descricao">Lat:</label>
+                                    <div class="col-md-8">
+                                        <input id="descricao" name="lat" value="@placeInfo.lat" class="form-control input-md" type="text">
+
+                                    </div>
+                                </div>
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="preco">Lng:</label>
+                                    <div class="col-md-8">
+                                        <input id="preco" name="lng" value="@placeInfo.lng" class="form-control input-md" type="text">
+
+                                    </div>
+                                </div>
+                                <!-- Text input-->
+                                <!-- Multiple Checkboxes (inline) -->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="promocao"></label>
+                                    <div class="col-md-4">
+                                        <label class="checkbox-inline" for="promocao-0">
+                                            <input type="submit" class="btn btn-info" name="submit" value="Update Place">
+                                        </label>
+                                    </div>
+                                </div>
+                                <!-- Multiple Checkboxes (inline) -->
+
+                            </fieldset>
+                        </form>
+                    </div>
+                    <!--/contacts list-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

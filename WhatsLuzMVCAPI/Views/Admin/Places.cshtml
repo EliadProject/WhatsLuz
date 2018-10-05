@@ -1,0 +1,82 @@
+﻿@model WhatsLuzMVCAPI.Models.UserAccount
+
+<title>@ViewBag.Title</title>
+
+<style>
+    h1.page-header {
+        margin-top: -5px;
+    }
+
+    .sidebar {
+        padding-left: 0;
+    }
+
+    .main-container {
+        background: #FFF;
+        padding-top: 15px;
+        margin-top: -20px;
+    }
+
+    .footer {
+        width: 100%;
+    }
+
+    .label, .glyphicon {
+        margin-right: 5px;
+    }
+</style>
+<br />
+<!------ Include the above in your HEAD tag ---------->
+<div class="container-fluid main-container">
+    <div class="col-md-2 sidebar">
+        <ul class="nav nav-pills nav-stacked">
+            <li class="active"><a href="/Admin/Index">Home</a></li>
+            <li><a href="/Admin/Users">Users</a></li>
+            <li><a href="/Admin/Statistics">Statistics</a></li>
+            <li><a href="/Admin/Places">Places</a></li>
+            <li><a href="#">Link</a></li>
+        </ul>
+    </div>
+    <div class="col-md-10 content">
+        <div class="container pull-left">
+            <!-- contacts card -->
+            <div class="card card-default" id="card_contacts">
+                <div id="contacts" class="panel-collapse collapse show" aria-expanded="true" style="">
+                    <ul class="list-group pull-down" id="contact-list">
+                        @{
+                            List<WhatsLuzMVCAPI.Models.Place> placeList = ViewBag.PlacesList;
+
+                            for (int i = 0; i < placeList.Count; i++)
+                            {
+                                <li class="list-group-item">
+                                    <div class="row w-100">
+                                        <div class="col-12 col-sm-6 col-md-3 px-0">
+                                            <label class="name lead">@placeList[i].Name</label>
+                                        </div>
+                                        <div>
+                                            <div class="" style="float:left;">
+                                                <span class="fa fa-globe fa-2x text-success float-right pulse" title="online now"></span>
+                                                <label class="name lead">@placeList[i].Address</label>
+                                                <br>
+                                                <span class="fa fa-map-marker fa-fw text-muted" data-toggle="tooltip" title="" data-original-title="5842 Hillcrest Rd"></span>
+                                                <span class="text-muted">Lat: @placeList[i].lat</span>
+                                                <br>
+                                                &nbsp;<span class="fa fa-map-marker" data-toggle="tooltip" data-original-title="" title=""></span>
+                                                <span class="text-muted">&nbsp;&nbsp;Lng: @placeList[i].lng</span>
+                                            </div>
+                                            <div style="float:right;padding:10px;">
+                                                <a href="/Admin/EditPlace?id=@placeList[i].Id" class="btn btn-primary">Edit Place</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        }
+                    </ul>
+                    <!--/contacts list-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
