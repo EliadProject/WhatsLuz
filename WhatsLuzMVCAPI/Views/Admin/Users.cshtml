@@ -1,4 +1,6 @@
-﻿<title>@ViewBag.Title</title>
+﻿@model WhatsLuzMVCAPI.Models.UserAccount
+
+<title>@ViewBag.Title</title>
 
 <style>
     h1.page-header {
@@ -41,76 +43,41 @@
             <div class="card card-default" id="card_contacts">
                 <div id="contacts" class="panel-collapse collapse show" aria-expanded="true" style="">
                     <ul class="list-group pull-down" id="contact-list">
-                        <li class="list-group-item">
-                            <div class="row w-100">
-                                <div class="col-12 col-sm-6 col-md-3 px-0">
-                                    <img src="~/Images/eliadvert.jpg" width="130" alt="Mike Anamendolla" class="rounded-circle mx-auto d-block img-fluid">
-                                </div>
-                                <div class="col-12 col-sm-6 col-md-9 text-center text-sm-left">
-                                    <span class="fa fa-mobile fa-2x text-success float-right pulse" title="online now"></span>
-                                    <label class="name lead">Eliad Vertman</label>
-                                    <br>
-                                    <span class="fa fa-map-marker fa-fw text-muted" data-toggle="tooltip" title="" data-original-title="5842 Hillcrest Rd"></span>
-                                    <span class="text-muted">5842 Hillcrest Rd</span>
-                                    <br>
-                                    <span class="fa fa-phone fa-fw text-muted" data-toggle="tooltip" title="" data-original-title="(870) 288-4149"></span>
-                                    <span class="text-muted small">(870) 288-4149</span>
-                                    <br>
-                                    <span class="fa fa-envelope fa-fw text-muted" data-toggle="tooltip" data-original-title="" title=""></span>
-                                    <span class="text-muted small text-truncate">mike.ana@example.com</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="row w-100">
-                                <div class="col-12 col-sm-6 col-md-3 px-0">
-                                    <img src="~/Images/haymiz.jpg" width="130" alt="Mike Anamendolla" class="rounded-circle mx-auto d-block img-fluid">
-                                </div>
-                                <div class="col-12 col-sm-6 col-md-9 text-center text-sm-left">
-                                    <span class="fa fa-mobile fa-2x text-success float-right pulse" title="online now"></span>
-                                    <span class="name lead">Hay Mizrachi</span>
-                                    <br>
-                                    <span class="fa fa-map-marker fa-fw text-muted" data-toggle="tooltip" title="" data-original-title="7396 E North St"></span>
-                                    <span class="text-muted">7396 E North St</span>
-                                    <br>
-                                    <span class="fa fa-phone fa-fw text-muted" data-toggle="tooltip" title="" data-original-title="(560) 180-4143"></span>
-                                    <span class="text-muted small">(560) 180-4143</span>
-                                    <br>
-                                    <span class="fa fa-envelope fa-fw text-muted" data-toggle="tooltip" title="" data-original-title="seth.frazier@example.com"></span>
-                                    <span class="text-muted small text-truncate">seth.frazier@example.com</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="row w-100">
-                                <div class="col-12 col-sm-6 col-md-3 px-0">
-                                    <img src="~/Images/saggiehen.jpg" width="130" alt="Mike Anamendolla" class="rounded-circle mx-auto d-block img-fluid">
-                                </div>
-                                <div class="col-12 col-sm-6 col-md-9 text-center text-sm-left">
-                                    <span class="fa fa-mobile fa-2x text-success float-right pulse" title="online now"></span>
-                                    <span class="name lead">Saggie Hen</span>
-                                    <br> <span class="fa fa-map-marker fa-fw text-muted" data-toggle="tooltip" title="" data-original-title="5267 Cackson St"></span>
-                                    <span class="text-muted">5267 Cackson St</span>
-                                    <br>
-                                    <span class="fa fa-phone fa-fw text-muted" data-toggle="tooltip" title="" data-original-title="(497) 160-9776"></span>
-                                    <span class="text-muted small">(497) 160-9776</span>
-                                    <br>
-                                    <span class="fa fa-envelope fa-fw text-muted" data-toggle="tooltip" title="" data-original-title="rosemary.porter@example.com"></span>
-                                    <span class="text-muted small text-truncate">rosemary.porter@example.com</span>
-                                    <br>
-                                </div>
-                            </div>
-                        </li>
+                        @{
+                            List<WhatsLuzMVCAPI.Models.UserAccount> userList = ViewBag.UserList;
+
+                            for (int i = 0; i < userList.Count; i++)
+                            {                                 <li class="list-group-item">
+                                    <div class="row w-100">
+                                        <div class="col-12 col-sm-6 col-md-3 px-0">
+                                            <img src="@userList[i].PhotoURL" width="95" alt="Mike Anamendolla" class="rounded-circle mx-auto d-block img-fluid">
+                                        </div>
+                                        <div>
+                                            <div class="" style="float:left;">
+                                                <span class="fa fa-mobile fa-2x text-success float-right pulse" title="online now"></span>
+                                                <label class="name lead">@userList[i].DisplayName</label>
+                                                <br>
+                                                <span class="fa fa-map-marker fa-fw text-muted" data-toggle="tooltip" title="" data-original-title="5842 Hillcrest Rd"></span>
+                                                <span class="text-muted">@userList[i].Address</span>
+                                                <br>
+                                                <span class="fa fa-envelope fa-fw text-muted" data-toggle="tooltip" data-original-title="" title=""></span>
+                                                <span class="text-muted small text-truncate">@userList[i].Email</span>
+                                            </div>
+                                            <div style="float:right;padding:10px;">
+                                                <button type="button" class="btn btn-primary">Edit User</button>
+                                                <br />
+                                                <button type="button" class="btn btn-danger" style="margin-top: 5px;">Delete User</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                }
+                            }
                     </ul>
                     <!--/contacts list-->
                 </div>
             </div>
         </div>
     </div>
-    <footer class="pull-left footer">
-        <p class="col-md-12">
-            <hr class="divider">
-            Copyright &COPY; 2018 <a href="http://www.pingpong-labs.com">WhatsLuz</a>
-        </p>
-    </footer>
+
 </div>

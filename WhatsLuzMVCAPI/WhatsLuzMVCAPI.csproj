@@ -452,6 +452,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdminModel.cs" />
     <Compile Include="Models\CategoryStatistics.cs" />
     <Compile Include="Models\FilterModel.cs" />
     <Compile Include="Models\ManageCookie.cs" />

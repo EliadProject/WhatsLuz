@@ -25,7 +25,18 @@ namespace WhatsLuzMVCAPI.Controllers
             if (ManageCookie.isAdmin() == false)
                 return RedirectToAction("Index", "Home");
             ViewBag.Title = "Users Managments";
+
+            ViewBag.UserList = AdminModel.getUsersList();
+
             return View();
+
+        }
+        [HttpGet]
+        public ActionResult Delete(int userID)
+        {
+            AdminModel.removeUserByEmail(userID);
+
+            return RedirectToAction("Users");
         }
 
         public ActionResult Statistics()
