@@ -82,6 +82,21 @@ namespace WhatsLuzMVCAPI.Controllers
             {
                 Console.WriteLine(e.Message);
             }
+            //insert to user_event table
+
+            Users_Event uevent = new Users_Event();
+            uevent.EventID = sportEvent.EventID;
+            uevent.UserID = sportEvent.OwnerID;
+
+            dataContext.Users_Events.InsertOnSubmit(uevent);
+            try
+            {
+                dataContext.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
 
 
         }
