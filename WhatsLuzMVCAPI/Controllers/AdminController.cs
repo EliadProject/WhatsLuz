@@ -28,11 +28,19 @@ namespace WhatsLuzMVCAPI.Controllers
             ViewBag.Title = "Users Managments";
 
             ViewBag.UserList = AdminModel.filterUsers(model);
-            //ViewBag.UserList = AdminModel.getUsersList();
+           // ViewBag.UserList = AdminModel.getUsersList();
 
             return View();
 
         }
+
+        [HttpPost]
+        public ActionResult filterUsers(FilterUsersModel model)
+        {           
+            return RedirectToAction("Users", "Admin", model);
+            
+        }
+
 
         public ActionResult Places()
         {

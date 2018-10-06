@@ -1,7 +1,8 @@
 ﻿
 $(document).ready(function () {
-    $('.firefilter_users').click(function () {
-        console.log("Okay");
+    $('.firefilter_users').on('click', function (e) {
+        
+        
         var filter_obj = new Object();
 
         filter_obj.name = $("#name_filter_users").val();
@@ -10,15 +11,18 @@ $(document).ready(function () {
 
         var filter_data = JSON.stringify(filter_obj);
 
+       
+        
         $.ajax({
             type: "POST",
             url: "http://localhost:61733/Admin/filterUsers",
             data: filter_data,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            accepts: "application/json",
+            contentType: "application/json; charset=utf-8",  
             async: false
+            
+
         });
+        
     });
 });
 
