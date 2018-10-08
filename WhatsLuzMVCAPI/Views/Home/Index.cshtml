@@ -178,9 +178,9 @@
 </div>
 
 <!-- ShowEvent -->
-<div class="fade " id="eventShow-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+<div class="fade " id="eventShow-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;" >
 
-    <form action="#" class="sport_event">
+    <form action="#" class="sport_event" style="width:20%;">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
         </button>
@@ -206,10 +206,26 @@
 
 
 
+        <table>
+            <tr>
+                <td width="33%">
+                    <button id="sport_event_join" type="submit" class="btn btn-primary btn-show-event">  Join</button>
+                    
+                </td>
+                <td width="33%">
+                    <button id="sport_event_cancel" type="submit" class="btn btn-warning btn-show-event" >Cancel</button>
+                    <div id="cancel_status_id" style="display:none;"> </div>
+                </td>
+                <td width="33%">
+                    <button id="sport_event_delete" type="submit" class="btn btn-danger btn-show-event" >Delete</button>
+                   
+                </td>
 
-        <button id="sport_event_join" type="submit" class="btn btn-primary" style="opacity: 1">Join</button>
-        <div id="join_status_id"> </div>
-
+            </tr>
+            <tr> 
+                <div id="join_status_id" style="width:max-content;"> </div>  
+            </tr>
+        </table>
 
     </form>
 </div>

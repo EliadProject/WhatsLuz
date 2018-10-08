@@ -35,7 +35,8 @@ $(document).ready(function () {
    
     //join event function
    //checks if the user is one of attendies/owner of the event
-    $('#sport_event_join').click(function () {
+    $('#sport_event_join').click(function (e) {
+        event.preventDefault();
         var event_obj = new Object();
         var eventID = angular.element(document.getElementById('ctrlid')).scope().eventID;
         event_obj.eventID = eventID;
@@ -140,6 +141,8 @@ $(document).ready(function () {
     $('#eventShow-modal').on('hidden.bs.modal', function () {
         //init status text of join div
         $("#join_status_id").text("");
+
+        
 
     });
         
