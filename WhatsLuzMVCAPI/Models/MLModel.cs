@@ -117,9 +117,23 @@ namespace WhatsLuzMVCAPI.Models
             */
         }
 
-        public static void Predict(int model)
+        public static void Predict(int userID, SportEvent sevent)
         {
-
+            //Building vector from data
+            double[][] test = new double[][]
+            {
+                new double[] {sevent.CategoryID, DateTime.Today.Subtract(sevent.Date).TotalMinutes }
+            };
+            foreach (DictionaryEntry s in usersTraining)
+            {
+                if(!s.Key.Equals(userID))
+                {
+                   Accord.MachineLearning.VectorMachines.SupportVectorMachine model = s.Value as Accord.MachineLearning.VectorMachines.SupportVectorMachine;
+                   bool[] answers = model.Decide(test);
+                   Debug.WriteLine("User" + s.Key + ". This event is suitable for him: " + answers[0]);
+                }
+            }
+            
         }
 
 

@@ -98,6 +98,10 @@ namespace WhatsLuzMVCAPI.Controllers
                 Console.WriteLine(e.Message);
             }
 
+            //Checks classification for each user - ML
+            MLModel.Predict(uevent.UserID, sportEvent);
+
+
 
         }
 
