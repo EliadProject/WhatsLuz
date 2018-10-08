@@ -35,20 +35,14 @@ textarea{
 .sport_event {
     box-shadow: 5px 10px;
     border-radius: 2px;
-    padding: 20px 30px;
+    padding: 1% 1%;
     font-size: 14px;
     font-weight: bold;
-    width: 350px;
-    margin: 20px 250px 0 35px;
-    float: left;
-    width: 350px;
-    margin: 0px;
+    width: 25%;
     background-color: white;
     position: absolute;
-    left: 50%;
-    top: 40%;
-    margin-left: -210px;
-    margin-top: -255px;
+    margin-left: 30%;
+    margin-top: -45%;
     z-index: 1050;
 }
 
