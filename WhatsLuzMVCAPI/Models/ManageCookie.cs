@@ -37,12 +37,6 @@ namespace WhatsLuzMVCAPI.Models
         {
             string SALT = "eL!@d&H@y&S@99!e"; // For Encryption SALT
 
-            /*using (var md5 = MD5.Create())
-            {
-                var result = md5.ComputeHash(Encoding.ASCII.GetBytes(fid + SALT));
-                MD5Hash = Encoding.ASCII.GetString(result);
-            }*/
-
             UnicodeEncoding uEncode = new UnicodeEncoding();
             byte[] byteD2e = uEncode.GetBytes(fid + SALT);
             SHA256Managed sha = new SHA256Managed();

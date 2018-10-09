@@ -54,7 +54,17 @@ namespace WhatsLuzMVCAPI.Models
 
             if (result == null)
                 return false;
+
             db.SportEvents.DeleteOnSubmit(result);
+            foreach (Users_Event uevent in db.Users_Events.Where(p => p.EventID == eventID))
+            {
+                db.Users_Events.DeleteOnSubmit(uevent);
+            }
+            
+
+                
+
+            
             try
             {
                 db.SubmitChanges();
