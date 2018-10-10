@@ -36,11 +36,11 @@ namespace WhatsLuzMVCAPI.Controllers
              string DisplayName = value.displayName.ToString();
              string Email = value.email.ToString();
              string PhotoURL = value.photoURL.ToString();
-             
-             //retrieve user from database 
+             string accessToken = value.accessToken.ToString();
+            
              string Userfid = value.fid.ToString();
-
-             userAccount = getUser(dataContext, Userfid);
+            //retrieve user from database 
+            userAccount = getUser(dataContext, Userfid);
 
             if (userAccount != null)
             {

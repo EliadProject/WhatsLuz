@@ -19,10 +19,21 @@
 <script src="~/Scripts/BingMaps/BingMaps.js"></script>
 <!-- Search Filter-->
 
- <link href="~/Content/SearchMenu.css" rel="stylesheet" id="bootstrap-css">
+<link href="~/Content/SearchMenu.css" rel="stylesheet" id="bootstrap-css">
 
-            <!-- JS -->
+<!-- JS -->
 <script src="~/Scripts/calender/script.js"></script>
+
+<div id="fb-root"></div>
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 <div class="panel-heading clearfix">
     <div>
         <div class="col-md-4">
@@ -72,7 +83,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="contain">Maximum attendies</label>
-                                    <input id="maxAttendies_filter" class="form-control" type="number"  />
+                                    <input id="maxAttendies_filter" class="form-control" type="number" />
                                 </div>
                                 <button type="submit" class="btn btn-primary firefilter"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                             </form>
@@ -108,46 +119,9 @@
 
     </div>
 
-    <!-- Close Events  -->
-    <div class="col-md-3">
-        <center> <h2> Close Events </h2></center>
-
-        <div ng-repeat="event in close_events_arr">
-
-            <div class="closeEventTemplate">
-
-                <div style="height: 30%; background-color: #337ab7;">
-                    <p style=" padding: 3%; text-align: center; color: white;"> {{ event.title}} </p>
-                </div>
-
-                <div style="padding-top: 10px; padding-bottom: 10px;">
-                    <table style="width: 100%">
-                        <tbody>
-                            <tr>
-
-                                <td style="width: 65%;">
-                                    <ul>
-                                        <li><b> קטגוריה </b> : {{ event.category }} </li>
-                                        <li> <b>מתחיל ב: </b> <br /> {{ event.startsAt }}  </li>
-                                        <li> <b> מס' משתתפים: </b> {{ event.max_attendies}} </li>
-                                    </ul>
-                                </td>
-                                <td style="width: 35%;">
-                                    <div style="padding: 10%; ">
-
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="opacity: 1;float:left">
-                                            <input class="btn actionButton" ng type="button" id="send" value="הצטרף" />
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-        </div>
-        <br>
+    <!-- Facebook page  -->
+    <div class="col-md-3" style="margin-top:2.7%">
+        <div class="fb-page" data-href="https://www.facebook.com/Whats-Luz-1980183165357929/?modal=admin_todo_tour" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/Whats-Luz-1980183165357929/?modal=admin_todo_tour" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/Whats-Luz-1980183165357929/?modal=admin_todo_tour">Whats Luz</a></blockquote></div>
     </div>
 </div>
 <div class="panel-footer">
@@ -175,7 +149,7 @@
 </div>
 
 <!-- ShowEvent -->
-<div class="fade " id="eventShow-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;" >
+<div class="fade " id="eventShow-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
 
     <form action="#" class="sport_event" style="width:20%;">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -207,20 +181,20 @@
             <tr>
                 <td width="33%">
                     <button id="sport_event_join" type="submit" class="btn btn-primary btn-show-event">  Join</button>
-                    
+
                 </td>
                 <td width="33%">
-                    <button id="sport_event_cancel" type="submit" class="btn btn-warning btn-show-event" >Cancel</button>
+                    <button id="sport_event_cancel" type="submit" class="btn btn-warning btn-show-event">Cancel</button>
                     <div id="cancel_status_id" style="display:none;"> </div>
                 </td>
                 <td width="33%">
-                    <button id="sport_event_delete" type="submit" class="btn btn-danger btn-show-event" >Delete</button>
-                   
+                    <button id="sport_event_delete" type="submit" class="btn btn-danger btn-show-event">Delete</button>
+
                 </td>
 
             </tr>
-            <tr> 
-                <div id="join_status_id" style="width:max-content;"> </div>  
+            <tr>
+                <div id="join_status_id" style="width:max-content;"> </div>
             </tr>
         </table>
 
@@ -287,7 +261,7 @@
                     cord = getPlaceCord(SelectVal);
                     getTemperature(cord);
                     map = new Microsoft.Maps.Map('#map', {center: new Microsoft.Maps.Location(cord.lat,cord.lng),zoom: 15});
-                    
+
                     var center = map.getCenter();
                     var pin = new Microsoft.Maps.Pushpin(center, {icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png'});
                     map.entities.push(pin);

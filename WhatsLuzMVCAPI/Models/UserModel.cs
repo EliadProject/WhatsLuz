@@ -11,6 +11,8 @@ namespace WhatsLuzMVCAPI.Models
         public string email { get; set; }
         public string photoURL { get; set; }
         public string fid { get; set; }
+        public string accessToken { get; set; }
+
 
     }
 }

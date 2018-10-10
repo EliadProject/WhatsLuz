@@ -27,6 +27,7 @@ namespace WhatsLuzMVCAPI.Models
         public static void Start()
         {
             usersTraining = new Hashtable();
+
             getAllUsersEvents();
         }
 
@@ -81,44 +82,12 @@ namespace WhatsLuzMVCAPI.Models
 
 
             }
-            /*
-            
-              // At this point, the learning algorithm should have
-              // figured important details about the problem itself:
-              int numberOfClasses = nb.NumberOfClasses; // should be 2 (positive or negative)
-              int nunmberOfInputs = nb.NumberOfInputs;  // should be 2 (x and y coordinates)
-              double[][] test = new double[][]
-  {
-      new double[] {0,1}
-  };
-
-
-
-              // Classify the samples using the model
-              int[] answers = nb.Decide(test);
-  */
-            /*
-            SVMProblem problem = SVMProblemHelper.Load(@"dataset_path.txt");
-            SVMProblem testProblem = SVMProblemHelper.Load(@"test_dataset_path.txt");
-
-            SVMParameter parameter = new SVMParameter();
-            parameter.Type = SVMType.C_SVC;
-            parameter.Kernel = SVMKernelType.RBF;
-            parameter.C = 1;
-            parameter.Gamma = 1;
-
-            SVMModel model = SVM.Train(problem, parameter);
-
-            double []target = new double[testProblem.Length];
-            for (int i = 0; i < testProblem.Length; i++)
-                target[i] = SVM.Predict(model, testProblem.X[i]);
-
-            double accuracy = SVMHelper.EvaluateClassificationProblem(testProblem, target);
-            */
+           
         }
 
         public static void Predict(int userID, SportEvent sevent)
         {
+            
             //Building vector from data
             double[][] test = new double[][]
             {

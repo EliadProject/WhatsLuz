@@ -486,6 +486,7 @@
     <Compile Include="Models\AdminModel.cs" />
     <Compile Include="Models\CategoryStatistics.cs" />
     <Compile Include="Models\EventML.cs" />
+    <Compile Include="Models\FacebookModel.cs" />
     <Compile Include="Models\FilterModel.cs" />
     <Compile Include="Models\FilterUsersModel.cs" />
     <Compile Include="Models\ManageCookie.cs" />

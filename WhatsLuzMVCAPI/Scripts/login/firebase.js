@@ -27,6 +27,7 @@
                 usera.displayName = user.displayName;
                 usera.email = user.email;
                 usera.photoURL = user.photoURL;
+                usera.accessToken = token;
 
                 //converting to json
                 var json_user = JSON.stringify(usera);
