@@ -4,13 +4,11 @@
 
 
 
-	font-family: assistant
+	font-family: assistant;
 	src: url(fonts/assistant/Assistant-ExtraBold.ttf);
 }
 
-body, form {
-	/*font-family: assistant*/
-}
+
 textarea{
     resize:none;
 }

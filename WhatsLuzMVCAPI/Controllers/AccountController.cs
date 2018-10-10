@@ -29,7 +29,6 @@ namespace WhatsLuzMVCAPI.Controllers
 
             var dataContext = new SqlConnectionDataContext();
 
-             JObject json;
              UserAccount userAccount;
 
             

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -70,6 +71,7 @@ namespace WhatsLuzMVCAPI.Models
             }
             catch (Exception e)
             {
+                Debug.WriteLine(e.Message);
                 return false;
                 // Provide for exceptions.
             }
