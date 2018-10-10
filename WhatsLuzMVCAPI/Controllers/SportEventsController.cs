@@ -101,11 +101,23 @@ namespace WhatsLuzMVCAPI.Controllers
             //Checks classification for each user - ML
             MLModel.Predict(uevent.UserID, sportEvent);
 
-
-
+        }
+        [HttpPost]
+        public ActionResult cancelEvent(int eventID)
+        {
+            int userID = ManageCookie.user.UserID;
+            bool result = SportEventModel.cancelEvent(eventID, userID);
+            return Json(result);
+        }
+        [HttpPost]
+        public ActionResult deleteEvent(int eventID)
+        {
+            int userID = ManageCookie.user.UserID;
+            bool result = SportEventModel.deleteEvent(eventID, userID);
+            return Json(result);
         }
 
-        public ActionResult getCategoriesStatistics()
+            public ActionResult getCategoriesStatistics()
         {
             var dataContext = new SqlConnectionDataContext();
             List<CategoryStatistics> seStatistics = getSportEventStatistics(dataContext);

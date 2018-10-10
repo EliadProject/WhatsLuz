@@ -136,9 +136,7 @@ namespace WhatsLuzMVCAPI.Models
             
         }
 
-
-       
-       
+      
     }
     public static class CustomLINQtoDataSetMethods
     {

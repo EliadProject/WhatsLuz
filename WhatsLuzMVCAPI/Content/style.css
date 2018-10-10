@@ -15,10 +15,18 @@ textarea{
     resize:none;
 }
 
+
+
 /*classes*/
 
-.asterisk{
-	color: red;
+.btn-show-event
+{
+    opacity: 1;
+    width:90%;
+}
+
+.asterisk {
+    color: red;
 }
 .labelEvent{
 	font-size: 16px;
@@ -42,6 +50,8 @@ textarea{
     margin-left: 30%;
     margin-top: -45%;
     z-index: 1050;
+    max-height:95%;
+    overflow-y:auto;
 }
 
 /* display event list key*/
