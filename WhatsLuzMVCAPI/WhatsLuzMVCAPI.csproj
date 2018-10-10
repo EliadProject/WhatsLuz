@@ -3092,6 +3092,7 @@
     <Content Include="Scripts\angular-1.6.4\i18n\angular-locale_zu.js" />
     <Content Include="Scripts\angular-1.6.4\version.txt" />
     <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\BingMaps\BingMaps.js" />
     <Content Include="Scripts\calender\app.js" />
     <Content Include="Scripts\bootstrap-3.3.7\.gitattributes" />
     <Content Include="Scripts\bootstrap-3.3.7\.gitignore" />

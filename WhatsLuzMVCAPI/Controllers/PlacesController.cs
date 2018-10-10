@@ -40,11 +40,17 @@ namespace WhatsLuzMVCAPI.Controllers
         // GET: Places
         public String getAllPlaces()
         {
-
             var dataContext = new SqlConnectionDataContext();
             Table<Place> table_Places = dataContext.Places;
-            List<Place> list_Places = table_Places.ToList();
-            String result = JsonConvert.SerializeObject(list_Places, Formatting.Indented,
+            List<Object> places = new List<Object>();
+            var queryRes = from place in table_Places select place;
+
+            foreach (var place in queryRes)
+            {
+                places.Add(new { place.Name, place.Id, place.CategoryID, place.Description, place.Address, place.lat, place.lng });
+            }
+
+            String result = JsonConvert.SerializeObject(places, Formatting.Indented,
                 new JsonSerializerSettings
                 {
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore

@@ -18,11 +18,11 @@
 
 <!-- Weather JS API -->
 <script src="~/Scripts/Weather/weather.js"></script>
+<script src="~/Scripts/BingMaps/BingMaps.js"></script>
+<!--    SearchFilter-- >
+        <link href="~/Content/SearchMenu.css" rel="stylesheet" id="bootstrap-css">
 
-<!-- SearchFilter -->
-<link href="~/Content/SearchMenu.css" rel="stylesheet" id="bootstrap-css">
-
-<!-- JS -->
+            <!-- JS -->
 <script src="~/Scripts/calender/script.js"></script>
 
 
@@ -261,24 +261,23 @@
 
         <div class="form-group">
             <label class="labelEvent" for="places">Location<span class="asterisk">*</span></label>
-            <select id="location" class="form-control places" onchange="getTemperature()" required></select>
+            <select id="location" class="form-control places" onchange="GetMap()" required></select>
             <br />
             <a><span ng-click="showMap = ! showMap" class="glyphicon glyphicon-map-marker"></span></a>
             <u>Weather Status:</u> <span id="weather">None</span>
             <div ng-show="showMap" id="map" style="width:300px;height:300px"></div>
 
             <script type="text/javascript">
-               
+                // create bing map
                 function GetMap() {
-                map = new Microsoft.Maps.Map('#map', {center: new Microsoft.Maps.Location(31.76904,35.21633),
-                zoom: 15});
-        
-                var center = map.getCenter();
-                var pin = new Microsoft.Maps.Pushpin(center, {
-                    icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png'
-                });
-
-                map.entities.push(pin);
+                    SelectVal = document.getElementById("location").value;
+                    cord = getPlaceCord(SelectVal);
+                    getTemperature(cord);
+                    map = new Microsoft.Maps.Map('#map', {center: new Microsoft.Maps.Location(cord.lat,cord.lng),zoom: 15});
+                    
+                    var center = map.getCenter();
+                    var pin = new Microsoft.Maps.Pushpin(center, {icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png'});
+                    map.entities.push(pin);
                 }
             </script>
             <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AhdNPwOo5F5H88MCVm8lfm8eW4wLzYo9z7BXBKzlCbJ-DugYtez5DKxZrsFHJY25' async defer></script>

@@ -1,10 +1,10 @@
-﻿function getTemperature()
+﻿function getTemperature(cord)
 {
     var weatherContent = [];
 
     $.ajax({
         type: "GET",
-        url: 'http://api.openweathermap.org/data/2.5/weather?lat=31.767405&lon=35.207988&appid=973c170e0e5b7c560beeca7f7566aece',
+        url: 'http://api.openweathermap.org/data/2.5/weather?lat=' + cord.lat + '&lon=' + cord.lng +'&appid=973c170e0e5b7c560beeca7f7566aece',
         dataType: 'json',
         async: false,
         accepts: "application/json",
