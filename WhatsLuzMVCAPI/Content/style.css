@@ -45,11 +45,14 @@ textarea{
     width: 25%;
     background-color: white;
     position: absolute;
+    top:0;
+    left:0;
     margin-left: 30%;
-    margin-top: -45%;
+    margin-top: 2%;
     z-index: 1050;
     max-height:95%;
     overflow-y:auto;
+
 }
 
 /* display event list key*/
