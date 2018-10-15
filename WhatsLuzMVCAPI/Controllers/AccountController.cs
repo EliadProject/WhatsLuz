@@ -46,7 +46,7 @@ namespace WhatsLuzMVCAPI.Controllers
             {
                 //update his details
                 Console.WriteLine("Registred");
-                updateUser(dataContext, userAccount, DisplayName, Email, PhotoURL);
+                updateUser(dataContext, userAccount, DisplayName, Email, PhotoURL,accessToken);
                 SHA256Hash = userAccount.Hash;
             }
             else if (userAccount == null)
@@ -55,7 +55,7 @@ namespace WhatsLuzMVCAPI.Controllers
                 SHA256Hash = ManageCookie.SHA256Hash(Userfid);
 
                 //register user
-                createUser(dataContext, Userfid, DisplayName, Email, PhotoURL, SHA256Hash);
+                createUser(dataContext, Userfid, DisplayName, Email, PhotoURL, SHA256Hash,accessToken);
             }
             Response.Cookies.Add(ManageCookie.CreateCookie(SHA256Hash));
 
@@ -91,16 +91,17 @@ namespace WhatsLuzMVCAPI.Controllers
 
 
         //update all facebook details
-        static public void updateUser(SqlConnectionDataContext db, UserAccount u, string displayName, string Email, string photoURL)
+        static public void updateUser(SqlConnectionDataContext db, UserAccount u, string displayName, string Email, string photoURL, string accessToken)
         {
             u.DisplayName = displayName;
             u.Email = Email;
             u.PhotoURL = photoURL;
             u.LastLogon = DateTime.Now;
+            u.accessToken = accessToken;
             db.SubmitChanges();
         }
         //create user from facebook
-        static public void createUser(SqlConnectionDataContext db, string fid, string displayName, string Email, string photoURL,string Hash)
+        static public void createUser(SqlConnectionDataContext db, string fid, string displayName, string Email, string photoURL,string Hash, string accessToken)
         {
             //creating instance user
             UserAccount u = new UserAccount();
@@ -111,6 +112,7 @@ namespace WhatsLuzMVCAPI.Controllers
             u.isAdmin = 0;
             u.LastLogon = DateTime.Now;
             u.Hash =  Hash;
+            u.accessToken = accessToken;
 
             //update database
             db.UserAccounts.InsertOnSubmit(u);

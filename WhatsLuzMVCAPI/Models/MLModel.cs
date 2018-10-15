@@ -85,9 +85,10 @@ namespace WhatsLuzMVCAPI.Models
            
         }
 
-        public static void Predict(int userID, SportEvent sevent)
+        public static Hashtable Predict(int userID, SportEvent sevent)
         {
-            
+            Hashtable answersTable = new Hashtable();
+
             //Building vector from data
             double[][] test = new double[][]
             {
@@ -97,11 +98,15 @@ namespace WhatsLuzMVCAPI.Models
             {
                 if(!s.Key.Equals(userID))
                 {
+                  
                    Accord.MachineLearning.VectorMachines.SupportVectorMachine model = s.Value as Accord.MachineLearning.VectorMachines.SupportVectorMachine;
                    bool[] answers = model.Decide(test);
+
+                   answersTable.Add(s.Key, answers[0]);
                    Debug.WriteLine("User" + s.Key + ". This event is suitable for him: " + answers[0]);
                 }
             }
+            return answersTable;
             
         }
 

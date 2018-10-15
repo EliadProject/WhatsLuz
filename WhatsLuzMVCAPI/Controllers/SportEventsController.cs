@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Linq;
 using System.Linq;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
@@ -38,8 +40,8 @@ namespace WhatsLuzMVCAPI.Controllers
 
             var dataContext = new SqlConnectionDataContext();
             SportEvent sportEvent = new SportEvent();
-
-            sportEvent.OwnerID = ManageCookie.user.UserID;
+            int userID = ManageCookie.user.UserID;
+            sportEvent.OwnerID = userID;
 
             sportEvent.CategoryID = getCategoryID(dataContext, sportEventModel.category);
             sportEvent.Date = DateTime.Parse(sportEventModel.datetime);
@@ -99,7 +101,15 @@ namespace WhatsLuzMVCAPI.Controllers
             }
 
             //Checks classification for each user - ML
-            MLModel.Predict(uevent.UserID, sportEvent);
+            Hashtable usersPredict =  MLModel.Predict(uevent.UserID, sportEvent);
+
+            //retrieve access token of logged on user
+            string accessToken = UserModel.getAccessTokenByUserID(userID);
+
+            //posting to facebook
+            Task<string> task =  FacebookModel.PostAsync(accessToken, usersPredict);
+
+            
 
         }
         [HttpPost]
