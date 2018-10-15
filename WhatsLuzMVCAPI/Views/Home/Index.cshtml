@@ -1,4 +1,7 @@
-﻿ <!-- Calander Libaries -->
+﻿<!-- Bing Maps JS API -->
+<script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AhdNPwOo5F5H88MCVm8lfm8eW4wLzYo9z7BXBKzlCbJ-DugYtez5DKxZrsFHJY25' async defer></script>
+<script src="~/Scripts/BingMaps/BingMaps.js"></script>
+<!-- Calander Libaries -->
 <link rel="stylesheet" href="/scripts/bower_components/angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.css">
 <script src="~/scripts/js/moment.min.js"></script>
 <script src="/scripts/js/ui-bootstrap-tpls.min.js"></script>
@@ -10,29 +13,25 @@
 <link href="~/scripts/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 @*<script src="/scripts/js/moment-with-locales.min.js"></script>*@
 <script src="/scripts/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-
 <!-- Sport Event Form -->
 <script src="~/Scripts/calender/validator.js"></script>
-
 <!-- Weather JS API -->
 <script src="~/Scripts/Weather/weather.js"></script>
-<script src="~/Scripts/BingMaps/BingMaps.js"></script>
+
 <!-- Search Filter-->
-
 <link href="~/Content/SearchMenu.css" rel="stylesheet" id="bootstrap-css">
-
 <!-- JS -->
 <script src="~/Scripts/calender/script.js"></script>
 
 <div id="fb-root"></div>
 <script>
-(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1';
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
 
 <div class="panel-heading clearfix">
     <div>
@@ -41,6 +40,7 @@
                 <p style="margin: 0 0 0 0;">  <span class="glyphicon glyphicon-plus text-center"></span> Create Sport Event </p>
             </a>
         </div>
+
         <div class="col-md-4">
             <h2 style="margin-top: 0px; margin-bottom: 0px;" class="text-center">{{ calendarTitle }} </h2>
         </div>
@@ -53,7 +53,6 @@
 
     </div>
     <!-- <p class="text-center"><a href = "#" class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#eventAddition-modal">Open Login Modal</a></p> -->
-
 </div>
 
 <!-- Filter Events -->
@@ -94,16 +93,9 @@
     </div>
 </div>
 
-
-
 <div class="container-fluid">
-
-
-
-
     <!-- Main Calender-->
     <div class="panel-body col-md-9">
-
         <mwl-calendar events="events"
                       view="calConfig.calendarView"
                       current-day="calConfig.calendarDay"
@@ -114,7 +106,6 @@
                       on-drill-down-click="false"
                       cell-modifier="cellModifier(calendarCell)">
         </mwl-calendar>
-
     </div>
 
     <!-- Facebook page  -->
@@ -122,6 +113,7 @@
         <div class="fb-page" data-href="https://www.facebook.com/Whats-Luz-1980183165357929/?modal=admin_todo_tour" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/Whats-Luz-1980183165357929/?modal=admin_todo_tour" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/Whats-Luz-1980183165357929/?modal=admin_todo_tour">Whats Luz</a></blockquote></div>
     </div>
 </div>
+
 <div class="panel-footer">
     <button class="btn btn-primary"
             mwl-date-modifier
@@ -129,6 +121,7 @@
             decrement="calConfig.calendarView">
         Back
     </button>
+
     <button class="btn btn-default"
             mwl-date-modifier
             date="calConfig.calendarDay"
@@ -142,20 +135,16 @@
             increment="calConfig.calendarView">
         Forward
     </button>
-
-
 </div>
 
 <!-- ShowEvent -->
 <div class="fade " id="eventShow-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-
     <form action="#" class="sport_event" style="width:20%;">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
         </button>
         <label> {{ title }}  </label>
         <hr />
-
         <ul>
             <li><div class="list_key">Owner: </div> <div id="owner_id" style="display:initial"> {{ owner }} </div> </li>
             <li> <div class="list_key">Category: </div> {{ category }} </li>
@@ -170,16 +159,12 @@
                     <li> {{ user }} </li>
                 </ul>
             </li>
-        </ul>
-        <br />
-
-
-
+        </ul><br />
+        <div id="eventMap" class="list_key" style="margin:0 auto;"></div>
         <table>
             <tr>
                 <td width="33%">
                     <button id="sport_event_join" type="submit" class="btn btn-primary btn-show-event">  Join</button>
-
                 </td>
                 <td width="33%">
                     <button id="sport_event_cancel" type="submit" class="btn btn-warning btn-show-event">Cancel</button>
@@ -187,43 +172,33 @@
                 </td>
                 <td width="33%">
                     <button id="sport_event_delete" type="submit" class="btn btn-danger btn-show-event">Delete</button>
-
                 </td>
-
             </tr>
             <tr>
                 <div id="join_status_id" style="width:max-content;"> </div>
             </tr>
         </table>
-
     </form>
 </div>
 
-<!-- Google Maps -->
 <!-- Event creation form -->
 <div class="fade sport_event" id="eventAddition-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-
     <div>
-
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
         </button>
-
         <h3>Event Creation</h3>
     </div>
     <hr />
     <form data-toggle="validator" role="form" action="#">
-
         <div class="form-group">
             <label class="labelEvent">Title</label>
             <input type="text" id="title" class="form-control" maxlength="50" placeholder="Write title" />
         </div>
-
         <div class="form-group">
             <label class="labelEvent" for="categories">Category <span class="asterisk">*</span></label>
             <select id="categories_create" class="form-control categories" required></select>
         </div>
-
         <div class="form-group">
             <label class="labelEvent">Date and Time <span class="asterisk">*</span></label>
             <div class='input-group date form-group' id='datetimepicker1'>
@@ -250,22 +225,7 @@
             <br />
             <a><span ng-click="showMap = ! showMap" class="glyphicon glyphicon-map-marker"></span></a>
             <u>Weather Status:</u> <span id="weather">None</span>
-            <div ng-show="showMap" id="map" style="width:300px;height:300px"></div>
-
-            <script type="text/javascript">
-                // create bing map
-                function GetMap() {
-                    SelectVal = document.getElementById("location").value;
-                    cord = getPlaceCord(SelectVal);
-                    getTemperature(cord);
-                    map = new Microsoft.Maps.Map('#map', {center: new Microsoft.Maps.Location(cord.lat,cord.lng),zoom: 15});
-
-                    var center = map.getCenter();
-                    var pin = new Microsoft.Maps.Pushpin(center, {icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png'});
-                    map.entities.push(pin);
-                }
-            </script>
-            <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AhdNPwOo5F5H88MCVm8lfm8eW4wLzYo9z7BXBKzlCbJ-DugYtez5DKxZrsFHJY25' async defer></script>
+            <div ng-show="showMap" id="map" style="width:300px;height:300px;margin:0 auto;"></div>
         </div>
 
         <div class="form-group">
@@ -277,9 +237,6 @@
             <button id="form_eventSport_send" type="submit" class="btn btn-primary">Create</button>
         </div>
     </form>
-
-
-
 </div>
 
 <!--

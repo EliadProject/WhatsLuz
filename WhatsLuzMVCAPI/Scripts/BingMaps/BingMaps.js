@@ -12,6 +12,17 @@ $.ajax({
     }
 });
 
+function GetMap(divId  = "map")
+{
+    SelectVal = document.getElementById("location").value;
+    cord = getPlaceCord(SelectVal);
+    getTemperature(cord);
+    map = new Microsoft.Maps.Map(document.getElementById(divId), {center: new Microsoft.Maps.Location(cord.lat, cord.lng), zoom: 15 });
+    var center = map.getCenter();
+    var pin = new Microsoft.Maps.Pushpin(center, {icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png' });
+    map.entities.push(pin);
+}
+
 function getPlaceCord(PlaceName)
 {   
     for (i = 0; i < Places.length; i++) { 
@@ -19,3 +30,5 @@ function getPlaceCord(PlaceName)
         return Places[i];
     }
 }
+
+

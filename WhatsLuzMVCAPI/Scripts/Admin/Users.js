@@ -1,7 +1,7 @@
 ﻿
+/*
 $(document).ready(function () {
     $('.firefilter_users').on('click', function (e) {
-        
         
         var filter_obj = new Object();
 
@@ -15,7 +15,7 @@ $(document).ready(function () {
         
         $.ajax({
             type: "POST",
-            url: "http://localhost:61733/Admin/filterUsers",
+            url: "http://localhost:61733/Admin/Users",
             data: filter_data,
             contentType: "application/json; charset=utf-8",  
             async: false
@@ -25,6 +25,7 @@ $(document).ready(function () {
         
     });
 });
+*/
 
     
 

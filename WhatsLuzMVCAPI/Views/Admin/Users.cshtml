@@ -1,5 +1,9 @@
 ﻿@model WhatsLuzMVCAPI.Models.UserAccount
 
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
 <title>@ViewBag.Title</title>
 
 <style>
@@ -25,98 +29,84 @@
         margin-right: 5px;
     }
 </style>
-<link href="~/Content/SearchMenu.css" rel="stylesheet"> 
+<link href="~/Content/SearchMenu.css" rel="stylesheet">
 <script src="~/Scripts/Admin/Users.js"></script>
-<br />
-<!------ Include the above in your HEAD tag ---------->
-<div class="container-fluid main-container">
-    <div class="col-md-2 sidebar">
-        <ul class="nav nav-pills nav-stacked">
-            <li class="active"><a href="/Admin/Index">Home</a></li>
-            <li><a href="/Admin/Users">Users</a></li>
-            <li><a href="/Admin/Statistics">Statistics</a></li>
-            <li><a href="/Admin/Places">Places</a></li>
-            <li><a href="#">Link</a></li>
-        </ul>
-    </div>
 
-    <div class="col-md-10 content">
-        <div class="container pull-left">
-            <!-- Filter Events -->
-            <div class="row search_menu" style="padding-left:initial">
-                <div class="col-md-5">
-                    <div class="input-group" id="adv-search">
-                        <input type="text" class="form-control" placeholder="Search for CIK, Filer, Ticker, Person..." />
-                        <div class="input-group-btn">
-                            <div class="btn-group" role="group">
-                                <div class="dropdown dropdown-lg">
-                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
-                                    <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                        <form class="form-horizontal" role="form">
-                                            <div class="form-group">
-                                                <label >Name</label>
-                                                <input id="name_filter_users" class="form-control" type="text" />
-                                               
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Address</label>
-                                                <input id="address_filter_users" class="form-control" type="text" />
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Email</label>
-                                                <input id="email_filter_users" class="form-control" type="text" />
-                                            </div>
-                                            <button type="submit" class="btn btn-primary firefilter_users"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                                        </form>
-                                    </div>
+<div class="col-md-10 content">
+    <div class="container pull-left">
+        <!-- Filter Events -->
+        <div class="row search_menu" style="padding-left:initial">
+            <div class="col-md-5">
+                <div class="input-group" id="adv-search">
+                    <input type="text" class="form-control" placeholder="Search for CIK, Filer, Ticker, Person..." />
+                    <div class="input-group-btn">
+                        <div class="btn-group" role="group">
+                            <div class="dropdown dropdown-lg">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                                <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                    <form class="form-horizontal" role="form" method="post">
+                                        <div class="form-group">
+                                            <label>Name</label>
+                                            <input id="name_filter_users" class="form-control" type="text" name="name" />
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Address</label>
+                                            <input id="address_filter_users" class="form-control" type="text" name="address" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <input id="email_filter_users" class="form-control" type="text" name="email" />
+                                        </div>
+                                        <button type="submit" class="btn btn-primary firefilter_users"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                    </form>
                                 </div>
-                                <button type="button" class="btn btn-primary firefilter_users"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                             </div>
+                            <button type="button" class="btn btn-primary firefilter_users"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- contacts card -->
-            <div class="card card-default" id="card_contacts">
-                <div id="contacts" class="panel-collapse collapse show" aria-expanded="true" style="">
-                    <ul class="list-group pull-down" id="contact-list">
-                        @{
-                            List<WhatsLuzMVCAPI.Models.UserAccount> userList = ViewBag.UserList;
+        <!-- contacts card -->
+        <div class="card card-default" id="card_contacts">
+            <div id="contacts" class="panel-collapse collapse show" aria-expanded="true" style="">
+                <ul class="list-group pull-down" id="contact-list">
+                    @{
+                        List<WhatsLuzMVCAPI.Models.UserAccount> userList = ViewBag.UserList;
 
-                            for (int i = 0; i < userList.Count; i++)
-                            {
-                                <li class="list-group-item">
-                                    <div class="row w-100">
-                                        <div class="col-12 col-sm-6 col-md-3 px-0">
-                                            <img src="@userList[i].PhotoURL" width="95" alt="Mike Anamendolla" class="rounded-circle mx-auto d-block img-fluid">
+                        for (int i = 0; i < userList.Count; i++)
+                        {
+                            <li class="list-group-item">
+                                <div class="row w-100">
+                                    <div class="col-12 col-sm-6 col-md-3 px-0">
+                                        <img src="@userList[i].PhotoURL" width="95" alt="Mike Anamendolla" class="rounded-circle mx-auto d-block img-fluid">
+                                    </div>
+                                    <div>
+                                        <div class="" style="float:left;">
+                                            <span class="fa fa-mobile fa-2x text-success float-right pulse" title="online now"></span>
+                                            <label class="name lead">@userList[i].DisplayName</label>
+                                            <br>
+                                            <span class="fa fa-map-marker fa-fw text-muted" data-toggle="tooltip" title="" data-original-title="5842 Hillcrest Rd"></span>
+                                            <span class="text-muted">@userList[i].Address</span>
+                                            <br>
+                                            <span class="fa fa-envelope fa-fw text-muted" data-toggle="tooltip" data-original-title="" title=""></span>
+                                            <span class="text-muted small text-truncate">@userList[i].Email</span>
                                         </div>
-                                        <div>
-                                            <div class="" style="float:left;">
-                                                <span class="fa fa-mobile fa-2x text-success float-right pulse" title="online now"></span>
-                                                <label class="name lead">@userList[i].DisplayName</label>
-                                                <br>
-                                                <span class="fa fa-map-marker fa-fw text-muted" data-toggle="tooltip" title="" data-original-title="5842 Hillcrest Rd"></span>
-                                                <span class="text-muted">@userList[i].Address</span>
-                                                <br>
-                                                <span class="fa fa-envelope fa-fw text-muted" data-toggle="tooltip" data-original-title="" title=""></span>
-                                                <span class="text-muted small text-truncate">@userList[i].Email</span>
-                                            </div>
-                                            <div style="float:right;padding:10px;">
-                                                <a href="/Admin/EditUser?id=@userList[i].UserID" class="btn btn-primary">Edit User</a>
-                                                <br />
-                                                <a href="/Admin/Delete?userID=@userList[i].UserID" style="margin-top: 5px;" class="btn btn-danger">Delete User</a>
-                                            </div>
+                                        <div style="float:right;padding:10px;">
+                                            <a href="/Admin/EditUser?id=@userList[i].UserID" class="btn btn-primary">Edit User</a>
+                                            <br />
+                                            <a href="/Admin/Delete?userID=@userList[i].UserID" style="margin-top: 5px;" class="btn btn-danger">Delete User</a>
                                         </div>
                                     </div>
-                                </li>
-                            }
+                                </div>
+                            </li>
                         }
-                    </ul>
-                    <!--/contacts list-->
-                </div>
+                    }
+                </ul>
+                <!--/contacts list-->
             </div>
         </div>
     </div>
-
 </div>
