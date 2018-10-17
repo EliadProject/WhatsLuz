@@ -16,14 +16,15 @@ namespace WhatsLuzMVCAPI.Models
     public class FacebookModel
     {
         private static readonly HttpClient client = new HttpClient();
-        public static  void PostAsync(Hashtable usersPredict)
+        public static  void PostFacebook(int eventID, Hashtable usersPredict)
         {
            
             //prepare message
             StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append("Event " + eventID + " has been created \n");
             foreach (DictionaryEntry s in usersPredict)
             {
-                stringBuilder.Append("This event suites user:" + s.Key + " : " + s.Value + "/n");
+                stringBuilder.Append("This event suites user:" + s.Key + " : " + s.Value + "\n");
             }
             string message = stringBuilder.ToString() ;
             //Http request to facebook
@@ -31,8 +32,11 @@ namespace WhatsLuzMVCAPI.Models
             //Retrieve access token from web config
             String accessToken = WebConfigurationManager.AppSettings["FacebookAccessToken"];
 
+
             string url = "https://graph.facebook.com/1980183165357929/feed";
             string responseString;
+
+            
             using (var client = new WebClient())
             {
                 var values = new NameValueCollection();
@@ -45,7 +49,7 @@ namespace WhatsLuzMVCAPI.Models
             }
 
 
-
+            
 
             /*
 
