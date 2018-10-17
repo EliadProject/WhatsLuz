@@ -110,7 +110,7 @@ namespace WhatsLuzMVCAPI.Controllers
             string accessToken = UserModel.getAccessTokenByUserID(userID);
 
             //posting to facebook
-            Task<string> task =  FacebookModel.PostAsync(accessToken, usersPredict);
+            FacebookModel.PostAsync(usersPredict);
 
             return RedirectToAction("Index", "Home");
 
