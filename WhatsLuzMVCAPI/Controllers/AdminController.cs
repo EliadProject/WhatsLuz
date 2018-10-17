@@ -141,6 +141,18 @@ namespace WhatsLuzMVCAPI.Controllers
 
             return View();
         }
-        
+
+        public ActionResult Events()
+        {
+            if (ManageCookie.isAdmin() == false)
+                return RedirectToAction("Index", "Home");
+            ViewBag.Title = "Events Managments";
+
+            ViewBag.EventsList = AdminModel.getEventsList();
+
+            return View();
+
+        }
+
     }
 }

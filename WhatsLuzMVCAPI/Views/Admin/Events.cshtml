@@ -1,0 +1,114 @@
+﻿@model WhatsLuzMVCAPI.Models.SportEvent
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<title>@ViewBag.Title</title>
+
+<style>
+    h1.page-header {
+        margin-top: -5px;
+    }
+
+    .sidebar {
+        padding-left: 0;
+    }
+
+    .main-container {
+        background: #FFF;
+        padding-top: 15px;
+        margin-top: -20px;
+    }
+
+    .footer {
+        width: 100%;
+    }
+
+    .label, .glyphicon {
+        margin-right: 5px;
+    }
+</style>
+<link href="~/Content/SearchMenu.css" rel="stylesheet">
+<script src="~/Scripts/Admin/Users.js"></script>
+
+<div class="col-md-10 content">
+    <div class="container pull-left">
+        <!-- Filter Users -->
+        <div class="row search_menu" style="padding-left:initial">
+            <div class="col-md-5">
+                <div class="input-group" id="adv-search">
+                    <input type="text" class="form-control" placeholder="Search for CIK, Filer, Ticker, Person..." />
+                    <div class="input-group-btn">
+                        <div class="btn-group" role="group">
+                            <div class="dropdown dropdown-lg">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                                <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                    <form class="form-horizontal" role="form" method="post">
+                                        <div class="form-group">
+                                            <label>Name</label>
+                                            <input id="name_filter_users" class="form-control" type="text" name="name" />
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Address</label>
+                                            <input id="address_filter_users" class="form-control" type="text" name="address" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <input id="email_filter_users" class="form-control" type="text" name="email" />
+                                        </div>
+                                        <button type="submit" class="btn btn-primary firefilter_users"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                    </form>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-primary firefilter_users"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- contacts card -->
+        <div class="card card-default" id="card_contacts">
+            <div id="contacts" class="panel-collapse collapse show" aria-expanded="true" style="">
+                <ul class="list-group pull-down" id="contact-list">
+                    @{
+                        List<WhatsLuzMVCAPI.Models.SportEvent> eventsList = ViewBag.EventsList;
+
+                        for (int i = 0; i < eventsList.Count; i++)
+                        {
+                            <li class="list-group-item">
+                                <div class="row w-100">
+                                    <div class="col-12 col-sm-6 col-md-3 px-0">
+                                        @eventsList[i].title
+                                    </div>
+                                    <div>
+                                        <div class="" style="float:left;">
+                                            
+                                            <label class="name lead">Event ID: @eventsList[i].EventID</label>
+                                            <br>
+                                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                                            <span class="text-muted">Date: @eventsList[i].Date</span>
+                                            <br>
+                                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                            <span class="text-muted small text-truncate">Duration: @eventsList[i].Duration</span>
+                                            <br />
+                                            <i class="fa fa-users" aria-hidden="true"></i>
+                                            <span class="text-muted small text-truncate">Max Attendies: @eventsList[i].MaxAttendies</span>
+                                        </div>
+                                        <div style="float:right;padding:10px;">
+                                            <a href="/Admin/EditUser?id=@eventsList[i].MaxAttendies" class="btn btn-primary">Edit User</a>
+                                            <br />
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                    }
+                </ul>
+                <!--/contacts list-->
+            </div>
+        </div>
+    </div>
+</div>

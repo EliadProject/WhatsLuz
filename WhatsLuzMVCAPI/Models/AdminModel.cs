@@ -24,9 +24,19 @@ namespace WhatsLuzMVCAPI.Models
             var db = new SqlConnectionDataContext();
 
             List<Place> placesList = (from myRow in db.Places
-                                           select myRow).ToList();
+                select myRow).ToList();
 
             return placesList;
+        }
+
+        public static List<SportEvent> getEventsList()
+        {
+            var db = new SqlConnectionDataContext();
+
+            List<SportEvent> eventsList = (from myRow in db.SportEvents
+                select myRow).ToList();
+
+            return eventsList;
         }
 
         public static UserAccount getUserInfo(int id)
