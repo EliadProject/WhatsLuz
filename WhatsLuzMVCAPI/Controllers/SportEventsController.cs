@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Linq;
 using System.Linq;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
@@ -33,44 +35,47 @@ namespace WhatsLuzMVCAPI.Controllers
 
 
         [HttpPost]
-        public void createEvent(SportEventModel sportEventModel)
+        public ActionResult createEvent(FormCollection sportEventModel)
         {
-
+                      
             var dataContext = new SqlConnectionDataContext();
             SportEvent sportEvent = new SportEvent();
+            int userID = ManageCookie.user.UserID;
+            sportEvent.OwnerID = userID;
 
-            sportEvent.OwnerID = ManageCookie.user.UserID;
-
-            sportEvent.CategoryID = getCategoryID(dataContext, sportEventModel.category);
-            sportEvent.Date = DateTime.Parse(sportEventModel.datetime);
-            if (sportEventModel.duration == 0)
+            sportEvent.CategoryID = getCategoryID(dataContext, sportEventModel["category"]);
+            sportEvent.Date = DateTime.Parse(sportEventModel["datetime"]);
+            string duration = sportEventModel["duration"];
+            if (String.IsNullOrWhiteSpace(duration))
             {
                 sportEvent.Duration = 120;
             }
             else
             {
-                sportEvent.Duration = sportEventModel.duration;
+                sportEvent.Duration = int.Parse(duration);
             }
 
-            if (sportEventModel.max_attendies == 0)
+            string max_attendies = sportEventModel["attendies"];
+            if (String.IsNullOrWhiteSpace(max_attendies))
             {
                 sportEvent.MaxAttendies = 12;
             }
             else
             {
-                sportEvent.MaxAttendies = sportEventModel.max_attendies;
+                sportEvent.MaxAttendies =  int.Parse(max_attendies);
             }
 
-            sportEvent.PlaceID = getPlaceIDByName(dataContext,sportEventModel.location);
-            sportEvent.notes = sportEventModel.notes;
+            sportEvent.PlaceID = getPlaceIDByName(dataContext,sportEventModel["location"]);
+            sportEvent.notes = sportEventModel["notes"];
 
-            if (sportEventModel.title == null)
+            string title = sportEventModel["title"];
+            if (String.IsNullOrWhiteSpace(title))
             {
                 sportEvent.title = "No Title";
             }
             else
             {
-                sportEvent.title = sportEventModel.title;
+                sportEvent.title = title;
             }
 
             dataContext.SportEvents.InsertOnSubmit(sportEvent);
@@ -99,7 +104,15 @@ namespace WhatsLuzMVCAPI.Controllers
             }
 
             //Checks classification for each user - ML
-            MLModel.Predict(uevent.UserID, sportEvent);
+            Hashtable usersPredict =  MLModel.Predict(uevent.UserID, sportEvent);
+
+            //retrieve access token of logged on user
+            string accessToken = UserModel.getAccessTokenByUserID(userID);
+
+            //posting to facebook
+            FacebookModel.PostFacebook(sportEvent.EventID, usersPredict);
+
+            return RedirectToAction("Index", "Home");
 
         }
         [HttpPost]

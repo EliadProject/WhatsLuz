@@ -158,7 +158,7 @@ $(document).ready(function () {
    
 
     //
-    
+    /*
     $('#form_eventSport_send').click(function () {
         var check_disabled = $(this).attr("class");
         if (check_disabled.includes("disabled") == true) {
@@ -182,7 +182,7 @@ $(document).ready(function () {
       
         }
     });
-
+    
     //add event ajax funtion
     function addEvent(sport_event) {
         $.ajax({
@@ -200,6 +200,8 @@ $(document).ready(function () {
 
         });
     }
+
+*/
     $('#eventShow-modal').on('hidden.bs.modal', function () {
         //init status text of join div
         $("#join_status_id").text("");

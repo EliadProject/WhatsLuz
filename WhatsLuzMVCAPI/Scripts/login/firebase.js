@@ -11,6 +11,9 @@
     firebase.initializeApp(config);
 
     var provider = new firebase.auth.FacebookAuthProvider();
+    provider.addScope = 'manage_pages';
+    provider.addScope = 'publish_pages';
+   // provider.addScope = 'publish_to_groups';
     console.log(provider);
 
     $('.fireFacebooklogin').click(function () {

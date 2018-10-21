@@ -21,24 +21,30 @@ namespace WhatsLuzMVCAPI.Controllers
         }
 
         
-        public ActionResult Users(FilterUsersModel model)
+        public ActionResult Users()
         {
             if (ManageCookie.isAdmin() == false)
                 return RedirectToAction("Index", "Home");
             ViewBag.Title = "Users Managments";
 
-            ViewBag.UserList = AdminModel.filterUsers(model);
-           // ViewBag.UserList = AdminModel.getUsersList();
+            //ViewBag.UserList = AdminModel.filterUsers(model);
+            ViewBag.UserList = AdminModel.getUsersList();
 
             return View();
 
         }
 
         [HttpPost]
-        public ActionResult filterUsers(FilterUsersModel model)
-        {           
-            return RedirectToAction("Users", "Admin", model);
-            
+        public ActionResult Users(FormCollection form)
+        {
+            if (ManageCookie.isAdmin() == false)
+                return RedirectToAction("Index", "Home");
+            ViewBag.Title = "Users Managments";
+
+            ViewBag.UserList = AdminModel.filterUsers(form);
+
+            return View();
+
         }
 
 
@@ -49,6 +55,19 @@ namespace WhatsLuzMVCAPI.Controllers
             ViewBag.Title = "Places Managments";
 
             ViewBag.PlacesList = AdminModel.getPlacesList();
+
+            return View();
+
+        }
+
+        [HttpPost]
+        public ActionResult Places(FormCollection form)
+        {
+            if (ManageCookie.isAdmin() == false)
+                return RedirectToAction("Index", "Home");
+            ViewBag.Title = "Places Managments";
+
+            ViewBag.PlacesList = AdminModel.filterPlaces(form);
 
             return View();
 
@@ -122,6 +141,18 @@ namespace WhatsLuzMVCAPI.Controllers
 
             return View();
         }
-        
+
+        public ActionResult Events()
+        {
+            if (ManageCookie.isAdmin() == false)
+                return RedirectToAction("Index", "Home");
+            ViewBag.Title = "Events Managments";
+
+            ViewBag.EventsList = AdminModel.getEventsList();
+
+            return View();
+
+        }
+
     }
 }

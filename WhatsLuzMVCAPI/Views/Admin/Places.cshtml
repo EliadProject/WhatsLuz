@@ -1,5 +1,9 @@
 ﻿@model WhatsLuzMVCAPI.Models.UserAccount
 
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
 <title>@ViewBag.Title</title>
 
 <style>
@@ -25,20 +29,38 @@
         margin-right: 5px;
     }
 </style>
-<br />
-<!------ Include the above in your HEAD tag ---------->
-<div class="container-fluid main-container">
-    <div class="col-md-2 sidebar">
-        <ul class="nav nav-pills nav-stacked">
-            <li class="active"><a href="/Admin/Index">Home</a></li>
-            <li><a href="/Admin/Users">Users</a></li>
-            <li><a href="/Admin/Statistics">Statistics</a></li>
-            <li><a href="/Admin/Places">Places</a></li>
-            <li><a href="#">Link</a></li>
-        </ul>
-    </div>
+<link href="~/Content/SearchMenu.css" rel="stylesheet">
     <div class="col-md-10 content">
         <div class="container pull-left">
+            <div class="row search_menu" style="padding-left:initial">
+                <div class="col-md-5">
+                    <div class="input-group" id="adv-search">
+                        <input type="text" class="form-control" placeholder="Search for CIK, Filer, Ticker, Person..." />
+                        <div class="input-group-btn">
+                            <div class="btn-group" role="group">
+                                <div class="dropdown dropdown-lg">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                                    <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                        <form class="form-horizontal" role="form" method="post">
+                                            <div class="form-group">
+                                                <label>Name</label>
+                                                <input id="name_filter_users" class="form-control" type="text" name="name" />
+
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Address</label>
+                                                <input id="address_filter_users" class="form-control" type="text" name="address" />
+                                            </div>
+                                            <button type="submit" class="btn btn-primary firefilter_users"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary firefilter_users"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!-- contacts card -->
             <div class="card card-default" id="card_contacts">
                 <div id="contacts" class="panel-collapse collapse show" aria-expanded="true" style="">
@@ -78,5 +100,3 @@
             </div>
         </div>
     </div>
-
-</div>

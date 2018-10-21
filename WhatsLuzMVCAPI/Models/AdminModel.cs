@@ -24,9 +24,19 @@ namespace WhatsLuzMVCAPI.Models
             var db = new SqlConnectionDataContext();
 
             List<Place> placesList = (from myRow in db.Places
-                                           select myRow).ToList();
+                select myRow).ToList();
 
             return placesList;
+        }
+
+        public static List<SportEvent> getEventsList()
+        {
+            var db = new SqlConnectionDataContext();
+
+            List<SportEvent> eventsList = (from myRow in db.SportEvents
+                select myRow).ToList();
+
+            return eventsList;
         }
 
         public static UserAccount getUserInfo(int id)
@@ -126,13 +136,13 @@ namespace WhatsLuzMVCAPI.Models
                 db.SubmitChanges();
             }
         }
-        public static List<UserAccount> filterUsers(FilterUsersModel model)
+        public static List<UserAccount> filterUsers(FormCollection form)
         {
             //retrieving filter parameters
-            string name = model.name;
-            string address = model.address;
-            string email = model.email;
-            
+            string name = form[0];
+            string address = form[1];
+            string email = form[2];
+
             var db = new SqlConnectionDataContext();
 
             List<UserAccount> usersList;
@@ -157,6 +167,33 @@ namespace WhatsLuzMVCAPI.Models
             usersList = query.ToList();
 
             return usersList;
+        }
+
+        public static List<Place> filterPlaces(FormCollection form)
+        {
+            //retrieving filter parameters
+            string name = form[0];
+            string address = form[1];
+
+            var db = new SqlConnectionDataContext();
+
+            List<Place> placesList;
+            var query = (from place in db.Places
+                         select place).ToList();
+
+            //Filter by display name name
+            if (!String.IsNullOrWhiteSpace(name))
+            {
+                query = query.Where(p => p.Name.Contains(name)).ToList();
+            }
+            //Filter by address name
+            if (!String.IsNullOrWhiteSpace(address))
+            {
+                query = query.Where(p => p.Address.Contains(address)).ToList();
+            }
+            placesList = query.ToList();
+
+            return placesList;
         }
     }
 }

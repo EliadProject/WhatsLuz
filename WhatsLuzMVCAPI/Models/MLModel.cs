@@ -67,7 +67,7 @@ namespace WhatsLuzMVCAPI.Models
             // positive or negative), and 2 inputs (x and y coordinates).
 
             // Create a Naive Bayes learning algorithm
-            var teacher = new LinearCoordinateDescent();
+            var teacher =  new KNearestNeighbors(k: 1); 
 
             // Use the learning algorithm to learn
             
@@ -85,9 +85,10 @@ namespace WhatsLuzMVCAPI.Models
            
         }
 
-        public static void Predict(int userID, SportEvent sevent)
+        public static Hashtable Predict(int userID, SportEvent sevent)
         {
-            
+            Hashtable answersTable = new Hashtable();
+
             //Building vector from data
             double[][] test = new double[][]
             {
@@ -97,11 +98,15 @@ namespace WhatsLuzMVCAPI.Models
             {
                 if(!s.Key.Equals(userID))
                 {
-                   Accord.MachineLearning.VectorMachines.SupportVectorMachine model = s.Value as Accord.MachineLearning.VectorMachines.SupportVectorMachine;
-                   bool[] answers = model.Decide(test);
-                   Debug.WriteLine("User" + s.Key + ". This event is suitable for him: " + answers[0]);
+                  
+                   Accord.MachineLearning.KNearestNeighbors model = s.Value as Accord.MachineLearning.KNearestNeighbors;
+                   int[] answers = model.Decide(test);
+
+                   answersTable.Add(s.Key, answers[0]);
+                   Debug.WriteLine("User" + s.Key + ". This event is suitable for him: " + answers[0] );
                 }
             }
+            return answersTable;
             
         }
 
