@@ -85,8 +85,8 @@ module.controller('ctrl', function ($scope, calendarConfig) {
            keyboard: true,
            show: true
       })
-     
-      GetMap('eventMap');
+
+      GetMap('eventMap', $scope.location);
      
   };
 

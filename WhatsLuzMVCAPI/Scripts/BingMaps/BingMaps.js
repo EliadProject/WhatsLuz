@@ -12,10 +12,12 @@ $.ajax({
     }
 });
 
-function GetMap(divId  = "map")
+function GetMap(divId = "map", location)
 {
-    SelectVal = document.getElementById("location").value;
-    cord = getPlaceCord(SelectVal);
+    if (location === undefined) {
+        location = document.getElementById("location").value;
+    }
+    cord = getPlaceCord(location);
     getTemperature(cord);
     map = new Microsoft.Maps.Map(document.getElementById(divId), {center: new Microsoft.Maps.Location(cord.lat, cord.lng), zoom: 15 });
     var center = map.getCenter();

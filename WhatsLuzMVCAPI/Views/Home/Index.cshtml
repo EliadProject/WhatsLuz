@@ -160,7 +160,7 @@
                 </ul>
             </li>
         </ul><br />
-        <div id="eventMap" class="list_key" style="margin:0 auto;"></div>
+        <div id="eventMap" style="width:300px;height:300px;margin:0 auto;"></div>
         <table>
             <tr>
                 <td width="33%">
@@ -221,7 +221,7 @@
 
         <div class="form-group">
             <label class="labelEvent" for="places">Location<span class="asterisk">*</span></label>
-            <select id="location" class="form-control places" onchange="GetMap()" required></select>
+            <select id="location" class="form-control places" onchange="GetMap('map')" required></select>
             <br />
             <a><span ng-click="showMap = ! showMap" class="glyphicon glyphicon-map-marker"></span></a>
             <u>Weather Status:</u> <span id="weather">None</span>
