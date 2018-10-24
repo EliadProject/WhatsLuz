@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Video";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<header>
+    <div align="center">
+        <canvas id="myCanvas" width="200" height="100">
+            Your browser does not support the HTML5 canvas tag.
+        </canvas>
+    </div>
+</header>
+<script>
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+ctx.font = "30px Arial";
+ctx.fillText("Our Video",10,50);
+</script>
+
+<div align="center">
+    <video width="640" height="480" controls>
+        <source src="~/Content/WhatsLuz.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+</div>

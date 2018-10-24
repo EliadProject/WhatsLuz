@@ -22,6 +22,8 @@ namespace WhatsLuzMVCAPI.Controllers
         public ActionResult About()
         {
             ViewBag.Title = "About the Team";
+            if (ManageCookie.CheckCookieExists() == null)
+                return RedirectToAction("LoginPage");
 
             return View();
         }
@@ -29,13 +31,22 @@ namespace WhatsLuzMVCAPI.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
-
+            if (ManageCookie.CheckCookieExists() == null)
+                return RedirectToAction("LoginPage");
             return View();
         }
         public ActionResult LoginPage()
         {
             ViewBag.Title = "Login Page";
-
+            if (ManageCookie.CheckCookieExists() == null)
+                return RedirectToAction("LoginPage");
+            return View();
+        }
+        public ActionResult Video()
+        {
+            ViewBag.Title = "Login Page";
+            if (ManageCookie.CheckCookieExists() == null)
+                return RedirectToAction("LoginPage");
             return View();
         }
     }

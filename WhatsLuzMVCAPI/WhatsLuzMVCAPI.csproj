@@ -518,7 +518,6 @@
     <Content Include="Images\eliadvert.jpg" />
     <Content Include="Images\haymiz.jpg" />
     <Content Include="Images\saggiehen.jpg" />
-    <Content Include="libsvm.dll" />
     <Content Include="License-LGPL.txt" />
     <Content Include="Scripts\Admin\Users.js" />
     <Content Include="Scripts\angular-1.6.4\angular-animate.js" />
@@ -4784,6 +4783,7 @@
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\Events.cshtml" />
+    <Content Include="Views\Home\Video.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
