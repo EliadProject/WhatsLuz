@@ -222,10 +222,10 @@
         <div class="form-group">
             <label class="labelEvent" for="places">Location<span class="asterisk">*</span></label>
             <select id="location" class="form-control places" onchange="GetMap('map')" required></select>
-            <select id="location" name="location" class="form-control places" onchange="GetMap()" required></select>
             <br />
             <a><span ng-click="showMap = ! showMap" class="glyphicon glyphicon-map-marker"></span></a>
             <u>Weather Status:</u> <span id="weather">None</span>
+            <img id="weatherImg" />
             <div ng-show="showMap" id="map" style="width:300px;height:300px;margin:0 auto;"></div>
         </div>
 

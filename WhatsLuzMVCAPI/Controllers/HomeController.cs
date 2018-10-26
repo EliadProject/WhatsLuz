@@ -38,8 +38,6 @@ namespace WhatsLuzMVCAPI.Controllers
         public ActionResult LoginPage()
         {
             ViewBag.Title = "Login Page";
-            if (ManageCookie.CheckCookieExists() == null)
-                return RedirectToAction("LoginPage");
             return View();
         }
         public ActionResult Video()
