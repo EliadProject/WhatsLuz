@@ -25,16 +25,28 @@
     <link rel="stylesheet" href="~/Content/style.css">
     <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
     <script src="~/Scripts/login/firebase.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/LoginPage.css">
+
 </head>
 <body>
-
-
-    <h2> Login Page</h2>
-    <h3> Please login</h3>
-
-    <a href="#" class="fireFacebooklogin" style="padding: 6px 16px;">
-        <p style="margin: 0 0 0 0;">  Login </p>
-    </a>
+    <div class="container-login">
+        <div class="wrap-login">
+            <form class="login-form validate-form">
+                <span class="login-form-title">
+                    Login
+                </span>
+                <div>
+                    <a href="#" class="fireFacebooklogin">
+                        <i class="fa fa-facebook-official"></i>
+                        Login with Facebook
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
 

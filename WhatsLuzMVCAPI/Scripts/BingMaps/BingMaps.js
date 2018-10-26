@@ -28,7 +28,7 @@ function GetMap(divId = "event_creation", location)
 function getPlaceCord(PlaceName)
 {   
     for (i = 0; i < Places.length; i++) { 
-        if(Places[i].Name == PlaceName)
+        if(Places[i].Name === PlaceName)
         return Places[i];
     }
 }
