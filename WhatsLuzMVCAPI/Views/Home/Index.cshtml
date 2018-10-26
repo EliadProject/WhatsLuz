@@ -160,7 +160,10 @@
                 </ul>
             </li>
         </ul><br />
-        <div id="eventMap" style="width:300px;height:300px;margin:0 auto;"></div>
+        <u>Weather Status:</u> <span id="event_weather">None</span>
+        <img id="event_weatherImg" />
+        <div id="event_map" style="width:350px;height:320px;margin:0 auto;"></div>
+        <br />
         <table>
             <tr>
                 <td width="33%">
@@ -221,12 +224,12 @@
 
         <div class="form-group">
             <label class="labelEvent" for="places">Location<span class="asterisk">*</span></label>
-            <select id="location" class="form-control places" onchange="GetMap('map')" required></select>
+            <select id="location" class="form-control places" onchange="GetMap('event_creation')" required></select>
             <br />
             <a><span ng-click="showMap = ! showMap" class="glyphicon glyphicon-map-marker"></span></a>
-            <u>Weather Status:</u> <span id="weather">None</span>
-            <img id="weatherImg" />
-            <div ng-show="showMap" id="map" style="width:300px;height:300px;margin:0 auto;"></div>
+            <u>Weather Status:</u> <span id="event_creation_weather">None</span>
+            <img id="event_creation_weatherImg" />
+            <div ng-show="showMap" id="event_creation_map" style="width:400px;height:380px;margin:0 auto;"></div>
         </div>
 
         <div class="form-group">

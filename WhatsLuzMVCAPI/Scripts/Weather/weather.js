@@ -1,4 +1,4 @@
-﻿function getTemperature(cord)
+﻿function getTemperature(cord,divId)
 {
     var weatherContent = [];
 
@@ -14,9 +14,9 @@
                 main: data["weather"][0].main,
                 description: data["weather"][0].description
                 });
-            document.getElementById("weatherImg").src = "http://openweathermap.org/img/w/" + data["weather"][0].icon +".png";
+            document.getElementById(divId + "_weatherImg").src = "http://openweathermap.org/img/w/" + data["weather"][0].icon +".png";
             //console.log(weatherContent[0]["description"]);
-            document.getElementById("weather").innerHTML =
+            document.getElementById(divId + "_weather").innerHTML =
                 weatherContent[0]["main"] + ", " + weatherContent[0]["description"];
         }
     });
