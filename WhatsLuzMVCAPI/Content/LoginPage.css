@@ -28,7 +28,7 @@
 
 .container-login {
     width: 100%;
-    height: calc( 100vh * 0.85);
+    height: calc( 100vh * 0.80);
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
