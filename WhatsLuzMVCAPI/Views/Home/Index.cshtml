@@ -13,6 +13,8 @@
 <link href="~/scripts/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 @*<script src="/scripts/js/moment-with-locales.min.js"></script>*@
 <script src="/scripts/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+<script src="~/Scripts/calender/datetimrpicker.js"></script>
 <!-- Sport Event Form -->
 <script src="~/Scripts/calender/validator.js"></script>
 <!-- Weather JS API -->
@@ -45,11 +47,7 @@
             <h2 style="margin-top: 0px; margin-bottom: 0px;" class="text-center">{{ calendarTitle }} </h2>
         </div>
 
-        <div class="btn-group col-md-2 " style="float: left;">
-            <label class="btn btn-primary" style="float: left;" ng-model="calConfig.calendarView" btn-radio="'day'">Day</label>
-            <label class="btn btn-primary" style="float: left;" ng-model="calConfig.calendarView" btn-radio="'week'">Week</label>
-            <label class="btn btn-primary" style="float: left;" ng-model="calConfig.calendarView" btn-radio="'month'">Month</label>
-        </div>
+       
 
     </div>
     <!-- <p class="text-center"><a href = "#" class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#eventAddition-modal">Open Login Modal</a></p> -->

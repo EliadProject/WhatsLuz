@@ -85,6 +85,29 @@ namespace WhatsLuzMVCAPI.Controllers
             return View();
 
         }
+        [HttpGet]
+        public ActionResult EditEvent(int eventID)
+        {
+            if (ManageCookie.isAdmin() == false)
+                return RedirectToAction("Index", "Home");
+            ViewBag.Title = "Event Edit";
+
+            ViewBag.eventInfo = AdminModel.getEventInfo(eventID);
+            ViewBag.eventAttenides = AdminModel.getEventAttendies(eventID);
+            return View();
+
+        }
+        [HttpPost]
+        public ActionResult updateEvent(FormCollection eventUpdate)
+        {
+            if (ManageCookie.isAdmin() == false)
+                return RedirectToAction("Index", "Home");
+
+            AdminModel.updateEventInput(eventUpdate);
+            return RedirectToAction("Events", "Admin");
+        }
+
+       
 
         [HttpGet]
         public ActionResult EditPlace(int id)

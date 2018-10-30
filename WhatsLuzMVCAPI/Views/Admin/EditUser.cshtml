@@ -39,7 +39,7 @@
                         @{
                             WhatsLuzMVCAPI.Models.UserAccount userInfo = ViewBag.userInfo;
                         }
-                        <form class="form-horizontal" method="post" style="float: left;">
+                        <form class="form-horizontal" method="post" action="~/Controllers/AdminController/updateEvent" style="float: left;">
                             <input type="hidden" value="@userInfo.UserID" name="userID" />
                             <fieldset>
                                 <!-- Form Name -->

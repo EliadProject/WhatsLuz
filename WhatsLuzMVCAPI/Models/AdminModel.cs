@@ -46,6 +46,53 @@ namespace WhatsLuzMVCAPI.Models
             return ((from myRow in db.UserAccounts.Where(u => u.UserID == id) select myRow).SingleOrDefault());
         }
 
+        public static List<Users_Event> getEventAttendies(int eventID)
+        {
+            var db = new SqlConnectionDataContext();
+
+            return ((from myRow in db.Users_Events.Where(ue => ue.EventID == eventID) select myRow).ToList());
+        }
+
+        public static void updateEventInput(FormCollection eventUpdate)
+        {
+            var db = new SqlConnectionDataContext();
+            int eventID = int.Parse(eventUpdate["eventID"]);
+
+            var eventObj =
+                        (from e in db.SportEvents
+                         where e.EventID == eventID
+                         select e).SingleOrDefault();
+
+            // Execute the query, and change the column values
+            // you want to change.
+
+            eventObj.title = eventUpdate["title"];
+            eventObj.Date = DateTime.Parse(eventUpdate["date"]);
+            eventObj.MaxAttendies = int.Parse(eventUpdate["attendies"]);
+            eventObj.Duration = int.Parse(eventUpdate["duration"]);
+            eventObj.notes = eventUpdate["notes"];
+
+            try
+            {
+                db.SubmitChanges();              
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+             
+                // Provide for exceptions.
+            }
+        }
+    
+
+        public static SportEvent getEventInfo(int eventID)
+        {
+            var db = new SqlConnectionDataContext();
+
+            return ((from myRow in db.SportEvents.Where(se => se.EventID == eventID) select myRow).SingleOrDefault());
+        }
+
+
         public static Place getPlaceInfo(int id)
         {
             var db = new SqlConnectionDataContext();

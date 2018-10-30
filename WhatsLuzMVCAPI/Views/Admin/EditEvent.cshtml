@@ -1,0 +1,143 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<title>@ViewBag.Title</title>
+
+<style>
+    h1.page-header {
+        margin-top: -5px;
+    }
+
+    .sidebar {
+        padding-left: 0;
+    }
+
+    .main-container {
+        background: #FFF;
+        padding-top: 15px;
+        margin-top: -20px;
+    }
+
+    .footer {
+        width: 100%;
+    }
+
+    .label, .glyphicon {
+        margin-right: 5px;
+    }
+</style>
+<script src="~/scripts/js/moment.min.js"></script>
+<!-- Datetime picker -->
+<link href="~/scripts/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+@*<script src="/scripts/js/moment-with-locales.min.js"></script>*@
+<script src="/scripts/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+<script src="/scripts/calender/datetimrpicker.js"></script>
+
+<div class="col-md-10 content">
+    <div class="container pull-left">
+        <!-- contacts card -->
+        <div class="" id="card_contacts">
+            <div id="contacts" class="" aria-expanded="true" style="">
+                <div class="">
+                    <h2>Edit Event</h2>
+                    @{
+                        WhatsLuzMVCAPI.Models.SportEvent eventInfo = ViewBag.eventInfo;
+                        List<WhatsLuzMVCAPI.Models.Users_Event> eventAttendies = ViewBag.eventAttenides;
+
+                    }
+                    <form class="form-horizontal" method="post" action="/Admin/updateEvent" style="float: left;">
+                        <input type="hidden" value="@eventInfo.EventID" name="eventID" />
+                        <fieldset>
+                            <!-- Form Name -->
+                            <legend></legend>
+                            <!-- Text input-->
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Title:</label>
+                                <div class="col-md-8">
+                                    <input id="nome" name="title" value="@eventInfo.title" class="form-control input-md" type="text">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Date:</label>
+
+                                <div class="col-md-8">
+                                    
+                                    <div class='input-group date' id='datetimepicker1'>
+                                        
+                                            <input name="date" value="@eventInfo.Date.ToString("HH:mm DD/MM/YYYY")" class="form-control input-md" type="text">
+                                            
+                                            <span class="input-group-addon" style="width:auto">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                </div>
+
+
+
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Maximum Atendies:</label>
+                                <div class="col-md-8">
+                                    <input type="number" id="attendies" name="attendies" value="@eventInfo.MaxAttendies" min="@eventAttendies.Capacity" max="50" class="form-control input-md" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Duration:</label>
+                                <div class="col-md-8">
+                                    <input type="number" id="duration" name="duration" value="@eventInfo.Duration" min="30" max="300" class="form-control input-md" />
+                                </div>
+                            </div>
+
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Notes:</label>
+                                <div class="col-md-8">
+                                    <textarea id="notes" map="notes" name="notes" class="form-control" rows="4" value="@eventInfo.notes" maxlength="200"></textarea>
+                                </div>
+                            </div>
+                            <!--
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Attendies</label>
+                                <ul class="list-group pull-down" id="eventAttendies">
+                                    @{
+                                        for (int i = 0; i < eventAttendies.Count; i++)
+                                        {
+                                            <li class="list-group-item">
+                                                <label class="col-md-4 control-label"> @eventAttendies[i].UserID </label>
+                                                <input type="submit" class="btn btn-info" name="user">
+                                            </li>
+                                        }
+                                    }
+
+
+                                </ul>
+                            </div>
+
+                                -->
+                            <!-- Multiple Checkboxes (inline) -->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label"></label>
+                                <div class="col-md-4">
+                                    <label class="checkbox-inline">
+                                        <input type="submit" class="btn btn-info" name="submit" value="Update Event">
+                                    </label>
+                                </div>
+                            </div>
+                            <!-- Multiple Checkboxes (inline) -->
+
+                        </fieldset>
+                    </form>
+                </div>
+                <!--/contacts list-->
+            </div>
+        </div>
+    </div>
+</div>
+
+
