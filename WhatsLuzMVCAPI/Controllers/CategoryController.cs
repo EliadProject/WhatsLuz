@@ -27,29 +27,5 @@ namespace WhatsLuzMVCAPI.Controllers
             
             return Json(toString, JsonRequestBehavior.AllowGet); ;
         }
-
-
-        
-
-        // GET: api/Category/5
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST: api/Category
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT: api/Category/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/Category/5
-        public void Delete(int id)
-        {
-        }
     }
 }

@@ -93,7 +93,7 @@ $(document).ready(function () {
 
 
     });
-
+/*
     $('#sport_event_delete').click(function (e) {
         event.preventDefault();
         var event_obj = new Object();
@@ -127,6 +127,7 @@ $(document).ready(function () {
 
     });
     
+  */ 
    
 
 
@@ -152,7 +153,7 @@ $(document).ready(function () {
    
 
     //
-    /*
+    
     $('#form_eventSport_send').click(function () {
         var check_disabled = $(this).attr("class");
         if (check_disabled.includes("disabled") == true) {
@@ -195,7 +196,7 @@ $(document).ready(function () {
         });
     }
 
-*/
+
     $('#eventShow-modal').on('hidden.bs.modal', function () {
         //init status text of join div
         $("#join_status_id").text("");

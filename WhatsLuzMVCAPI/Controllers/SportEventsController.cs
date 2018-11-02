@@ -351,7 +351,7 @@ namespace WhatsLuzMVCAPI.Controllers
                                                      {
                                                          label = g.Key,
                                                          value = 100.0 * g.Count() / count_all
-                                                     })/*.Take(10)*/.ToList(); // Limit in SQL = Take in Linq to SQL.
+                                                     }).Take(10).ToList(); // Limit in SQL = Take in Linq to SQL.
 
             return seStatistics;
         }

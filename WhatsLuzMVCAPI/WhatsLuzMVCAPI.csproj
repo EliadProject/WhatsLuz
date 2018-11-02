@@ -4858,11 +4858,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Images\" />
-    <Folder Include="Views\Account\" />
-    <Folder Include="Views\Auth\" />
-    <Folder Include="Views\Category\" />
-    <Folder Include="Views\Cookie\" />
-    <Folder Include="Views\Places\" />
     <Folder Include="Views\Users\" />
   </ItemGroup>
   <ItemGroup>
