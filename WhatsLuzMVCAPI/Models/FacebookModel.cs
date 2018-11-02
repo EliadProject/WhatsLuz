@@ -19,7 +19,7 @@ namespace WhatsLuzMVCAPI.Models
         public static  void PostFacebook(int eventID, Hashtable usersPredict)
         {
            
-            //prepare message
+            //Prepare message
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append("Event " + eventID + " has been created \n");
             foreach (DictionaryEntry s in usersPredict)
@@ -47,27 +47,7 @@ namespace WhatsLuzMVCAPI.Models
 
                 responseString = Encoding.Default.GetString(response);
             }
-
-
-            
-
-            /*
-
-            var values = new Dictionary<string, string>
-{
-   { "message", message },
-   { "access_token", accessToken }
-};
-
-            var content = new FormUrlEncodedContent(values);
-
-            var response = await client.PostAsync("https://graph.facebook.com/1980183165357929/feed", content);
-
-            var responseString = await response.Content.ReadAsStringAsync();
-
-            return responseString.ToString();
-            */
-
+        
 
         }
     }

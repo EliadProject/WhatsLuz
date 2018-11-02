@@ -106,9 +106,6 @@ namespace WhatsLuzMVCAPI.Controllers
             //Checks classification for each user - ML
             Hashtable usersPredict =  MLModel.Predict(uevent.UserID, sportEvent);
 
-            //retrieve access token of logged on user
-            string accessToken = UserModel.getAccessTokenByUserID(userID);
-
             //posting to facebook
             FacebookModel.PostFacebook(sportEvent.EventID, usersPredict);
 

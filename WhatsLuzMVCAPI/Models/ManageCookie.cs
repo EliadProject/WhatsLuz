@@ -35,7 +35,7 @@ namespace WhatsLuzMVCAPI.Models
 
         public static string SHA256Hash(string fid)
         {
-            string SALT = "eL!@d&H@y&S@99!e"; // For Encryption SALT
+            string SALT = "eL!@d&H@y&S@99!e"; // For Encryption SALT with the facebook user id
 
             UnicodeEncoding uEncode = new UnicodeEncoding();
             byte[] byteD2e = uEncode.GetBytes(fid + SALT);
@@ -54,11 +54,7 @@ namespace WhatsLuzMVCAPI.Models
             StudentCookies.Expires = DateTime.Now.AddHours(1);
             return StudentCookies;
         }
-        public static void deleteCookie()
-        {
-            HttpContext.Current.Request.Cookies["FacebookCookie"].Expires = DateTime.Now.AddDays(-10);
-            user = null;
-        }
+
         private static UserAccount getUserByHash(SqlConnectionDataContext db,string SHA256Hash)
         {
             UserAccount usera =

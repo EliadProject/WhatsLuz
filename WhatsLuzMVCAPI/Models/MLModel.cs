@@ -31,6 +31,7 @@ namespace WhatsLuzMVCAPI.Models
             getAllUsersEvents();
         }
 
+        //Building dataTable contains details for the model foreach user
         public static void getAllUsersEvents()
         {
             var db = new SqlConnectionDataContext();
@@ -39,7 +40,7 @@ namespace WhatsLuzMVCAPI.Models
             for (int i =0; i<users.Count(); i++)
             {
                 var query = (from sevents in db.SportEvents
-                             join uevents in db.Users_Events on sevents.EventID equals uevents.EventID into ueventGroup
+                             join uevents in db.Users_Events on sevents.EventID equals uevents.EventID into ueventGroup //using 'into' to retrieve group unique eventID and removing duplicates events.
                              select new
                              {
                                  category = sevents.CategoryID,
@@ -47,7 +48,8 @@ namespace WhatsLuzMVCAPI.Models
                                  classification = (ueventGroup.Any(x => x.UserID.Equals(users[i].UserID))) ? 1 : 0
 
                              });
-                DataTable userData = CustomLINQtoDataSetMethods.CopyToDataTable(query);
+
+                DataTable userData = CustomLINQtoDataSetMethods.CopyToDataTable(query); //using external class to convert into datatable structure for Accord ML usage
                 Train(users[i].UserID, userData );            
             }
             
@@ -63,14 +65,11 @@ namespace WhatsLuzMVCAPI.Models
             int[] outputs = userData.Columns["classification"].ToArray<int>();
 
 
-            // In our problem, we have 2 classes (samples can be either
-            // positive or negative), and 2 inputs (x and y coordinates).
-
-            // Create a Naive Bayes learning algorithm
-            var teacher =  new KNearestNeighbors(k: 1); 
+            // Create a KNN learning algorithm
+            var teacher =  new KNearestNeighbors(k: 1); // by k = 1 neighbors
 
             // Use the learning algorithm to learn
-            
+
             try
             {
                 var nb = teacher.Learn(inputs, outputs);
@@ -85,6 +84,7 @@ namespace WhatsLuzMVCAPI.Models
            
         }
 
+        //Predict match for paraticipate of each user
         public static Hashtable Predict(int userID, SportEvent sevent)
         {
             Hashtable answersTable = new Hashtable();
@@ -96,9 +96,10 @@ namespace WhatsLuzMVCAPI.Models
             };
             foreach (DictionaryEntry s in usersTraining)
             {
+                //foreach user except the creator of the user
                 if(!s.Key.Equals(userID))
                 {
-                  
+                   //Checking for a match
                    Accord.MachineLearning.KNearestNeighbors model = s.Value as Accord.MachineLearning.KNearestNeighbors;
                    int[] answers = model.Decide(test);
 
