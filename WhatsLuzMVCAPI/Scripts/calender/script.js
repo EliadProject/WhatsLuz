@@ -93,45 +93,8 @@ $(document).ready(function () {
 
 
     });
-/*
-    $('#sport_event_delete').click(function (e) {
-        event.preventDefault();
-        var event_obj = new Object();
-        var eventID = angular.element(document.getElementById('ctrlid')).scope().eventID;
-        event_obj.eventID = eventID;
-        var event_json = JSON.stringify(event_obj);
-
-        $.ajax({
-            type: "POST",
-            url: "http://localhost:61733/SportEvents/deleteEvent",
-            data: event_json,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            async: false,
-            accepts: "application/json",
-            success: function (data, status, xhr) {
-                if (data == true) {
-                    //update events on board
-                    location.reload();
-
-                    //dismiss modal 
-                    $('#eventShow-modal').modal('hide');
-                }
-                else {
-                    
-                    $("#join_status_id").text("User is not the owner");
-                }
-            }
-        });
-
-
-    });
-    
-  */ 
    
 
-
-   
 
     //Retrieving cateogies from Database
     $.getJSON('http://localhost:61733/Category/getCategoriesName')
@@ -153,7 +116,7 @@ $(document).ready(function () {
    
 
     //
-    
+    /*
     $('#form_eventSport_send').click(function () {
         var check_disabled = $(this).attr("class");
         if (check_disabled.includes("disabled") == true) {
@@ -195,7 +158,7 @@ $(document).ready(function () {
 
         });
     }
-
+*/
 
     $('#eventShow-modal').on('hidden.bs.modal', function () {
         //init status text of join div
