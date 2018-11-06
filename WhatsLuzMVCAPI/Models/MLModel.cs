@@ -16,28 +16,47 @@ using Accord.Statistics.Distributions.Univariate;
 using Accord.Statistics;
 using System.Reflection;
 using System.Diagnostics;
+using System.Runtime.Remoting.Messaging;
 using Accord.MachineLearning.VectorMachines.Learning;
 
 namespace WhatsLuzMVCAPI.Models
 {
     public class MLModel
     {
-        public static Hashtable usersTraining;
-       
-        public static void Start()
-        {
-            usersTraining = new Hashtable();
+        private static MLModel MLInstance = null;
+        private static Hashtable usersTraining;
 
-            getAllUsersEvents();
+        //Creating ML model for each user
+        private MLModel()
+        {
+            
+            //get DataTable for each user
+            Hashtable usersData = getAllUsersEvents(); //get users data
+
+            //Train each user
+            usersTraining = new Hashtable();
+            usersTraining = Train(usersData);
         }
 
-        //Building dataTable contains details for the model foreach user
-        public static void getAllUsersEvents()
+
+        public static MLModel GetInstance()
         {
+            if (MLInstance == null)
+            {
+               MLInstance =  new MLModel();
+            }
+
+            return MLInstance;
+        }
+        
+        //Building dataTable contains details for the model foreach user
+        private static Hashtable getAllUsersEvents()
+        {
+            Dictionary<int, DataTable> usersData = new Dictionary<int, DataTable>();  
             var db = new SqlConnectionDataContext();
 
             List<UserAccount> users = db.UserAccounts.ToList(); 
-            for (int i =0; i<users.Count(); i++)
+            foreach (UserAccount user in users)
             {
                 var query = (from sevents in db.SportEvents
                              join uevents in db.Users_Events on sevents.EventID equals uevents.EventID into ueventGroup //using 'into' to retrieve group unique eventID and removing duplicates events.
@@ -45,47 +64,79 @@ namespace WhatsLuzMVCAPI.Models
                              {
                                  category = sevents.CategoryID,
                                  difftime = DateTime.Today.Subtract(sevents.Date).TotalMinutes,
-                                 classification = (ueventGroup.Any(x => x.UserID.Equals(users[i].UserID))) ? 1 : 0
+                                 classification = (ueventGroup.Any(x => x.UserID.Equals(user.UserID))) ? 1 : 0
 
                              });
 
-                DataTable userData = CustomLINQtoDataSetMethods.CopyToDataTable(query); //using external class to convert into datatable structure for Accord ML usage
-                Train(users[i].UserID, userData );            
+
+                DataTable userData = CustomLINQtoDataSetMethods.CopyToDataTable(query);  //using external class to convert into datatable structure for Accord ML usage
+                usersData.Add(user.UserID, userData);
+
+                          
             }
-            
-            
-           
+
+            Hashtable usersDataHash = new Hashtable(usersData);
+            return usersDataHash;
+
+
         }
         
-        public static void Train(int userID, DataTable userData)
+        private static  Hashtable Train(Hashtable usersData)
+        {
+            Hashtable usersTraining = new Hashtable();
+            foreach (DictionaryEntry userData in usersData)
+            {
+
+                try
+                {
+                    KNearestNeighbors userKNNModel = TrainUser((DataTable) userData.Value);
+                    if (userKNNModel != null)
+                    {
+                        usersTraining.Add(userData.Key, userKNNModel);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+
+            }
+
+            return usersTraining;
+
+        }
+
+
+        //Train user, if error return null;
+        private static  KNearestNeighbors TrainUser(DataTable userData)
         {
 
-           // Convert the DataTable to input and output vectors
+            // Convert the DataTable to input and output vectors
             double[][] inputs = userData.ToJagged<double>("category", "difftime");
             int[] outputs = userData.Columns["classification"].ToArray<int>();
 
 
             // Create a KNN learning algorithm
-            var teacher =  new KNearestNeighbors(k: 1); // by k = 1 neighbors
+            var teacher = new KNearestNeighbors(k: 1); // by k = 1 neighbors
 
             // Use the learning algorithm to learn
 
+            KNearestNeighbors userModelKNN = null;
             try
             {
-                var nb = teacher.Learn(inputs, outputs);
-                usersTraining.Add(userID, nb);
+                userModelKNN = teacher.Learn(inputs, outputs);
+                
             }
             catch (Exception e)
             {
                 Debug.WriteLine(e.Message);
-
-
             }
-           
+            
+            return userModelKNN;
         }
 
         //Predict match for paraticipate of each user
-        public static Hashtable Predict(int userID, SportEvent sevent)
+        public Hashtable Predict(int userID, SportEvent sevent)
         {
             Hashtable answersTable = new Hashtable();
 
@@ -102,8 +153,8 @@ namespace WhatsLuzMVCAPI.Models
                    //Checking for a match
                    Accord.MachineLearning.KNearestNeighbors model = s.Value as Accord.MachineLearning.KNearestNeighbors;
                    int[] answers = model.Decide(test);
-
-                   answersTable.Add(s.Key, answers[0]);
+                   bool answerBool = answers[0] != 0;
+                   answersTable.Add(s.Key, answerBool);
                    Debug.WriteLine("User" + s.Key + ". This event is suitable for him: " + answers[0] );
                 }
             }

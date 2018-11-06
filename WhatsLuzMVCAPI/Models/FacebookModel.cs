@@ -13,21 +13,25 @@ using System.Web.Configuration;
 
 namespace WhatsLuzMVCAPI.Models
 {
+
     public class FacebookModel
     {
-       
-        public static void PostFacebook(int eventID, Hashtable usersPredict)
+        private const int FACEBOOK_COUNT_ERRORS = 10;
+
+        public static void PostFacebook(int eventID, string title, Hashtable usersPredict)
         {
            
             //Prepare message
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append("Event " + eventID + " has been created \n");
+            stringBuilder.Append("Event " + eventID + " named " + title + " has been created \n");
+
             foreach (DictionaryEntry s in usersPredict)
             {
-                stringBuilder.Append("This event suites user:" + s.Key + " : " + s.Value + "\n");
+                String userName = SportEventModel.convertUserIDtoName(int.Parse(s.Key.ToString()));
+                stringBuilder.Append("This event suites user: " + userName + " : " + s.Value + "\n");
             }
-            string message = stringBuilder.ToString() ;
-            //Http request to facebook
+
+            string message = stringBuilder.ToString();
 
             //Retrieve access token from web config
             String accessToken = WebConfigurationManager.AppSettings["FacebookAccessToken"];
@@ -43,9 +47,9 @@ namespace WhatsLuzMVCAPI.Models
 
             bool isSuccess = false;//init to not sucess for loop enter
 
-
+            int countError = 0;
             //try posting until sucess
-            while (!isSuccess)
+            while (!isSuccess && countError< FACEBOOK_COUNT_ERRORS)
             {
                 isSuccess = true; //default state is true;
                 try
@@ -57,6 +61,7 @@ namespace WhatsLuzMVCAPI.Models
                 {
                     Console.WriteLine(e.Message);
                     isSuccess = false; //try again
+                    countError++;
                 }
                 finally
                 {
@@ -67,8 +72,8 @@ namespace WhatsLuzMVCAPI.Models
                 }
                 
             }
-
-           
+            if(countError==FACEBOOK_COUNT_ERRORS)
+                return;
 
         }
     }

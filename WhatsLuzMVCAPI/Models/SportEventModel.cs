@@ -161,14 +161,26 @@ namespace WhatsLuzMVCAPI.Models
                 Console.WriteLine(e.Message);
             }
 
+            //Retrieve ML instance
+            MLModel mlModel = MLModel.GetInstance();
+
             //Predict classification for each user - ML
-            Hashtable usersPredict = MLModel.Predict(uevent.UserID, sportEvent);
+            Hashtable usersPredict = mlModel.Predict(uevent.UserID, sportEvent);
 
             //posting to facebook asyncly
-            new Task(() => { FacebookModel.PostFacebook(sportEvent.EventID, usersPredict); }).Start();
-            FacebookModel.PostFacebook(sportEvent.EventID, usersPredict);
+            new Task(() => { FacebookModel.PostFacebook(sportEvent.EventID,sportEvent.title, usersPredict); }).Start();
+
         }
 
+        public static String convertUserIDtoName(int userID)
+        {
+            var dataContext = new SqlConnectionDataContext();
+            string userName = (from u in dataContext.UserAccounts
+                where u.UserID == userID
+                select u.DisplayName).FirstOrDefault();
+            return userName;
+
+        }
 
         private static int getPlaceIDByName(SqlConnectionDataContext db, string placeName)
         {

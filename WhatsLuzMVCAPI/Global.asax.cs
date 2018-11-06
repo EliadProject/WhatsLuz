@@ -20,7 +20,7 @@ namespace WhatsLuzMVCAPI
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            MLModel.Start(); // Start the Machine Learning Algorithm
+            MLModel.GetInstance(); // Start the Machine Learning Algorithm
         }
     }
 }
