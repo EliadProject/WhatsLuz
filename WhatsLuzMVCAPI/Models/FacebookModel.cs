@@ -15,8 +15,8 @@ namespace WhatsLuzMVCAPI.Models
 {
     public class FacebookModel
     {
-        private static readonly HttpClient client = new HttpClient();
-        public static  void PostFacebook(int eventID, Hashtable usersPredict)
+       
+        public static void PostFacebook(int eventID, Hashtable usersPredict)
         {
            
             //Prepare message
@@ -33,21 +33,42 @@ namespace WhatsLuzMVCAPI.Models
             String accessToken = WebConfigurationManager.AppSettings["FacebookAccessToken"];
 
 
-            string url = "https://graph.facebook.com/1980183165357929/feed";
-            string responseString;
-
+            string url = WebConfigurationManager.AppSettings["FacebookPageURL"];
             
-            using (var client = new WebClient())
+            //configure parameters for facebook API post
+            var client = new WebClient();
+            var values = new NameValueCollection();
+            values["message"] = message;
+            values["access_token"] = accessToken;
+
+            bool isSuccess = false;//init to not sucess for loop enter
+
+
+            //try posting until sucess
+            while (!isSuccess)
             {
-                var values = new NameValueCollection();
-                values["message"] = message;
-                values["access_token"] = accessToken;
-
-                var response = client.UploadValues(url, values);
-
-                responseString = Encoding.Default.GetString(response);
+                isSuccess = true; //default state is true;
+                try
+                {
+                    var response = client.UploadValues(url, values);
+                    string responseString = Encoding.Default.GetString(response);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    isSuccess = false; //try again
+                }
+                finally
+                {
+                    if (!isSuccess)
+                    {
+                        System.Threading.Thread.Sleep(1000);
+                    }
+                }
+                
             }
-        
+
+           
 
         }
     }
