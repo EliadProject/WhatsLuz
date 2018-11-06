@@ -97,7 +97,7 @@ $(document).ready(function () {
 
 
     //Retrieving cateogies from Database
-    $.getJSON('http://localhost:61733/Category/getCategoriesName')
+    $.getJSON('http://localhost:61733/SportEvents/getCategoriesName')
         .done(function (data) {
             $.each(data, function (key, item) { 
                 $('<option>', { text: item }).appendTo($('.categories'));

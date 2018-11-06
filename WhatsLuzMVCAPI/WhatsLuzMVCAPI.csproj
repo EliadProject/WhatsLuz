@@ -478,7 +478,6 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlacesController.cs" />
@@ -486,6 +485,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\AdminModel.cs" />
     <Compile Include="Models\CategoryStatistics.cs" />
     <Compile Include="Models\EventML.cs" />
@@ -494,9 +494,9 @@
     <Compile Include="Models\FilterUsersModel.cs" />
     <Compile Include="Models\ManageCookie.cs" />
     <Compile Include="Models\MLModel.cs" />
+    <Compile Include="Models\PlacesModel.cs" />
     <Compile Include="Models\SportEventModel.cs" />
     <Compile Include="Models\SportEvent_Parsed.cs" />
-    <Compile Include="Models\HttpConnection.cs" />
     <Compile Include="Models\SqlConnection.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -504,6 +504,11 @@
     </Compile>
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -4219,6 +4224,10 @@
     <Content Include="fonts\oswald\Oswald-SemiBold.ttf" />
     <None Include="Models\SqlConnection.dbml.layout">
       <DependentUpon>SqlConnection.dbml</DependentUpon>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bower_components\angular-bootstrap-calendar\dist\css\angular-bootstrap-calendar.css" />

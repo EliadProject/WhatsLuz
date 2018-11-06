@@ -48,7 +48,7 @@ namespace WhatsLuzMVCAPI.Models
     #endregion
 		
 		public SqlConnectionDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["WhatsLuzConnectionString"].ConnectionString, mappingSource)
+				base(global::WhatsLuzMVCAPI.Properties.Settings.Default.WhatsLuzConnectionString, mappingSource)
 		{
 			OnCreated();
 		}

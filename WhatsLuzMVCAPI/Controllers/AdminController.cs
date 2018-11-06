@@ -19,7 +19,6 @@ namespace WhatsLuzMVCAPI.Controllers
             ViewBag.Title = "Admin Page";
             return View();
         }
-
         
         public ActionResult Users()
         {
@@ -46,8 +45,7 @@ namespace WhatsLuzMVCAPI.Controllers
             return View();
 
         }
-
-
+        
         public ActionResult Places()
         {
             if (ManageCookie.isAdmin() == false)
@@ -106,9 +104,7 @@ namespace WhatsLuzMVCAPI.Controllers
             AdminModel.updateEventInput(eventUpdate);
             return RedirectToAction("Events", "Admin");
         }
-
-       
-
+        
         [HttpGet]
         public ActionResult EditPlace(int id)
         {
