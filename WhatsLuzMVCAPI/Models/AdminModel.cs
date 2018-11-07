@@ -172,6 +172,20 @@ namespace WhatsLuzMVCAPI.Models
             return true;
         }
 
+        public static void removePlaceByID(int placeID)
+        {
+            var db = new SqlConnectionDataContext();
+
+            var place = db.Places.Where(p => p.Id == placeID).SingleOrDefault();
+            if (place != null)
+            {
+                db.Places.DeleteOnSubmit(place);
+                db.SubmitChanges();
+            }
+        }
+
+
+
         public static void removeUserByID(int userID)
         {
             var db = new SqlConnectionDataContext();

@@ -145,6 +145,15 @@ namespace WhatsLuzMVCAPI.Controllers
         }
 
         [HttpGet]
+        public ActionResult DeleteEvent(int eventID)
+        {
+            SportEventModel.deleteEventLocal(eventID);
+
+            return RedirectToAction("SportEvents");
+        }
+
+
+        [HttpGet]
         public ActionResult Delete(int userID)
         {
             AdminModel.removeUserByID(userID);

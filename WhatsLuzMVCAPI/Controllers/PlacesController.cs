@@ -39,5 +39,12 @@ namespace WhatsLuzMVCAPI.Controllers
         {
             return PlacesModel.getAllPlacesInfo();
         }
+
+        public ActionResult deletePlace(int placeID)
+        {
+            AdminModel.removePlaceByID(placeID);
+
+            return RedirectToAction("Places");
+        }
     }
 }
