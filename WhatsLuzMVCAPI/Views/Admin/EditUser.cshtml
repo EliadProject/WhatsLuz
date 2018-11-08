@@ -39,7 +39,7 @@
                         @{
                             WhatsLuzMVCAPI.Models.UserAccount userInfo = ViewBag.userInfo;
                         }
-                        <form class="form-horizontal" method="post" action="~/Controllers/AdminController/updateEvent" style="float: left;">
+                        <form class="form-horizontal" method="post" action="/Admin/EditUser" style="float: left;">
                             <input type="hidden" value="@userInfo.UserID" name="userID" />
                             <fieldset>
                                 <!-- Form Name -->
@@ -82,8 +82,17 @@
                                     <div class="col-md-2">
 
                                         <div class="radio">
-                                            <label><input type="radio" name="admin" value="1" checked>Yes</label>
-                                            <label><input type="radio" name="admin" value="0" checked>No</label>
+                                            @if (userInfo.isAdmin == 1)
+                                            {
+                                                <label><input type="radio" name="admin" value="1" checked>Yes</label>
+                                                <label><input type="radio" name="admin" value="0">No</label>
+                                            }
+                                            else
+                                            {
+                                                <label><input type="radio" name="admin" value="1">Yes</label>
+                                                <label><input type="radio" name="admin" value="0" checked>No</label>
+                                            }
+
                                         </div>
                                     </div>
                                 </div>

@@ -67,7 +67,7 @@
                                     
                                     <div class='input-group date' id='datetimepicker1'>
                                         
-                                            <input name="date" value="@eventInfo.Date.ToString("HH:mm DD/MM/YYYY")" class="form-control input-md" type="text">
+                                            <input name="date" value="@eventInfo.Date.ToString("HH:mm dd/MM/yyyy")" class="form-control input-md" type="text">
                                             
                                             <span class="input-group-addon" style="width:auto">
                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -101,25 +101,7 @@
                                     <textarea id="notes" map="notes" name="notes" class="form-control" rows="4" value="@eventInfo.notes" maxlength="200"></textarea>
                                 </div>
                             </div>
-                            <!--
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Attendies</label>
-                                <ul class="list-group pull-down" id="eventAttendies">
-                                    @{
-                                        for (int i = 0; i < eventAttendies.Count; i++)
-                                        {
-                                            <li class="list-group-item">
-                                                <label class="col-md-4 control-label"> @eventAttendies[i].UserID </label>
-                                                <input type="submit" class="btn btn-info" name="user">
-                                            </li>
-                                        }
-                                    }
-
-
-                                </ul>
-                            </div>
-
-                                -->
+                            
                             <!-- Multiple Checkboxes (inline) -->
                             <div class="form-group">
                                 <label class="col-md-4 control-label"></label>
@@ -129,7 +111,7 @@
                                     </label>
                                 </div>
                             </div>
-                            <!-- Multiple Checkboxes (inline) -->
+                          
 
                         </fieldset>
                     </form>
