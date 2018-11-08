@@ -172,9 +172,23 @@ namespace WhatsLuzMVCAPI.Models
             return true;
         }
 
+        public static void removePlaceDependencies(int placeID)
+        {
+            var db = new SqlConnectionDataContext();
+            List<int> evetsDependencies = (from s in db.SportEvents where s.PlaceID == placeID select s.EventID).ToList();
+
+            foreach (int eventdep in evetsDependencies)
+            {
+                SportEventModel.deleteEventLocal(eventdep);
+            }
+        }
+
+
         public static void removePlaceByID(int placeID)
         {
             var db = new SqlConnectionDataContext();
+
+            
 
             var place = db.Places.Where(p => p.Id == placeID).SingleOrDefault();
             if (place != null)

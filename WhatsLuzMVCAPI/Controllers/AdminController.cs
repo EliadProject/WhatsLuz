@@ -95,16 +95,7 @@ namespace WhatsLuzMVCAPI.Controllers
             return View();
 
         }
-        [HttpPost]
-        public ActionResult updateEvent(FormCollection eventUpdate)
-        {
-            if (ManageCookie.isAdmin() == false)
-                return RedirectToAction("Index", "Home");
 
-            AdminModel.updateEventInput(eventUpdate);
-            return RedirectToAction("Events", "Admin");
-        }
-        
         [HttpGet]
         public ActionResult EditPlace(int id)
         {
@@ -117,6 +108,18 @@ namespace WhatsLuzMVCAPI.Controllers
             return View();
 
         }
+
+        [HttpPost]
+        public ActionResult updateEvent(FormCollection eventUpdate)
+        {
+            if (ManageCookie.isAdmin() == false)
+                return RedirectToAction("Index", "Home");
+
+            AdminModel.updateEventInput(eventUpdate);
+            return RedirectToAction("Events", "Admin");
+        }
+        
+       
 
         [HttpPost]
         public ActionResult EditUser(FormCollection userUpdate)
@@ -144,22 +147,7 @@ namespace WhatsLuzMVCAPI.Controllers
 
         }
 
-        [HttpGet]
-        public ActionResult DeleteEvent(int eventID)
-        {
-            SportEventModel.deleteEventLocal(eventID);
-
-            return RedirectToAction("SportEvents");
-        }
-
-
-        [HttpGet]
-        public ActionResult Delete(int userID)
-        {
-            AdminModel.removeUserByID(userID);
-
-            return RedirectToAction("Users");
-        }
+       
 
         public ActionResult Statistics()
         {
@@ -181,6 +169,33 @@ namespace WhatsLuzMVCAPI.Controllers
             return View();
 
         }
+        [HttpGet]
+        public ActionResult DeleteEvent(int eventID)
+        {
+            SportEventModel.deleteEventLocal(eventID);
 
+            return RedirectToAction("Events");
+        }
+
+
+        [HttpGet]
+        public ActionResult Delete(int userID)
+        {
+            AdminModel.removeUserByID(userID);
+
+            return RedirectToAction("Users");
+        }
+
+        [HttpGet]
+        public ActionResult DeletePlace(int placeID)
+        {
+            //Remove dependencies SportEvents of this place
+            AdminModel.removePlaceDependencies(placeID);
+
+            //Remove place 
+            AdminModel.removePlaceByID(placeID);
+
+            return RedirectToAction("Places");
+        }
     }
 }
