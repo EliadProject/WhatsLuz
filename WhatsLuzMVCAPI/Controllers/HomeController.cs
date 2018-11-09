@@ -16,7 +16,6 @@ namespace WhatsLuzMVCAPI.Controllers
             if (ManageCookie.CheckCookieExists() == null)
                 return RedirectToAction("LoginPage");
 
-
             return View();
         }
         public ActionResult About()
@@ -38,6 +37,10 @@ namespace WhatsLuzMVCAPI.Controllers
         public ActionResult LoginPage()
         {
             ViewBag.Title = "Login Page";
+            if (ManageCookie.CheckCookieExists() != null)
+            {
+                return RedirectToAction("Index");
+            }
             return View();
         }
         public ActionResult Video()

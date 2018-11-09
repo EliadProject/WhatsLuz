@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Linq;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -11,6 +12,7 @@ namespace WhatsLuzMVCAPI.Models
 {
     public class SportEventModel
     {
+        
         public string title{ get; set; }
         public string category { get; set; }
         public string datetime { get; set; }
@@ -96,12 +98,22 @@ namespace WhatsLuzMVCAPI.Models
 
         public static void createEvent(FormCollection sportEventModel)
         {
-            var dataContext = new SqlConnectionDataContext();
+            
+            var dataContext = new SqlConnectionDataContext(); 
+            int placeID = getPlaceIDByName(dataContext, sportEventModel["location"]); //validate exist location
+            if (placeID == 0)
+                return;
+
+            int catID = getCategoryID(dataContext, sportEventModel["category"]); //validate exist category
+            if(catID ==0)
+                return;
+
+           
             SportEvent sportEvent = new SportEvent();
             int userID = ManageCookie.user.UserID;
             sportEvent.OwnerID = userID;
 
-            sportEvent.CategoryID = getCategoryID(dataContext, sportEventModel["category"]);
+            sportEvent.CategoryID = catID;
             sportEvent.Date = DateTime.Parse(sportEventModel["datetime"]);
             string duration = sportEventModel["duration"];
             if (String.IsNullOrWhiteSpace(duration))
@@ -110,6 +122,8 @@ namespace WhatsLuzMVCAPI.Models
             }
             else
             {
+                if(!ValidationModel.ValidDuration(duration)) //validate duration 
+                    return;
                 sportEvent.Duration = int.Parse(duration);
             }
 
@@ -120,21 +134,21 @@ namespace WhatsLuzMVCAPI.Models
             }
             else
             {
+                if (!ValidationModel.ValidAttendies(max_attendies)) // validate attendies 
+                    return;
                 sportEvent.MaxAttendies = int.Parse(max_attendies);
             }
-
-            sportEvent.PlaceID = getPlaceIDByName(dataContext, sportEventModel["location"]);
-            sportEvent.notes = sportEventModel["notes"];
-
             string title = sportEventModel["title"];
-            if (String.IsNullOrWhiteSpace(title))
-            {
-                sportEvent.title = "No Title";
-            }
-            else
-            {
-                sportEvent.title = title;
-            }
+            sportEvent.PlaceID = placeID;
+            if (!ValidationModel.LengthAndNotSpecialValidationMaxOnly(title))
+                return;
+            sportEvent.title = title;
+
+            string notes = sportEventModel["notes"];
+            if (!ValidationModel.LengthAndNotSpecialValidationMaxOnly(notes))
+                return;
+            sportEvent.notes = notes;
+
 
             dataContext.SportEvents.InsertOnSubmit(sportEvent);
             try
@@ -207,7 +221,7 @@ namespace WhatsLuzMVCAPI.Models
         public static bool deleteEventLocal(int eventID)
         {
             int userID = ManageCookie.user.UserID;
-            bool result = SportEventModel.deleteEvent(eventID, userID);
+            bool result = SportEventModel.deleteEvent(eventID);
 
             return result;
         }
@@ -384,6 +398,91 @@ namespace WhatsLuzMVCAPI.Models
                 return false;
                 // Provide for exceptions.
             }
+        }
+        public static bool deleteEvent(int eventID)
+        {
+            var db = new SqlConnectionDataContext();
+            var result =
+                (from esport in db.SportEvents
+                    where esport.EventID == eventID 
+                    select esport).FirstOrDefault();
+
+            if (result == null)
+                return false;
+
+            db.SportEvents.DeleteOnSubmit(result);
+            foreach (Users_Event uevent in db.Users_Events.Where(p => p.EventID == eventID))
+            {
+                db.Users_Events.DeleteOnSubmit(uevent);
+            }
+
+            try
+            {
+                db.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+                // Provide for exceptions.
+            }
+        }
+
+        public static List<SportEvent_Parsed> getAllEvents(SqlConnectionDataContext db)
+        {
+
+            List<SportEvent_Parsed> sportsEvents = (from se in db.SportEvents
+                                                    join cat in db.Categories on se.CategoryID equals cat.CategoryID
+                                                    join us in db.UserAccounts on se.OwnerID equals us.UserID
+                                                    join p in db.Places on se.PlaceID equals p.Id
+                                                    select new SportEvent_Parsed()
+                                                    {
+                                                        eventID = se.EventID,
+                                                        title = se.title,
+                                                        category = cat.Name,
+                                                        owner = us.DisplayName,
+                                                        max_attendies = se.MaxAttendies,
+                                                        location = p.Name,
+                                                        notes = se.notes,
+                                                        startsAt = se.Date,
+                                                        endsAt = se.Date.AddMinutes(se.Duration),
+                                                        color = "ff0000"
+
+                                                    }).ToList();
+
+            return sportsEvents;
+        }
+
+
+        public static string getCategoryName(SqlConnectionDataContext db, int catID)
+        {
+            return (from cat in db.Categories
+                    where cat.CategoryID == catID
+                    select cat.Name).FirstOrDefault().ToString();
+        }
+
+        public static List<String> getUsersByEvent(SqlConnectionDataContext db, int eventID)
+        {
+            return (from ue in db.Users_Events
+                    join ua in db.UserAccounts on ue.UserID equals ua.UserID
+                    where ue.EventID == eventID
+                    select ua.DisplayName).ToList();
+        }
+
+        public static string[] getCategoriesName()
+        {
+            var dataContext = new SqlConnectionDataContext();
+            Table<Category> table_Categories = dataContext.Categories;
+            //IEnumerator<SportEvent> enu_sportEvents = table_sportEvents.GetEnumerator();
+            List<Category> list_Categories = table_Categories.ToList();
+            string[] toString = new string[list_Categories.Count];
+            for (int i = 0; i < list_Categories.Count; i++)
+            {
+                toString[i] = list_Categories[i].Name;
+            }
+
+            return toString;
         }
     }
     

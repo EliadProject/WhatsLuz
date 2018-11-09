@@ -55,6 +55,16 @@ namespace WhatsLuzMVCAPI.Models
 
         public static void updateEventInput(FormCollection eventUpdate)
         {
+            // Valid event input
+            if (!ValidationModel.LengthAndNotSpecialValidationMaxOnly(eventUpdate["title"]) ||
+                !ValidationModel.isDateTime(eventUpdate["date"]) ||
+                !ValidationModel.ValidAttendies(eventUpdate["attendies"]) ||
+                !ValidationModel.ValidDuration(eventUpdate["duration"]) ||
+            !ValidationModel.LengthAndNotSpecialValidationMaxOnly(eventUpdate["notes"]))
+            {
+                return ;
+            }
+            
             var db = new SqlConnectionDataContext();
             int eventID = int.Parse(eventUpdate["eventID"]);
 
@@ -102,6 +112,15 @@ namespace WhatsLuzMVCAPI.Models
 
         public static bool updateUserInput(FormCollection userUpdate)
         {
+            // Valid user input
+            if(!ValidationModel.EmailValidation(userUpdate["email"]) ||
+                !ValidationModel.LengthAndNotSpecialValidation(userUpdate["name"]) ||
+                !ValidationModel.LengthAndNotSpecialValidation(userUpdate["address"]) ||
+                !ValidationModel.isInt(userUpdate["admin"]))
+            {
+                return false;
+            }
+
             var db = new SqlConnectionDataContext();
             int userID = int.Parse(userUpdate["userID"]);
 
@@ -136,10 +155,20 @@ namespace WhatsLuzMVCAPI.Models
             return true;
         }
 
-        public static bool updatePlaceInput(FormCollection userUpdate)
+        public static bool updatePlaceInput(FormCollection placeUpdate)
         {
+            // Valid place input
+            if (!ValidationModel.LengthAndNotSpecialValidation(placeUpdate["name"]) ||
+                !ValidationModel.LengthAndNotSpecialValidation(placeUpdate["address"]) ||
+                !ValidationModel.LengthAndNotSpecialValidation(placeUpdate["description"]) ||
+                !ValidationModel.isDouble(placeUpdate["lat"]) ||
+                !ValidationModel.isDouble(placeUpdate["lng"]))
+            {
+                return false;
+            }
+
             var db = new SqlConnectionDataContext();
-            int placeID = int.Parse(userUpdate["placeID"]);
+            int placeID = int.Parse(placeUpdate["placeID"]);
 
             var placeObj =
                         (from place in db.Places
@@ -149,11 +178,11 @@ namespace WhatsLuzMVCAPI.Models
             // Execute the query, and change the column values
             // you want to change.
 
-            placeObj.Name = userUpdate["name"];
-            placeObj.Address = userUpdate["address"];
-            placeObj.Description = userUpdate["description"];
-            placeObj.lat = double.Parse(userUpdate["lat"]);
-            placeObj.lng = double.Parse(userUpdate["lng"]);
+            placeObj.Name = placeUpdate["name"];
+            placeObj.Address = placeUpdate["address"];
+            placeObj.Description = placeUpdate["description"];
+            placeObj.lat = double.Parse(placeUpdate["lat"]);
+            placeObj.lng = double.Parse(placeUpdate["lng"]);
 
             // Insert any additional changes to column values.
 
@@ -172,24 +201,18 @@ namespace WhatsLuzMVCAPI.Models
             return true;
         }
 
-        public static void removePlaceDependencies(int placeID)
-        {
-            var db = new SqlConnectionDataContext();
-            List<int> evetsDependencies = (from s in db.SportEvents where s.PlaceID == placeID select s.EventID).ToList();
-
-            foreach (int eventdep in evetsDependencies)
-            {
-                SportEventModel.deleteEventLocal(eventdep);
-            }
-        }
-
-
         public static void removePlaceByID(int placeID)
         {
             var db = new SqlConnectionDataContext();
-
             
+            //delete dependencies events
+            var events =  db.SportEvents.Where(s => s.PlaceID == placeID).ToList();
+            foreach (var sevent in  events )
+            {
+                SportEventModel.deleteEventLocal(sevent.EventID);
+            }
 
+            //delete place
             var place = db.Places.Where(p => p.Id == placeID).SingleOrDefault();
             if (place != null)
             {

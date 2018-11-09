@@ -24,14 +24,6 @@ $(document).ready(function () {
 
 
     });
-
-    /*
-    $.get(
-        "http://localhost:61733/Cookie"
-    );
-
-        
- */
    
     //join event function
    //checks if the user is one of attendies/owner of the event
@@ -111,54 +103,6 @@ $(document).ready(function () {
                 $('<option>', { text: item }).appendTo($('.places'));
             });
         });
-
-    
-   
-
-    //
-    /*
-    $('#form_eventSport_send').click(function () {
-        var check_disabled = $(this).attr("class");
-        if (check_disabled.includes("disabled") == true) {
-            //
-        }
-        else {
-            var sport_event = new Object();
-            //retrieve forms values 
-            sport_event.title = $("#title").val();
-            sport_event.category = $("#categories_create").val();
-            sport_event.datetime = $("#datetime").val();
-            sport_event.max_attendies = $("#attendies").val();
-            sport_event.duration = $("#duration").val();
-            sport_event.location = $("#location").val();
-            sport_event.notes = $("#notes").val();
-
-            //converting to json
-            var json_sport_event = JSON.stringify(sport_event);
-
-            addEvent(json_sport_event);
-      
-        }
-    });
-    
-    //add event ajax funtion
-    function addEvent(sport_event) {
-        $.ajax({
-            type: "POST",
-            url: "http://localhost:61733/SportEvents/createEvent",
-            data: sport_event,
-            contentType: "application/json; charset=utf-8",
-            success: function () {
-                
-                location.reload();
-            },
-            error: function (XMLHttpReqest, textStatus, errorThrown) {
-                alert(errorThrown.textStatus);
-            }
-
-        });
-    }
-*/
 
     $('#eventShow-modal').on('hidden.bs.modal', function () {
         //init status text of join div

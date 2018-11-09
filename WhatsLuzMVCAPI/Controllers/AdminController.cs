@@ -95,7 +95,16 @@ namespace WhatsLuzMVCAPI.Controllers
             return View();
 
         }
+        [HttpPost]
+        public ActionResult updateEvent(FormCollection eventUpdate)
+        {
+            if (ManageCookie.isAdmin() == false)
+                return RedirectToAction("Index", "Home");
 
+            AdminModel.updateEventInput(eventUpdate);
+            return RedirectToAction("Events", "Admin");
+        }
+        
         [HttpGet]
         public ActionResult EditPlace(int id)
         {
@@ -110,26 +119,13 @@ namespace WhatsLuzMVCAPI.Controllers
         }
 
         [HttpPost]
-        public ActionResult updateEvent(FormCollection eventUpdate)
-        {
-            if (ManageCookie.isAdmin() == false)
-                return RedirectToAction("Index", "Home");
-
-            AdminModel.updateEventInput(eventUpdate);
-            return RedirectToAction("Events", "Admin");
-        }
-        
-       
-
-        [HttpPost]
         public ActionResult EditUser(FormCollection userUpdate)
         {
             if (ManageCookie.isAdmin() == false)
                 return RedirectToAction("Index", "Home");
             ViewBag.Title = "User Edit";
 
-            bool isUpdate = AdminModel.updateUserInput(userUpdate);
-
+            bool updateStatus = AdminModel.updateUserInput(userUpdate);
             return RedirectToAction("Users");
 
         }
@@ -147,7 +143,29 @@ namespace WhatsLuzMVCAPI.Controllers
 
         }
 
-       
+        [HttpGet]
+        public ActionResult DeleteEvent(int eventID)
+        {
+            SportEventModel.deleteEventLocal(eventID);
+
+            return RedirectToAction("Events");
+        }
+
+
+        [HttpGet]
+        public ActionResult Delete(int userID)
+        {
+            AdminModel.removeUserByID(userID);
+
+            return RedirectToAction("Users");
+        }
+        [HttpGet]
+        public ActionResult DeletePlace(int id)
+        {
+            AdminModel.removePlaceByID(id);
+
+            return RedirectToAction("Places");
+        }
 
         public ActionResult Statistics()
         {
@@ -169,33 +187,6 @@ namespace WhatsLuzMVCAPI.Controllers
             return View();
 
         }
-        [HttpGet]
-        public ActionResult DeleteEvent(int eventID)
-        {
-            SportEventModel.deleteEventLocal(eventID);
 
-            return RedirectToAction("Events");
-        }
-
-
-        [HttpGet]
-        public ActionResult Delete(int userID)
-        {
-            AdminModel.removeUserByID(userID);
-
-            return RedirectToAction("Users");
-        }
-
-        [HttpGet]
-        public ActionResult DeletePlace(int placeID)
-        {
-            //Remove dependencies SportEvents of this place
-            AdminModel.removePlaceDependencies(placeID);
-
-            //Remove place 
-            AdminModel.removePlaceByID(placeID);
-
-            return RedirectToAction("Places");
-        }
     }
 }
