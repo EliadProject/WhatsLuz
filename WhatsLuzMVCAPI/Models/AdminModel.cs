@@ -56,11 +56,11 @@ namespace WhatsLuzMVCAPI.Models
         public static void updateEventInput(FormCollection eventUpdate)
         {
             // Valid event input
-            if (!ValidationModel.LengthAndNotSpecialValidation(eventUpdate["title"]) ||
+            if (!ValidationModel.LengthAndNotSpecialValidationMaxOnly(eventUpdate["title"]) ||
                 !ValidationModel.isDateTime(eventUpdate["date"]) ||
                 !ValidationModel.ValidAttendies(eventUpdate["attendies"]) ||
                 !ValidationModel.ValidDuration(eventUpdate["duration"]) ||
-            !ValidationModel.isInt(eventUpdate["notes"]))
+            !ValidationModel.LengthAndNotSpecialValidationMaxOnly(eventUpdate["notes"]))
             {
                 return ;
             }
@@ -204,7 +204,15 @@ namespace WhatsLuzMVCAPI.Models
         public static void removePlaceByID(int placeID)
         {
             var db = new SqlConnectionDataContext();
+            
+            //delete dependencies events
+            var events =  db.SportEvents.Where(s => s.PlaceID == placeID).ToList();
+            foreach (var sevent in  events )
+            {
+                SportEventModel.deleteEventLocal(sevent.EventID);
+            }
 
+            //delete place
             var place = db.Places.Where(p => p.Id == placeID).SingleOrDefault();
             if (place != null)
             {

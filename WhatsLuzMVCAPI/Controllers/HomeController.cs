@@ -16,7 +16,6 @@ namespace WhatsLuzMVCAPI.Controllers
             if (ManageCookie.CheckCookieExists() == null)
                 return RedirectToAction("LoginPage");
 
-
             return View();
         }
         public ActionResult About()

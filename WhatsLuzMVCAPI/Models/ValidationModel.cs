@@ -17,8 +17,6 @@ namespace WhatsLuzMVCAPI.Models
         public const int MIN_LENGTH = 3;
         public const int MAX_LENGTH = 50;
 
-     
-
         public static bool EmailValidation(string input)
         {
             string regExpression = @"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$";
@@ -32,6 +30,16 @@ namespace WhatsLuzMVCAPI.Models
         public static bool LengthAndNotSpecialValidation(string input)
         {
             string regExpression = @"^[\w\d\s]{" + MIN_LENGTH + "," + MAX_LENGTH + "}$";
+            Regex regex = new Regex(regExpression);
+            Match match = regex.Match(input);
+
+            if (match.Success)
+                return true;
+            return false;
+        }
+        public static bool LengthAndNotSpecialValidationMaxOnly(string input)
+        {
+            string regExpression = @"^[\w\d\s]{0," + MAX_LENGTH + "}$";
             Regex regex = new Regex(regExpression);
             Match match = regex.Match(input);
 
@@ -77,13 +85,13 @@ namespace WhatsLuzMVCAPI.Models
             }
             return false;
         }
-
+      
         public static bool ValidAttendies(string input)
         {
             int value;
             if (int.TryParse(input, out value))
             {
-                if (value >= MIN_ATTENDIES && value <= MIN_ATTENDIES)
+                if (value >= MIN_ATTENDIES && value <= MAX_ATTENDIES)
                     return true;
             }
             return false;

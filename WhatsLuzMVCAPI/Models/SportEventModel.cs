@@ -12,6 +12,7 @@ namespace WhatsLuzMVCAPI.Models
 {
     public class SportEventModel
     {
+        
         public string title{ get; set; }
         public string category { get; set; }
         public string datetime { get; set; }
@@ -97,12 +98,22 @@ namespace WhatsLuzMVCAPI.Models
 
         public static void createEvent(FormCollection sportEventModel)
         {
-            var dataContext = new SqlConnectionDataContext();
+            
+            var dataContext = new SqlConnectionDataContext(); 
+            int placeID = getPlaceIDByName(dataContext, sportEventModel["location"]); //validate exist location
+            if (placeID == 0)
+                return;
+
+            int catID = getCategoryID(dataContext, sportEventModel["category"]); //validate exist category
+            if(catID ==0)
+                return;
+
+           
             SportEvent sportEvent = new SportEvent();
             int userID = ManageCookie.user.UserID;
             sportEvent.OwnerID = userID;
 
-            sportEvent.CategoryID = getCategoryID(dataContext, sportEventModel["category"]);
+            sportEvent.CategoryID = catID;
             sportEvent.Date = DateTime.Parse(sportEventModel["datetime"]);
             string duration = sportEventModel["duration"];
             if (String.IsNullOrWhiteSpace(duration))
@@ -111,6 +122,8 @@ namespace WhatsLuzMVCAPI.Models
             }
             else
             {
+                if(!ValidationModel.ValidDuration(duration)) //validate duration 
+                    return;
                 sportEvent.Duration = int.Parse(duration);
             }
 
@@ -121,21 +134,21 @@ namespace WhatsLuzMVCAPI.Models
             }
             else
             {
+                if (!ValidationModel.ValidAttendies(max_attendies)) // validate attendies 
+                    return;
                 sportEvent.MaxAttendies = int.Parse(max_attendies);
             }
-
-            sportEvent.PlaceID = getPlaceIDByName(dataContext, sportEventModel["location"]);
-            sportEvent.notes = sportEventModel["notes"];
-
             string title = sportEventModel["title"];
-            if (String.IsNullOrWhiteSpace(title))
-            {
-                sportEvent.title = "No Title";
-            }
-            else
-            {
-                sportEvent.title = title;
-            }
+            sportEvent.PlaceID = placeID;
+            if (!ValidationModel.LengthAndNotSpecialValidationMaxOnly(title))
+                return;
+            sportEvent.title = title;
+
+            string notes = sportEventModel["notes"];
+            if (!ValidationModel.LengthAndNotSpecialValidationMaxOnly(notes))
+                return;
+            sportEvent.notes = notes;
+
 
             dataContext.SportEvents.InsertOnSubmit(sportEvent);
             try
@@ -208,7 +221,7 @@ namespace WhatsLuzMVCAPI.Models
         public static bool deleteEventLocal(int eventID)
         {
             int userID = ManageCookie.user.UserID;
-            bool result = SportEventModel.deleteEvent(eventID, userID);
+            bool result = SportEventModel.deleteEvent(eventID);
 
             return result;
         }
@@ -386,7 +399,36 @@ namespace WhatsLuzMVCAPI.Models
                 // Provide for exceptions.
             }
         }
-        
+        public static bool deleteEvent(int eventID)
+        {
+            var db = new SqlConnectionDataContext();
+            var result =
+                (from esport in db.SportEvents
+                    where esport.EventID == eventID 
+                    select esport).FirstOrDefault();
+
+            if (result == null)
+                return false;
+
+            db.SportEvents.DeleteOnSubmit(result);
+            foreach (Users_Event uevent in db.Users_Events.Where(p => p.EventID == eventID))
+            {
+                db.Users_Events.DeleteOnSubmit(uevent);
+            }
+
+            try
+            {
+                db.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+                // Provide for exceptions.
+            }
+        }
+
         public static List<SportEvent_Parsed> getAllEvents(SqlConnectionDataContext db)
         {
 

@@ -125,8 +125,7 @@ namespace WhatsLuzMVCAPI.Controllers
                 return RedirectToAction("Index", "Home");
             ViewBag.Title = "User Edit";
 
-            bool isUpdate = AdminModel.updateUserInput(userUpdate);
-
+            bool updateStatus = AdminModel.updateUserInput(userUpdate);
             return RedirectToAction("Users");
 
         }
@@ -149,7 +148,7 @@ namespace WhatsLuzMVCAPI.Controllers
         {
             SportEventModel.deleteEventLocal(eventID);
 
-            return RedirectToAction("SportEvents");
+            return RedirectToAction("Events");
         }
 
 
@@ -159,6 +158,13 @@ namespace WhatsLuzMVCAPI.Controllers
             AdminModel.removeUserByID(userID);
 
             return RedirectToAction("Users");
+        }
+        [HttpGet]
+        public ActionResult DeletePlace(int id)
+        {
+            AdminModel.removePlaceByID(id);
+
+            return RedirectToAction("Places");
         }
 
         public ActionResult Statistics()
