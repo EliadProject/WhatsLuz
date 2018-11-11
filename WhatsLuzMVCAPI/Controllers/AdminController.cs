@@ -78,6 +78,10 @@ namespace WhatsLuzMVCAPI.Controllers
                 return RedirectToAction("Index", "Home");
             ViewBag.Title = "User Edit";
 
+            //check event exist
+            if (!AccountModel.isUserExists(id))
+                return RedirectToAction("Users");
+
             ViewBag.userInfo = AdminModel.getUserInfo(id);
 
             return View();
@@ -89,6 +93,10 @@ namespace WhatsLuzMVCAPI.Controllers
             if (ManageCookie.isAdmin() == false)
                 return RedirectToAction("Index", "Home");
             ViewBag.Title = "Event Edit";
+
+            //check event exist
+            if (!SportEventModel.isEventExists(eventID))
+                return RedirectToAction("Events");
 
             ViewBag.eventInfo = AdminModel.getEventInfo(eventID);
             ViewBag.eventAttenides = AdminModel.getEventAttendies(eventID);
@@ -111,6 +119,10 @@ namespace WhatsLuzMVCAPI.Controllers
             if (ManageCookie.isAdmin() == false)
                 return RedirectToAction("Index", "Home");
             ViewBag.Title = "Place Edit";
+
+            //check event exist
+            if (!PlacesModel.isPlaceExists(id))
+                return RedirectToAction("Places");
 
             ViewBag.placeInfo = AdminModel.getPlaceInfo(id);
 
@@ -146,6 +158,7 @@ namespace WhatsLuzMVCAPI.Controllers
         [HttpGet]
         public ActionResult DeleteEvent(int eventID)
         {
+
             SportEventModel.deleteEventLocal(eventID);
 
             return RedirectToAction("Events");

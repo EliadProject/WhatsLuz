@@ -57,13 +57,14 @@ namespace WhatsLuzMVCAPI.Models
 
             List<UserAccount> users = db.UserAccounts.ToList(); 
             foreach (UserAccount user in users)
+
             {
                 var query = (from sevents in db.SportEvents
                              join uevents in db.Users_Events on sevents.EventID equals uevents.EventID into ueventGroup //using 'into' to retrieve group unique eventID and removing duplicates events.
                              select new
                              {
                                  category = sevents.CategoryID,
-                                 difftime = DateTime.Today.Subtract(sevents.Date).TotalMinutes,
+                                 difftime = sevents.PlaceID,
                                  classification = (ueventGroup.Any(x => x.UserID.Equals(user.UserID))) ? 1 : 0
 
                              });
@@ -143,7 +144,7 @@ namespace WhatsLuzMVCAPI.Models
             //Building vector from data
             double[][] test = new double[][]
             {
-                new double[] {sevent.CategoryID, DateTime.Today.Subtract(sevent.Date).TotalMinutes }
+                new double[] {sevent.CategoryID, sevent.PlaceID }
             };
             foreach (DictionaryEntry s in usersTraining)
             {
@@ -160,6 +161,10 @@ namespace WhatsLuzMVCAPI.Models
             }
             return answersTable;
             
+        }
+        private static double CalculateDaysABS(DateTime eventDate)
+        {
+            return Math.Abs(DateTime.Today.Subtract(eventDate).TotalDays);
         }
 
       

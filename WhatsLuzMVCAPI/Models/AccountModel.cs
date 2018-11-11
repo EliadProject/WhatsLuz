@@ -84,5 +84,16 @@ namespace WhatsLuzMVCAPI.Models
             db.UserAccounts.InsertOnSubmit(u);
             db.SubmitChanges();
         }
+
+        public static bool isUserExists(int userID)
+        {
+            var db = new SqlConnectionDataContext();
+            var user = (from ua in db.UserAccounts
+                         where ua.UserID == userID
+                         select ua.UserID).FirstOrDefault();
+            if (user != 0)
+                return true;
+            return false;
+        }
     }
 }

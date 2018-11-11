@@ -484,6 +484,16 @@ namespace WhatsLuzMVCAPI.Models
 
             return toString;
         }
+        public static bool isEventExists(int eventID)
+        {
+            var db = new SqlConnectionDataContext();
+            var sevent = (from se in db.SportEvents
+                            where se.EventID == eventID
+                          select se.EventID).FirstOrDefault();
+            if (sevent != 0)
+                return true;
+            return false;
+        }
     }
     
 }

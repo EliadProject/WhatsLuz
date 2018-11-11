@@ -71,5 +71,16 @@ namespace WhatsLuzMVCAPI.Models
 
             return result;
         }
+
+        public static bool isPlaceExists(int placeID)
+        {
+            var db = new SqlConnectionDataContext();
+            var place = (from p in db.Places
+                          where p.Id == placeID
+                          select p.Id).FirstOrDefault();
+            if (place != 0)
+                return true;
+            return false;
+        }
     }
 }
