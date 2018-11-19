@@ -36,20 +36,20 @@
     }(document, 'script', 'facebook-jssdk'));</script>
 
 <div class="panel-heading clearfix">
-    <div>
-        <div class="col-md-4">
-            <a href="#" id="createEventButton" class="btn btn-primary btn-lg " style="padding: 6px 16px;" role="button" data-toggle="modal" data-target="#eventAddition-modal">
-                <p style="margin: 0 0 0 0;">  <span class="glyphicon glyphicon-plus text-center"></span> Create Sport Event </p>
+    <div class="container-fluid ">
+        <div class="col-md-4 col-xs-6">
+            <a href="#" id="createEventButton" class="btn btn-primary"  role="button" data-toggle="modal" data-target="#eventAddition-modal">
+                <span class="glyphicon glyphicon-plus text-center"></span>Create Sport Event
             </a>
         </div>
 
-        <div class="col-md-4">
-            <h2 style="margin-top: 0px; margin-bottom: 0px;" class="text-center">{{ calendarTitle }} </h2>
+        <div class="col-md-4 col-xs-6 text-center">
+            <h2 id="panel-heading-header">{{ calendarTitle }} </h2>
         </div>
 
-       
-
     </div>
+
+    
     <!-- <p class="text-center"><a href = "#" class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#eventAddition-modal">Open Login Modal</a></p> -->
 </div>
 
@@ -107,9 +107,9 @@
     </div>
 
     <!-- Facebook page  -->
-    <div class="col-md-3" style="margin-top:2.7%">
-        <div class="fb-page" data-href="https://www.facebook.com/Whats-Luz-1980183165357929/?modal=admin_todo_tour" data-tabs="posts" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/Whats-Luz-1980183165357929/?modal=admin_todo_tour" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/Whats-Luz-1980183165357929/?modal=admin_todo_tour">Whats Luz</a></blockquote></div>
-    </div>
+  
+        <div class="fb-page col-md-3" style="margin-top:2.7%" data-href="https://www.facebook.com/Whats-Luz-1980183165357929/?modal=admin_todo_tour" data-tabs="posts" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/Whats-Luz-1980183165357929/?modal=admin_todo_tour" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/Whats-Luz-1980183165357929/?modal=admin_todo_tour">Whats Luz</a></blockquote></div>
+
 </div>
 
 <div class="panel-footer">
@@ -160,7 +160,7 @@
         </ul><br />
         <u>Weather Status:</u> <span id="event_weather">None</span>
         <img id="event_weatherImg" />
-        <div id="event_map" style="width:350px;height:320px;margin:0 auto;"></div>
+        <div id="event_map" style="height:320px;margin:0 auto;"></div>
         <br />
         <table>
             <tr>
@@ -176,7 +176,7 @@
                 </td>
             </tr>
             <tr>
-                <div id="join_status_id" style="width:max-content;"> </div>
+                <div id="join_status_id"> </div>
             </tr>
         </table>
     </form>
@@ -227,7 +227,7 @@
             <a><span ng-click="showMap = ! showMap" class="glyphicon glyphicon-map-marker"></span></a>
             <u>Weather Status:</u> <span id="event_creation_weather">None</span>
             <img id="event_creation_weatherImg" />
-            <div ng-show="showMap" id="event_creation_map" style="width:400px;height:380px;margin:0 auto;"></div>
+            <div ng-show="showMap" id="event_creation_map" style="height:380px;margin:0 auto;"></div>
         </div>
 
         <div class="form-group">

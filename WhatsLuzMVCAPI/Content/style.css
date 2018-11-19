@@ -13,14 +13,55 @@ textarea{
     resize:none;
 }
 
+.panel-heading
+{
+    padding:2px;
+    padding-top:5px;
+    padding-bottom:5px;
+}
+.panel-heading a {
+    padding: 2px;
+    font-size: 20px;
+    font-weight: 500;
+}
+.panel-heading span {
+    padding: 2px;
+    font-size: 20px;
+    font-weight: 300;
+}
+.panel-heading h2 {
+    margin: 0;
+}
+
+@media (max-width: 570px) {
+    .panel-heading a {
+       
+        font-size: 18px;
+        font-weight: 300;
+    }
+    .panel-heading span {
+   
+        font-size: 18px;
+        font-weight: 100;
+    }
+    .panel-heading h2 {
+        margin: 0;
+        font-size: 18px;
+        font-weight:400;
+    }
+
+    .fb-page{
+            margin-bottom:20px;  
+         
+}
+
+}
 
 
 /*classes*/
-
-.btn-show-event
-{
+.btn-show-event {
     opacity: 1;
-    width:90%;
+    width: 90%;
 }
 
 .asterisk {
